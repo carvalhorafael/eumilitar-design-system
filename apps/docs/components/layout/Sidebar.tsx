@@ -23,6 +23,7 @@ const nav = [
       { href: "/padroes/faq",        label: "04 — FAQ" },
       { href: "/padroes/beneficios",   label: "05 — Benefícios" },
       { href: "/padroes/depoimentos",  label: "06 — Depoimentos" },
+      { href: "/padroes/landing",      label: "07 — Landing Page" },
     ],
   },
   {
