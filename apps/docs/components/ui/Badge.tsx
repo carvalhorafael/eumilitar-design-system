@@ -3,6 +3,7 @@ interface BadgeProps {
   variant?: "default" | "brand" | "urgent" | "ex" | "mb" | "fab" | "pm" | "bm" | "outline" | "dark";
   size?: "sm" | "md";
   dot?: boolean;
+  style?: React.CSSProperties;
 }
 
 const variantStyles: Record<NonNullable<BadgeProps["variant"]>, React.CSSProperties> = {
@@ -63,7 +64,7 @@ const sizeStyles: Record<NonNullable<BadgeProps["size"]>, React.CSSProperties> =
   md: { padding: "4px 8px", fontSize: "11px", letterSpacing: "0.06em" },
 };
 
-export function Badge({ children, variant = "default", size = "md", dot }: BadgeProps) {
+export function Badge({ children, variant = "default", size = "md", dot, style }: BadgeProps) {
   return (
     <span
       style={{
@@ -78,6 +79,7 @@ export function Badge({ children, variant = "default", size = "md", dot }: Badge
         whiteSpace: "nowrap",
         ...variantStyles[variant],
         ...sizeStyles[size],
+        ...style,
       }}
     >
       {dot && (
