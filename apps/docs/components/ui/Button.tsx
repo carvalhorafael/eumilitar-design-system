@@ -2,7 +2,7 @@
 
 import { ButtonHTMLAttributes, forwardRef } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "brand-inverse" | "urgent";
+export type ButtonVariant = "primary" | "secondary" | "ghost" | "ghost-inverse" | "danger" | "brand-inverse" | "urgent";
 export type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -42,6 +42,12 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
     color: "var(--surface-brand)",
     border: "2px solid var(--n-50)",
     boxShadow: "var(--shadow-md)",
+  },
+  "ghost-inverse": {
+    background: "transparent",
+    color: "rgba(245,240,232,0.80)",
+    border: "2px solid rgba(245,240,232,0.30)",
+    boxShadow: "none",
   },
   urgent: {
     background: "var(--fire)",
@@ -99,6 +105,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           if (variant === "ghost") {
             el.style.background = "var(--paper)";
             el.style.borderColor = "var(--border-default)";
+          } else if (variant === "ghost-inverse") {
+            el.style.background = "rgba(245,240,232,0.12)";
+            el.style.borderColor = "rgba(245,240,232,0.55)";
+            el.style.color = "#f5f0e8";
           } else {
             el.style.boxShadow = "none";
             el.style.transform = "translate(2px, 2px)";
@@ -110,6 +120,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           if (variant === "ghost") {
             el.style.background = "transparent";
             el.style.borderColor = "transparent";
+          } else if (variant === "ghost-inverse") {
+            el.style.background = "transparent";
+            el.style.borderColor = "rgba(245,240,232,0.30)";
+            el.style.color = "rgba(245,240,232,0.80)";
           } else {
             el.style.boxShadow = variantStyles[variant].boxShadow as string;
             el.style.transform = "translate(0, 0)";

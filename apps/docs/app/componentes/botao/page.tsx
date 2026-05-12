@@ -67,12 +67,22 @@ export default function BotaoPage() {
           </ComponentDemo>
 
           <ComponentDemo
-            label="Brand Inverse — sobre fundo escuro ou verde"
+            label="Brand Inverse — ação primária sobre fundo escuro ou verde"
             background="brand"
             code={`<Button variant="brand-inverse">Começar agora</Button>`}
           >
             <Button variant="brand-inverse">Começar agora</Button>
             <Button variant="brand-inverse" icon={<ArrowIcon />} iconPosition="right">Ver planos</Button>
+          </ComponentDemo>
+
+          <ComponentDemo
+            label="Ghost Inverse — ação secundária sobre fundo escuro ou verde"
+            background="brand"
+            code={`<Button variant="ghost-inverse">Saiba mais</Button>`}
+          >
+            <Button variant="ghost-inverse">Saiba mais</Button>
+            <Button variant="ghost-inverse" icon={<ArrowIcon />} iconPosition="right">Ver detalhes</Button>
+            <Button variant="ghost-inverse" disabled>Desabilitado</Button>
           </ComponentDemo>
 
           <ComponentDemo

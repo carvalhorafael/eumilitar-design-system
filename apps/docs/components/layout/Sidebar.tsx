@@ -15,6 +15,17 @@ const nav = [
     ],
   },
   {
+    label: "Padrões",
+    items: [
+      { href: "/padroes/hero",     label: "01 — Hero" },
+      { href: "/padroes/urgencia", label: "02 — Urgência" },
+      { href: "/padroes/captacao", label: "03 — Captação" },
+      { href: "/padroes/faq",        label: "04 — FAQ" },
+      { href: "/padroes/beneficios",   label: "05 — Benefícios" },
+      { href: "/padroes/depoimentos",  label: "06 — Depoimentos" },
+    ],
+  },
+  {
     label: "Componentes",
     items: [
       { href: "/componentes/botao",    label: "01 — Button" },
@@ -23,6 +34,9 @@ const nav = [
       { href: "/componentes/input",    label: "04 — Input & Textarea" },
       { href: "/componentes/select",   label: "05 — Select" },
       { href: "/componentes/checkbox", label: "06 — Checkbox & Radio" },
+      { href: "/componentes/alert",     label: "07 — Alert" },
+      { href: "/componentes/accordion", label: "08 — Accordion" },
+      { href: "/componentes/table",     label: "09 — Table" },
     ],
   },
 ];
