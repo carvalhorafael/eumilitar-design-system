@@ -1,0 +1,12 @@
+{
+  "name": "@eumilitar/tokens",
+  "version": "0.1.0",
+  "main": "index.css",
+  "exports": {
+    ".": "./index.css",
+    "./colors": "./colors.css",
+    "./typography": "./typography.css",
+    "./spacing": "./spacing.css",
+    "./effects": "./effects.css"
+  }
+}

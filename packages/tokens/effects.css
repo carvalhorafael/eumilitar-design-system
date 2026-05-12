@@ -1,0 +1,27 @@
+/* ─────────────────────────────────────────────
+   EUMILITAR DESIGN SYSTEM — EFFECTS TOKENS
+   Neo-brutalismo: shadows offset sem blur
+   ───────────────────────────────────────────── */
+
+:root {
+  /* ── Border radius ── */
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-full: 999px;
+
+  /* ── Shadows (hard offset, zero blur) ── */
+  --shadow-sm:    2px 2px 0 var(--ink);
+  --shadow-md:    4px 4px 0 var(--ink);
+  --shadow-lg:    6px 6px 0 var(--ink);
+  --shadow-brand: 4px 4px 0 var(--accent);
+  --shadow-inset: inset 2px 2px 0 var(--ink);
+
+  /* ── Borders ── */
+  --border-width-default: 1px;
+  --border-width-strong:  2px;
+
+  /* ── Transitions ── */
+  --transition-fast: 100ms ease;
+  --transition-base: 150ms ease;
+}
