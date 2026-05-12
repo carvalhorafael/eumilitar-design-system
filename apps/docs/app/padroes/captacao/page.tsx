@@ -2,11 +2,7 @@
 
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Select } from "@/components/ui/Select";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { Alert } from "@/components/ui/Alert";
+import { Button, Input, Select, Checkbox, Alert } from "@eumilitar/ui";
 import { useState } from "react";
 
 const forcaOptions = [

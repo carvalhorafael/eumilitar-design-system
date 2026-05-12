@@ -50,7 +50,7 @@ Documento complementar:
 
 ### Frente principal — Reutilização do sistema
 - [x] Consolidar tokens como fonte única real do sistema
-- [ ] Separar componentes reutilizáveis do app de documentação
+- [x] Separar componentes reutilizáveis do app de documentação
 - [ ] Estruturar padrões como blocos portáveis
 
 ---
@@ -64,10 +64,10 @@ Documento complementar:
 - [x] Eliminar duplicação entre tokens do app e tokens do pacote
 
 ### 2. Extração dos componentes base
-- [ ] Criar `packages/ui`
-- [ ] Mover Button, Badge, Card, Input, Select, Checkbox, Alert, Accordion e Table para `packages/ui`
-- [ ] Exportar os componentes por uma API única do pacote
-- [ ] Fazer `apps/docs` consumir esses componentes do pacote, não de `apps/docs/components/ui`
+- [x] Criar `packages/ui`
+- [x] Mover Button, Badge, Card, Input, Select, Checkbox, Alert, Accordion e Table para `packages/ui`
+- [x] Exportar os componentes por uma API única do pacote
+- [x] Fazer `apps/docs` consumir esses componentes do pacote, não de `apps/docs/components/ui`
 
 ### 3. Portabilidade de estilos
 - [ ] Reduzir dependência de `style={{ ... }}` onde houver repetição estrutural

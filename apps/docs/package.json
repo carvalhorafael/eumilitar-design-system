@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@eumilitar/tokens": "*",
+    "@eumilitar/ui": "*",
     "@next/mdx": "^15",
     "@mdx-js/loader": "^3",
     "@mdx-js/react": "^3",

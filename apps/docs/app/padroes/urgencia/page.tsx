@@ -1,9 +1,6 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Alert } from "@/components/ui/Alert";
-import { Card, CardBody } from "@/components/ui/Card";
+import { Button, Badge, Alert, Card, CardBody } from "@eumilitar/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Urgência" };

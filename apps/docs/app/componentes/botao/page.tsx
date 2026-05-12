@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { ComponentDemo } from "@/components/docs/ComponentDemo";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@eumilitar/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Button" };

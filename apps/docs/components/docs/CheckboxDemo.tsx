@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Checkbox, Radio, CheckboxGroup, RadioGroup } from "@/components/ui/Checkbox";
-import type { InputState } from "@/components/ui/Input";
+import { Checkbox, Radio, CheckboxGroup, RadioGroup, type InputState } from "@eumilitar/ui";
 
 export function CheckboxStatesDemo() {
   const [checked, setChecked] = useState(false);
