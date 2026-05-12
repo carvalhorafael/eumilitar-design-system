@@ -65,6 +65,26 @@
   --tape:         rgba(214, 178, 92, 0.55);
   --tape-edge:    rgba(178, 138, 56, 0.75);
 
+  /* ── ESTADOS DE INTERFACE ── */
+  --state-error:         #922020;
+  --state-error-light:   #e0a0a0;
+  --state-error-pale:    #f7eaea;
+  --state-success:       var(--b-700);
+  --state-success-light: var(--b-300);
+  --state-success-pale:  var(--b-50);
+  --state-warning:       var(--fire);
+  --state-warning-pale:  var(--fire-pale);
+
+  /* ── URGÊNCIA / FIRE ── */
+  --fire:       #c4521a;
+  --fire-light: #e8ac80;
+  --fire-pale:  #f7e8dc;
+
+  /* ── SEMÂNTICOS DE URGÊNCIA ── */
+  --urgent:       var(--fire);
+  --urgent-light: var(--fire-light);
+  --urgent-pale:  var(--fire-pale);
+
   /* ── FORÇAS MILITARES ── */
 
   /* Exército Brasileiro (inclui ESA) */

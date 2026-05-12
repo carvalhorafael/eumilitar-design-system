@@ -15,6 +15,7 @@
   --shadow-md:    4px 4px 0 var(--ink);
   --shadow-lg:    6px 6px 0 var(--ink);
   --shadow-brand: 4px 4px 0 var(--accent);
+  --shadow-urgent: 4px 4px 0 var(--fire);
   --shadow-inset: inset 2px 2px 0 var(--ink);
 
   /* ── Borders ── */
