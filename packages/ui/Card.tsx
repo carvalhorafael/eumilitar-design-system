@@ -37,13 +37,16 @@ const shadowMap: Record<CardShadow, string> = {
   brand: "var(--shadow-brand)",
 };
 
-export function Card({ variant = "default", shadow = "md", style, children, ...rest }: CardProps) {
+export function Card({ variant = "default", shadow = "md", style, children, className, ...rest }: CardProps) {
   return (
     <div
+      className={["ds-card", className].filter(Boolean).join(" ")}
+      data-slot="card"
+      data-variant={variant}
+      data-shadow={shadow}
       style={{
         ...variantMap[variant],
         boxShadow: shadowMap[shadow],
-        overflow: "hidden",
         ...style,
       }}
       {...rest}
@@ -53,9 +56,11 @@ export function Card({ variant = "default", shadow = "md", style, children, ...r
   );
 }
 
-export function CardHeader({ style, children, ...rest }: CardSectionProps) {
+export function CardHeader({ style, children, className, ...rest }: CardSectionProps) {
   return (
     <div
+      className={["ds-card__header", className].filter(Boolean).join(" ")}
+      data-slot="header"
       style={{
         padding: "16px 20px",
         borderBottom: "2px solid var(--border-default)",
@@ -68,9 +73,11 @@ export function CardHeader({ style, children, ...rest }: CardSectionProps) {
   );
 }
 
-export function CardBody({ style, children, ...rest }: CardSectionProps) {
+export function CardBody({ style, children, className, ...rest }: CardSectionProps) {
   return (
     <div
+      className={["ds-card__body", className].filter(Boolean).join(" ")}
+      data-slot="body"
       style={{
         padding: "20px",
         ...style,
@@ -82,9 +89,11 @@ export function CardBody({ style, children, ...rest }: CardSectionProps) {
   );
 }
 
-export function CardFooter({ style, children, ...rest }: CardSectionProps) {
+export function CardFooter({ style, children, className, ...rest }: CardSectionProps) {
   return (
     <div
+      className={["ds-card__footer", className].filter(Boolean).join(" ")}
+      data-slot="footer"
       style={{
         padding: "12px 20px",
         borderTop: "2px solid var(--border-default)",

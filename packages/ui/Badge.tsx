@@ -1,9 +1,10 @@
-interface BadgeProps {
+import type { HTMLAttributes } from "react";
+
+interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   variant?: "default" | "brand" | "urgent" | "ex" | "mb" | "fab" | "pm" | "bm" | "outline" | "dark";
   size?: "sm" | "md";
   dot?: boolean;
-  style?: React.CSSProperties;
 }
 
 const variantStyles: Record<NonNullable<BadgeProps["variant"]>, React.CSSProperties> = {
@@ -64,12 +65,14 @@ const sizeStyles: Record<NonNullable<BadgeProps["size"]>, React.CSSProperties> =
   md: { padding: "4px 8px", fontSize: "11px", letterSpacing: "0.06em" },
 };
 
-export function Badge({ children, variant = "default", size = "md", dot, style }: BadgeProps) {
+export function Badge({ children, variant = "default", size = "md", dot, style, className, ...rest }: BadgeProps) {
   return (
     <span
+      className={["ds-badge", className].filter(Boolean).join(" ")}
+      data-slot="badge"
+      data-variant={variant}
+      data-size={size}
       style={{
-        display: "inline-flex",
-        alignItems: "center",
         gap: "5px",
         fontFamily: "var(--font-mono)",
         fontWeight: 700,
@@ -81,9 +84,12 @@ export function Badge({ children, variant = "default", size = "md", dot, style }
         ...sizeStyles[size],
         ...style,
       }}
+      {...rest}
     >
       {dot && (
         <span
+          className="ds-badge__dot"
+          data-slot="dot"
           style={{
             width: "5px",
             height: "5px",

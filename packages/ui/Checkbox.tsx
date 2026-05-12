@@ -12,7 +12,7 @@ interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "siz
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, helperText, inputState = "default", indeterminate, id, style, ...rest }, ref) => {
+  ({ label, helperText, inputState = "default", indeterminate, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
 
@@ -22,9 +22,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       "var(--border-strong)";
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+      <div className="ds-checkbox" data-slot="checkbox-root" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <label
           htmlFor={inputId}
+          className="ds-checkbox__label"
+          data-slot="label"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -33,11 +35,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             opacity: rest.disabled ? 0.45 : 1,
           }}
         >
-          <span style={{ position: "relative", flexShrink: 0, marginTop: "1px" }}>
+          <span className="ds-checkbox__control-wrap" data-slot="control-wrap" style={{ position: "relative", flexShrink: 0, marginTop: "1px" }}>
             <input
               ref={ref}
               id={inputId}
               type="checkbox"
+              className={["ds-checkbox__control", className].filter(Boolean).join(" ")}
+              data-slot="control"
               style={{
                 appearance: "none",
                 width: "18px",
@@ -102,6 +106,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           </span>
           {label && (
             <span
+              className="ds-checkbox__text"
+              data-slot="text"
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "14px",
@@ -114,7 +120,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           )}
         </label>
         {helperText && (
-          <div style={{ paddingLeft: "28px" }}>
+          <div className="ds-checkbox__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
             <HelperText state={inputState}>{helperText}</HelperText>
           </div>
         )}
@@ -132,7 +138,7 @@ interface RadioProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" 
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ label, helperText, inputState = "default", id, style, ...rest }, ref) => {
+  ({ label, helperText, inputState = "default", id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
 
@@ -142,9 +148,11 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       "var(--border-strong)";
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+      <div className="ds-radio" data-slot="radio-root" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <label
           htmlFor={inputId}
+          className="ds-radio__label"
+          data-slot="label"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -153,11 +161,13 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
             opacity: rest.disabled ? 0.45 : 1,
           }}
         >
-          <span style={{ position: "relative", flexShrink: 0, marginTop: "1px" }}>
+          <span className="ds-radio__control-wrap" data-slot="control-wrap" style={{ position: "relative", flexShrink: 0, marginTop: "1px" }}>
             <input
               ref={ref}
               id={inputId}
               type="radio"
+              className={["ds-radio__control", className].filter(Boolean).join(" ")}
+              data-slot="control"
               style={{
                 appearance: "none",
                 width: "18px",
@@ -206,6 +216,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           </span>
           {label && (
             <span
+              className="ds-radio__text"
+              data-slot="text"
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "14px",
@@ -218,7 +230,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           )}
         </label>
         {helperText && (
-          <div style={{ paddingLeft: "28px" }}>
+          <div className="ds-radio__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
             <HelperText state={inputState}>{helperText}</HelperText>
           </div>
         )}
@@ -238,7 +250,7 @@ interface CheckboxGroupProps {
 
 export function CheckboxGroup({ label, helperText, inputState = "default", children }: CheckboxGroupProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div className="ds-checkbox-group" data-slot="checkbox-group" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       {label && (
         <span
           style={{
@@ -271,7 +283,7 @@ interface RadioGroupProps {
 
 export function RadioGroup({ label, helperText, inputState = "default", children }: RadioGroupProps) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div className="ds-radio-group" data-slot="radio-group" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       {label && (
         <span
           style={{

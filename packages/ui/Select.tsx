@@ -37,6 +37,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       options = [],
       placeholder,
       style,
+      className,
       defaultValue,
       value,
       ...rest
@@ -47,16 +48,17 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const inputId = id ?? uid;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <div className="ds-select" data-slot="select-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         {label && <Label htmlFor={inputId} required={required}>{label}</Label>}
-        <div style={{ position: "relative", width: "100%" }}>
+        <div className="ds-select__field-wrap" data-slot="field-wrap" style={{ position: "relative", width: "100%" }}>
           <select
             ref={ref}
             id={inputId}
             defaultValue={defaultValue ?? (placeholder && value === undefined ? "" : undefined)}
             value={value}
+            className={["ds-select__field", className].filter(Boolean).join(" ")}
+            data-slot="field"
             style={{
-              width: "100%",
               fontFamily: "var(--font-body)",
               fontWeight: 400,
               color: "var(--ink)",
@@ -79,10 +81,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                             "var(--accent)";
               e.currentTarget.style.borderColor = color;
               e.currentTarget.style.boxShadow = `2px 2px 0 ${color}`;
+              rest.onFocus?.(e);
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = stateStyles[inputState].borderColor as string;
               e.currentTarget.style.boxShadow = "none";
+              rest.onBlur?.(e);
             }}
             {...rest}
           >
@@ -99,6 +103,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </select>
           {/* Seta customizada */}
           <div
+            className="ds-select__icon"
+            data-slot="icon"
             style={{
               position: "absolute",
               right: size === "sm" ? "10px" : "14px",

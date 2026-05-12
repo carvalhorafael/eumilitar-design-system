@@ -70,16 +70,16 @@ Documento complementar:
 - [x] Fazer `apps/docs` consumir esses componentes do pacote, não de `apps/docs/components/ui`
 
 ### 3. Portabilidade de estilos
-- [ ] Reduzir dependência de `style={{ ... }}` onde houver repetição estrutural
-- [ ] Definir uma convenção de classes semânticas ou utilitárias previsíveis para componentes e blocos
-- [ ] Deixar inline style apenas para casos realmente dinâmicos
-- [ ] Documentar a anatomia base dos componentes mais usados
+- [x] Reduzir dependência de `style={{ ... }}` onde houver repetição estrutural
+- [x] Definir uma convenção de classes semânticas ou utilitárias previsíveis para componentes e blocos
+- [x] Deixar inline style apenas para casos realmente dinâmicos
+- [x] Documentar a anatomia base dos componentes mais usados
 
 ### 4. Qualidade mínima para reuso
 - [ ] Auditar dark mode nos componentes principais
 - [ ] Revisar acessibilidade básica: labels, teclado, contraste e estados
 - [ ] Documentar props, variantes, estados e tokens usados por componente
-- [ ] Definir checklist mínimo para considerar um componente “reutilizável”
+- [x] Definir checklist mínimo para considerar um componente “reutilizável”
 
 ---
 

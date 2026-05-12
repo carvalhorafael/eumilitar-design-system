@@ -72,6 +72,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition = "left",
       children,
       style,
+      className,
       disabled,
       ...rest
     },
@@ -81,9 +82,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         disabled={disabled}
+        type={rest.type ?? "button"}
+        className={["ds-button", className].filter(Boolean).join(" ")}
+        data-slot="button"
+        data-variant={variant}
+        data-size={size}
         style={{
-          display: "inline-flex",
-          alignItems: "center",
           gap: "6px",
           fontFamily: "var(--font-body)",
           fontWeight: 700,
@@ -131,9 +135,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         }}
         {...rest}
       >
-        {icon && iconPosition === "left" && <span style={{ display: "flex", alignItems: "center" }}>{icon}</span>}
+        {icon && iconPosition === "left" && <span className="ds-button__icon" data-slot="icon-left" style={{ display: "flex", alignItems: "center" }}>{icon}</span>}
         {children}
-        {icon && iconPosition === "right" && <span style={{ display: "flex", alignItems: "center" }}>{icon}</span>}
+        {icon && iconPosition === "right" && <span className="ds-button__icon" data-slot="icon-right" style={{ display: "flex", alignItems: "center" }}>{icon}</span>}
       </button>
     );
   }

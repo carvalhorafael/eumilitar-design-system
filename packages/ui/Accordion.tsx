@@ -26,6 +26,8 @@ interface AccordionItemProps {
 function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProps) {
   return (
     <div
+      className="ds-accordion__item"
+      data-slot="item"
       style={{
         borderBottom: isLast ? "none" : "2px solid var(--border-strong)",
       }}
@@ -35,9 +37,10 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         aria-expanded={open}
         aria-controls={`${id}-panel`}
         onClick={onToggle}
+        type="button"
+        className="ds-accordion__trigger"
+        data-slot="trigger"
         style={{
-          width: "100%",
-          display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           gap: "16px",
@@ -56,6 +59,8 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         }}
       >
         <span
+          className="ds-accordion__title"
+          data-slot="title"
           style={{
             fontFamily: "var(--font-body)",
             fontSize: "15px",
@@ -71,8 +76,9 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         {/* +/− icon */}
         <span
           aria-hidden="true"
+          className="ds-accordion__icon"
+          data-slot="icon"
           style={{
-            flexShrink: 0,
             width: "20px",
             height: "20px",
             display: "flex",
@@ -94,6 +100,8 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         id={`${id}-panel`}
         role="region"
         aria-labelledby={`${id}-trigger`}
+        className="ds-accordion__panel"
+        data-slot="panel"
         style={{
           overflow: "hidden",
           maxHeight: open ? "600px" : "0",
@@ -101,6 +109,8 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         }}
       >
         <div
+          className="ds-accordion__content"
+          data-slot="content"
           style={{
             padding: "4px 18px 18px",
             borderTop: "1px solid var(--border-default)",
@@ -143,13 +153,14 @@ export function Accordion({ items, allowMultiple = false }: AccordionProps) {
 
   return (
     <div
+      className="ds-accordion"
+      data-slot="accordion"
       style={{
         border: "2px solid var(--border-strong)",
         borderRadius: "var(--radius-sm)",
         boxShadow: "var(--shadow-sm)",
         overflow: "hidden",
         background: "var(--surface-raised)",
-        width: "100%",
       }}
     >
       {items.map((item, i) => {

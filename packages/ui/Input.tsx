@@ -37,6 +37,8 @@ export function Label({ htmlFor, required, children }: LabelProps) {
   return (
     <label
       htmlFor={htmlFor}
+      className="ds-input__label"
+      data-slot="label"
       style={{
         display: "block",
         fontFamily: "var(--font-mono)",
@@ -50,7 +52,7 @@ export function Label({ htmlFor, required, children }: LabelProps) {
     >
       {children}
       {required && (
-        <span style={{ color: "var(--state-error)", marginLeft: "4px" }}>*</span>
+        <span data-slot="required" style={{ color: "var(--state-error)", marginLeft: "4px" }}>*</span>
       )}
     </label>
   );
@@ -70,6 +72,9 @@ export function HelperText({ state = "default", children }: HelperTextProps) {
 
   return (
     <p
+      className="ds-input__helper"
+      data-slot="helper"
+      data-state={state}
       style={{
         fontFamily: "var(--font-body)",
         fontSize: "12px",
@@ -93,18 +98,19 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ inputState = "default", size = "md", label, helperText, required, id, style, ...rest }, ref) => {
+  ({ inputState = "default", size = "md", label, helperText, required, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <div className="ds-input" data-slot="input-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         {label && <Label htmlFor={inputId} required={required}>{label}</Label>}
         <input
           ref={ref}
           id={inputId}
+          className={["ds-input__field", className].filter(Boolean).join(" ")}
+          data-slot="field"
           style={{
-            width: "100%",
             fontFamily: "var(--font-body)",
             fontWeight: 400,
             color: "var(--ink)",
@@ -153,18 +159,19 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ inputState = "default", size = "md", label, helperText, required, id, style, ...rest }, ref) => {
+  ({ inputState = "default", size = "md", label, helperText, required, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
 
     return (
-      <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      <div className="ds-input" data-slot="textarea-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
         {label && <Label htmlFor={inputId} required={required}>{label}</Label>}
         <textarea
           ref={ref}
           id={inputId}
+          className={["ds-textarea-field", className].filter(Boolean).join(" ")}
+          data-slot="field"
           style={{
-            width: "100%",
             fontFamily: "var(--font-body)",
             fontWeight: 400,
             color: "var(--ink)",
