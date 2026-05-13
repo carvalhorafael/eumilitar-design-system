@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Navbar, type NavbarGroup } from "@carvalhorafael/eumilitar-ui";
 
-const nav = [
+const nav: NavbarGroup[] = [
   {
     label: "Biblioteca",
     items: [
@@ -45,6 +46,7 @@ const nav = [
       { href: "/componentes/alert",     label: "07 — Alert" },
       { href: "/componentes/accordion", label: "08 — Accordion" },
       { href: "/componentes/table",     label: "09 — Table" },
+      { href: "/componentes/navbar",    label: "10 — Navbar" },
     ],
   },
 ];
@@ -53,20 +55,11 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside
-      className="docs-sidebar flex flex-col"
-      style={{
-        background: "var(--paper)",
-      }}
-    >
-      {/* Logo */}
-      <div
-        className="px-5 py-4 border-b-2"
-        style={{ borderColor: "var(--border-strong)" }}
-      >
-        <Link href="/" className="block">
+    <Navbar
+      brand={
+        <>
           <span
-            className="text-xs font-bold tracking-widest uppercase block"
+            className="text-xs font-bold uppercase block"
             style={{ fontFamily: "var(--font-mono)", color: "var(--pencil)", fontSize: "10px" }}
           >
             EuMilitar
@@ -77,63 +70,32 @@ export function Sidebar() {
           >
             Design System
           </span>
+        </>
+      }
+      groups={nav}
+      activeHref={pathname}
+      menuLabel="Abrir navegação"
+      closeLabel="Fechar navegação"
+      renderLink={({ item, active, className, style, onClick }) => (
+        <Link
+          href={item.href}
+          className={className}
+          style={{
+            ...style,
+            fontWeight: active ? 600 : 400,
+          }}
+          onClick={onClick}
+        >
+          {item.label}
         </Link>
-      </div>
-
-      {/* Navegação */}
-      <nav className="docs-sidebar__nav flex-1">
-        {nav.map((group) => (
-          <div key={group.label} className="docs-sidebar__group">
-            <span
-              className="px-5 block mb-1"
-              style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: "10px",
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "var(--pencil)",
-              }}
-            >
-              {group.label}
-            </span>
-            {group.items.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-center px-5 py-1.5 text-sm transition-all"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "13px",
-                    fontWeight: active ? 600 : 400,
-                    color: active ? "var(--text-brand)" : "var(--text-secondary)",
-                    background: active ? "var(--accent-pale)" : "transparent",
-                    borderLeft: active
-                      ? "3px solid var(--accent)"
-                      : "3px solid transparent",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </div>
-        ))}
-      </nav>
-
-      {/* Versão */}
-      <div
-        className="docs-sidebar__version px-5 py-3 border-t-2"
-        style={{ borderColor: "var(--border-default)" }}
-      >
+      )}
+      version={
         <span
           style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil-soft)" }}
         >
           v0.1.0 — alpha
         </span>
-      </div>
-    </aside>
+      }
+    />
   );
 }

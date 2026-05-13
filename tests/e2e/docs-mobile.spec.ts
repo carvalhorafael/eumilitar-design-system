@@ -4,6 +4,7 @@ const criticalRoutes = [
   "/",
   "/componentes/botao",
   "/componentes/input",
+  "/componentes/navbar",
   "/componentes/table",
   "/padroes/captacao",
   "/padroes/beneficios",
@@ -33,4 +34,19 @@ test.describe("docs mobile viewport", () => {
       expect(metrics.mainScrollWidth).toBeLessThanOrEqual(metrics.mainClientWidth + 1);
     });
   }
+});
+
+test("docs mobile menu opens and closes through Navbar", async ({ page }) => {
+  await page.goto("/");
+
+  const menuButton = page.getByRole("button", { name: "Abrir navegação" });
+  await expect(menuButton).toHaveAttribute("aria-expanded", "false");
+
+  await menuButton.click();
+  const closeButton = page.getByRole("button", { name: "Fechar navegação" });
+  await expect(closeButton).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByRole("link", { name: "10 — Navbar" })).toBeVisible();
+
+  await page.getByRole("link", { name: "10 — Navbar" }).click();
+  await expect(page).toHaveURL(/\/componentes\/navbar$/);
 });

@@ -98,29 +98,6 @@ body {
   background: var(--surface-base);
 }
 
-.docs-sidebar {
-  width: 100%;
-  flex-shrink: 0;
-  border-bottom: 2px solid var(--border-strong);
-  background: var(--paper);
-}
-
-.docs-sidebar__nav {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding: 14px 16px;
-}
-
-.docs-sidebar__group {
-  min-width: 168px;
-  margin-bottom: 0;
-}
-
-.docs-sidebar__version {
-  display: none;
-}
-
 .docs-header {
   border-bottom: 2px solid var(--border-strong);
   padding: 24px 20px;
@@ -221,28 +198,6 @@ body {
 @media (min-width: 900px) {
   .docs-shell {
     flex-direction: row;
-  }
-
-  .docs-sidebar {
-    width: 14rem;
-    min-height: 100vh;
-    border-right: 2px solid var(--border-strong);
-    border-bottom: 0;
-  }
-
-  .docs-sidebar__nav {
-    display: block;
-    padding: 20px 0;
-    overflow-x: visible;
-    overflow-y: auto;
-  }
-
-  .docs-sidebar__group {
-    margin-bottom: 20px;
-  }
-
-  .docs-sidebar__version {
-    display: block;
   }
 
   .docs-header {

@@ -7,6 +7,7 @@ import {
   Checkbox,
   CheckboxGroup,
   Input,
+  Navbar,
   Radio,
   RadioGroup,
 } from "./index";
@@ -105,5 +106,38 @@ describe("@carvalhorafael/eumilitar-ui smoke", () => {
     expect(checkboxGroup).toHaveAttribute("aria-describedby");
     expect(radioGroup).toHaveAttribute("aria-invalid", "true");
     expect(radioGroup).toHaveAttribute("aria-describedby");
+  });
+
+  it("abre e fecha Navbar mobile com aria-expanded", () => {
+    render(
+      <Navbar
+        brand={<span>EuMilitar</span>}
+        groups={[{ label: "Componentes", items: [{ href: "/componentes/botao", label: "Button" }] }]}
+        activeHref="/componentes/botao"
+        renderLink={({ item, className, style, onClick }) => (
+          <a
+            href={item.href}
+            className={className}
+            style={style}
+            onClick={(event) => {
+              event.preventDefault();
+              onClick();
+            }}
+          >
+            {item.label}
+          </a>
+        )}
+      />,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Abrir menu" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: "Button" })).toHaveAttribute("href", "/componentes/botao");
+
+    fireEvent.click(screen.getByRole("link", { name: "Button" }));
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
   });
 });
