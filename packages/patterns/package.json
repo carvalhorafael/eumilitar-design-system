@@ -1,6 +1,6 @@
 {
   "name": "@carvalhorafael/eumilitar-patterns",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "build": "tsup index.ts docs.tsx --format esm --dts --tsconfig ./tsconfig.json --clean --out-dir dist"
