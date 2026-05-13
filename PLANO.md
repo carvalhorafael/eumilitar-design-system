@@ -1,145 +1,234 @@
-# EuMilitar Design System — Plano de Implementação
+# EuMilitar Design System — Plano de Trabalho Atual
 
 ## Status geral
 
-**Fase atual**: Evolução para reutilização  
-**Objetivo de médio prazo**: Transformar o projeto de um site de documentação visual em um design system reutilizável entre múltiplos consumidores.  
-**Objetivo de longo prazo**: Ter tokens, componentes base e blocos de composição que acelerem a construção de landing pages e futuros produtos, incluindo um tema WordPress.
+**Foco atual**: transformar o design system em uma biblioteca distribuível e versionada  
+**Objetivo de médio prazo**: permitir consumo consistente em múltiplos sistemas, incluindo app React/Next, site institucional e tema WordPress  
+**Objetivo de longo prazo**: ter uma base compartilhada de tokens, CSS, componentes e blocos que possa evoluir com versionamento previsível e atualização controlada
 
-Documento complementar:
-- [ROADMAP-REUTILIZACAO.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ROADMAP-REUTILIZACAO.md)
+## Decisão arquitetural
 
----
+O design system **não** será tratado como um conjunto de componentes React tentando rodar em qualquer plataforma.
 
-## Concluído
+Ele será tratado como uma arquitetura em camadas:
 
-### Fundamentos
-- [x] 01 — Cores (escala primitiva, tokens semânticos, forças militares, urgência/fire)
-- [x] 02 — Tipografia (famílias, escala, exemplos de uso)
-- [x] 03 — Espaçamento (escala base 4px, contextos de aplicação)
-- [x] 04 — Tokens (referência completa de CSS custom properties)
-- [x] 05 — Sombras & Efeitos (sombras offset, raios, highlight, tape)
+1. `tokens` como fonte única de verdade
+2. `css` compartilhado e agnóstico de framework
+3. `ui` como adapter React
+4. `patterns` como contratos e markup de blocos
+5. `wordpress` como adapter de tema e editor
+6. `docs` como vitrine e ambiente de validação
 
-### Componentes
-- [x] 01 — Button (7 variantes: primary, secondary, ghost, ghost-inverse, brand-inverse, danger, urgent)
-- [x] 02 — Badge (11 variantes, dot, tamanhos sm/md)
-- [x] 03 — Card (4 variantes, 5 níveis de sombra)
-- [x] 04 — Input & Textarea (3 estados, 3 tamanhos, foco neo-brutalista)
-- [x] 05 — Select (seta SVG customizada, placeholder automático)
-- [x] 06 — Checkbox & Radio (checkmark SVG animado, grupos)
-- [x] 07 — Alert (5 variantes: default, success, error, warning, urgent; dismissible)
-- [x] 08 — Accordion (modo exclusivo e múltiplo, defaultOpen, conteúdo rico)
-- [x] 09 — Table (primitivos composáveis + DataTable com render functions)
+## O que já está consolidado
 
-### Padrões
-- [x] 01 — Hero (claro, brand escuro, com urgência)
-- [x] 02 — Urgência (banner de topo, bloco CTA, cards de turma)
-- [x] 03 — Captação (lead form simples, form completo 2 colunas)
-- [x] 04 — FAQ (FAQ geral, FAQ por força com conteúdo rico)
-- [x] 05 — Benefícios (grid 3 col com ícone, grid 2 col com checklist, stats em fundo brand)
-- [x] 06 — Depoimentos (grid 3 cards, depoimento em destaque fundo escuro, faixa de números)
+### Base visual e técnica
+- [x] Tokens centralizados em `@eumilitar/tokens`
+- [x] Primitives React extraídas para `@eumilitar/ui`
+- [x] Contratos de blocos formalizados em `@eumilitar/patterns`
+- [x] Documentação operacional do monorepo atualizada
+- [x] Lint, build e smoke tests funcionando
+- [x] Base mínima de acessibilidade e fluxo de formulários validada
 
-### Infra e operação
-- [x] Deploy automático na Vercel via integração Git com `main`
-- [x] Compatibilidade entre Codex e Claude Code via `AGENTS.md -> CLAUDE.md`
-- [x] Diagnóstico inicial de reutilização e roadmap documentado em `ROADMAP-REUTILIZACAO.md`
-- [x] Migrar lint para ESLint CLI não interativo
-- [x] Atualizar `README.md` e `CLAUDE.md` para refletir o monorepo real
-- [x] Eliminar o warning de ordem de `@import` em `apps/docs/app/globals.css`
-- [x] Fazer o app `docs` consumir `@eumilitar/patterns` na documentação dos blocos
-- [x] Documentar exemplos de HTML puro por componente
-- [x] Documentar limites e anti-padrões por componente
-- [x] Adicionar smoke tests mínimos para o pacote `@eumilitar/ui`
-- [x] Documentar tokens usados por componente
-- [x] Reduzir repetição estrutural nas páginas de padrões com helpers compartilhados
+### Documentação já existente
+- [x] Anatomia dos componentes
+- [x] HTML puro por componente
+- [x] Anti-padrões por componente
+- [x] HTML de referência por bloco
 
----
+Esses itens não são mais o foco principal do plano. Eles passam a ser pré-requisitos já concluídos.
 
-## Em andamento
+## Princípios do novo ciclo
 
-### Frente principal — Reutilização do sistema
-- [x] Consolidar tokens como fonte única real do sistema
-- [x] Separar componentes reutilizáveis do app de documentação
-- [x] Estruturar padrões como blocos portáveis
+- [x] O compartilhamento entre plataformas deve acontecer por **tokens + CSS + contratos**, não por React apenas
+- [x] Atualizações devem acontecer por **versionamento**, não por acoplamento invisível
+- [x] WordPress será tratado como **consumidor de biblioteca**, não como exceção improvisada
+- [x] Elementor será tratado como **consumer layer**, não como fonte da verdade do design system
 
----
+## Arquitetura alvo do monorepo
 
-## Próxima fase — Prioridades imediatas
+### Camadas centrais
 
-### 1. Tokens como fonte única
-- [x] Mover a definição primária de tokens para `packages/tokens/*.css`
-- [x] Fazer `apps/docs` consumir os tokens a partir de `@eumilitar/tokens`
-- [x] Reduzir `apps/docs/app/globals.css` para base, reset, tema e ajustes específicos do app
-- [x] Eliminar duplicação entre tokens do app e tokens do pacote
+#### `packages/tokens`
 
-### 2. Extração dos componentes base
-- [x] Criar `packages/ui`
-- [x] Mover Button, Badge, Card, Input, Select, Checkbox, Alert, Accordion e Table para `packages/ui`
-- [x] Exportar os componentes por uma API única do pacote
-- [x] Fazer `apps/docs` consumir esses componentes do pacote, não de `apps/docs/components/ui`
+Responsabilidade:
+- source of truth de cores, tipografia, espaçamento, bordas, sombras e estados
 
-### 3. Portabilidade de estilos
-- [x] Reduzir dependência de `style={{ ... }}` onde houver repetição estrutural
-- [x] Definir uma convenção de classes semânticas ou utilitárias previsíveis para componentes e blocos
-- [x] Deixar inline style apenas para casos realmente dinâmicos
-- [x] Documentar a anatomia base dos componentes mais usados
-- [x] Refinar as páginas de padrões do app `docs` para consumir tokens semânticos em vez de cores literais inverse
+Artefatos esperados:
+- CSS variables
+- JSON exportável
+- mapeamento para `theme.json` do WordPress
 
-### 4. Qualidade mínima para reuso
-- [x] Auditar dark mode nos componentes principais
-- [x] Revisar acessibilidade básica: labels, teclado, contraste e estados
-- [x] Documentar props, variantes, estados e tokens usados por componente
-- [x] Definir checklist mínimo para considerar um componente “reutilizável”
+#### `packages/css`
 
----
+Responsabilidade:
+- biblioteca CSS agnóstica de framework
 
-## Fase seguinte — Preparação para WordPress
+Conteúdo esperado:
+- primitives (`.ds-button`, `.ds-input`, `.ds-card`, etc.)
+- blocos (`.ds-hero`, `.ds-faq`, `.ds-capture`, etc.)
+- helpers mínimos de layout realmente reutilizáveis
 
-### Blocos e padrões reutilizáveis
-- [x] Formalizar Hero, Urgência, Benefícios, FAQ, Depoimentos, Captação e CTA como blocos
-- [x] Definir anatomia, variantes e conteúdo esperado de cada bloco
-- [x] Criar contratos de conteúdo: obrigatório, opcional, lista, rich text, imagem, CTA
-- [x] Documentar tokens usados e regras responsivas por bloco
+Observação:
+- essa camada será a ponte principal para WordPress e outros sistemas não React
 
-### Referência agnóstica de framework
-- [x] Criar versões HTML/CSS de referência para os blocos prioritários
-- [x] Definir convenção de classes voltada para portabilidade, por exemplo `.ds-hero`, `.ds-faq`, `.ds-benefits`
-- [x] Garantir que os blocos possam ser implementados fora de React sem redesenho estrutural
+#### `packages/ui`
 
-### Caminho para o tema WordPress
-- [x] Identificar quais blocos são prioridade real para o tema
-- [x] Mapear os campos de CMS necessários por bloco
-- [ ] Preparar um CSS global exportável para WordPress
-- [ ] Criar um protótipo de landing page com blocos portáveis e independentes do app `docs`
+Responsabilidade:
+- adapter React do design system
 
----
+Regra:
+- `@eumilitar/ui` deve consumir a camada de tokens e a camada de CSS compartilhado, não se comportar como fonte paralela
 
-## Backlog — Componentes
+#### `packages/patterns`
 
-Componentes ainda úteis, mas não prioritários antes da consolidação da base reutilizável.
+Responsabilidade:
+- contratos de conteúdo, anatomia, variantes, HTML refs e regras responsivas dos blocos
 
-| Componente | Prioridade | Justificativa |
-|---|---|---|
-| Toggle / Switch | Alta | Filtros e preferências — app do aluno |
-| Tabs | Alta | Organização de conteúdo por força (EX/MB/FAB) |
-| Toast / Notification | Média | Feedback não-bloqueante pós-ação |
-| Modal / Dialog | Média | Confirmações, formulários em overlay |
-| Breadcrumb | Baixa | Navegação interna — app do aluno |
-| Pagination | Baixa | Listagens longas — banco de questões |
-| Skeleton / Loading | Baixa | Estados de carregamento |
+Uso:
+- documentação
+- geração de templates
+- mapping de CMS
+- base para WordPress e Elementor
 
----
+### Camadas por plataforma
 
-## Backlog — Futuro de distribuição
+#### `apps/docs`
 
-- [ ] Avaliar exportação estruturada de tokens para múltiplos formatos
-- [ ] Avaliar Style Dictionary somente depois de a fonte única de tokens estar estável
-- [ ] Avaliar geração de artefatos para Figma, iOS e Android no momento em que houver segundo consumidor real além do app `docs`
+Responsabilidade:
+- vitrine oficial
+- ambiente de smoke visual/manual
+- documentação dos contratos
 
----
+#### `packages/wordpress`
 
-## Convenção de atualização deste arquivo
+Responsabilidade:
+- adapter para consumo do design system em WordPress
 
-Marcar `[x]` ao concluir cada item.  
-Manter "Em andamento" curto e alinhado à frente de trabalho atual.  
-Adicionar novos itens apenas quando eles ajudarem o objetivo de reutilização, não quando forem apenas desejos laterais.
+Conteúdo esperado:
+- `theme.json` derivado dos tokens
+- enqueue do CSS compartilhado
+- templates / template parts / patterns de tema
+- utilitários mínimos para integrar classes `ds-*` no tema
+
+#### Elementor
+
+Elementor entra como consumidor do adapter WordPress, não como camada central.
+
+Direção recomendada:
+- o tema carrega tokens e CSS globais
+- o tema expõe classes e blocos compatíveis com o design system
+- o Elementor usa isso via:
+  - Style Kit alinhado aos tokens
+  - templates/seções prontos
+  - eventualmente widgets próprios, se necessário
+
+Regra importante:
+- **não duplicar o design system inteiro dentro do Elementor**
+- o Elementor deve usar a base já publicada pelo design system
+
+## Fases do trabalho
+
+### Fase 1 — Definir a biblioteca distribuível
+
+Objetivo:
+transformar o estado atual em uma arquitetura de biblioteca clara
+
+Entregas:
+- [ ] decidir se a camada CSS compartilhada viverá em `packages/css`
+- [ ] ajustar `@eumilitar/ui` para depender explicitamente da camada CSS compartilhada
+- [ ] definir quais artefatos cada pacote exporta
+- [ ] documentar a arquitetura alvo no repositório
+- [ ] definir a política de versionamento dos pacotes
+
+### Fase 2 — Artefatos de distribuição
+
+Objetivo:
+fazer os pacotes gerarem saídas consumíveis por outros sistemas
+
+Entregas:
+- [ ] criar exports claros para `@eumilitar/tokens`
+- [ ] criar build/export da camada CSS compartilhada
+- [ ] revisar `package.json` dos pacotes para consumo externo
+- [ ] garantir que o `docs` consuma esses artefatos como consumidor real
+- [ ] validar o fluxo de import em um consumer mínimo fora do app `docs`
+
+### Fase 3 — Base de release e versionamento
+
+Objetivo:
+tirar o design system do modo “código local” e colocá-lo no modo “biblioteca versionada”
+
+Entregas:
+- [ ] escolher estratégia de release, preferencialmente `changesets`
+- [ ] configurar versionamento semântico
+- [ ] definir changelog por pacote
+- [ ] preparar CI para validar build/lint/test antes de release
+- [ ] documentar como um consumer atualiza de versão
+
+### Fase 4 — Adapter WordPress
+
+Objetivo:
+permitir consumo consistente do design system em tema WordPress
+
+Entregas:
+- [ ] criar `packages/wordpress`
+- [ ] gerar base de `theme.json` a partir dos tokens relevantes
+- [ ] definir enqueue de CSS do design system no tema
+- [ ] criar estrutura mínima de tema compatível com a biblioteca
+- [ ] mapear os blocos prioritários para template parts / padrões de tema
+
+### Fase 5 — Integração com Elementor
+
+Objetivo:
+fazer Elementor usar o design system sem virar uma segunda fonte de verdade
+
+Entregas:
+- [ ] definir quais tokens precisam aparecer no Style Kit do Elementor
+- [ ] definir estratégia para classes `ds-*` em seções e widgets
+- [ ] preparar templates de página e seções reutilizáveis
+- [ ] decidir se haverá widgets customizados ou apenas templates e classes
+- [ ] documentar o fluxo de uso de Elementor com a biblioteca
+
+### Fase 6 — Consumer real de validação
+
+Objetivo:
+provar que a biblioteca funciona fora do app `docs`
+
+Entregas:
+- [ ] criar um consumer real mínimo da biblioteca
+- [ ] validar update de versão em um consumer
+- [ ] validar que mudanças de tokens e CSS propagam de forma previsível
+- [ ] documentar limitações e pontos de atenção de compatibilidade
+
+## Ordem recomendada de execução
+
+1. Fase 1 — definir arquitetura final da biblioteca
+2. Fase 2 — gerar artefatos de distribuição
+3. Fase 3 — preparar versionamento e release
+4. Fase 4 — criar adapter WordPress
+5. Fase 5 — integrar com Elementor
+6. Fase 6 — validar em consumer real
+
+## Decisões já tomadas para WordPress e Elementor
+
+- [x] WordPress será tratado como plataforma alvo real, não como adaptação tardia
+- [x] `theme.json` deve ser consumidor dos tokens, não fonte paralela
+- [x] `block.json` e padrões de bloco são relevantes para o futuro adapter WordPress
+- [x] Elementor será uma camada de composição por cima da biblioteca
+- [x] O design system não deve ficar dependente de Elementor para existir
+
+## Critérios de sucesso
+
+Consideraremos este ciclo bem-sucedido quando:
+
+- [ ] o design system puder ser instalado ou consumido como biblioteca
+- [ ] um consumer React usar os pacotes sem depender de arquivos internos do repo
+- [ ] um tema WordPress puder usar os mesmos tokens e CSS compartilhados
+- [ ] Elementor puder compor páginas usando essa mesma base visual
+- [ ] uma mudança no design system puder ser publicada em nova versão e adotada por consumidores de forma previsível
+
+## Documento de referência complementar
+
+Este plano substitui o plano anterior como documento ativo de execução.
+
+O documento anterior cumpriu seu papel na fase de consolidação da base de reutilização.  
+O [ROADMAP-REUTILIZACAO.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ROADMAP-REUTILIZACAO.md) pode continuar como registro de diagnóstico e contexto histórico.
