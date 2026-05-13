@@ -94,7 +94,7 @@ export default function DepoimentosPage() {
         description="Social proof com citação real, nome, patente e força. Duas variações: grid de cards e depoimento único em destaque."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {testimonialsDefinition ? <PatternContract definition={testimonialsDefinition} /> : null}
 
         <SectionLabel
@@ -103,7 +103,7 @@ export default function DepoimentosPage() {
           description="Formato padrão para listar múltiplos depoimentos. Badge de força ancora a credibilidade ao contexto do concurso."
         />
         <PatternShell label="3 depoimentos — grid de cards">
-          <div style={{ background: "var(--paper)", padding: "56px 48px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
             <div style={{ textAlign: "center", marginBottom: "40px" }}>
               <p style={{
                 fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700,
@@ -121,8 +121,7 @@ export default function DepoimentosPage() {
               </h2>
             </div>
 
-            <div style={{
-              display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+            <div className="docs-grid-4" style={{
               gap: "2px", background: "var(--border-default)",
               border: "2px solid var(--border-strong)",
             }}>
@@ -185,7 +184,7 @@ export default function DepoimentosPage() {
           description="Formato de alto impacto para um depoimento único. Aspas grandes, citação ampliada e CTA integrado. Quebra visual eficiente entre seções de conteúdo."
         />
         <PatternShell label="Depoimento único — destaque com CTA">
-          <div style={{ background: "var(--surface-dark)", padding: "72px 64px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-dark)" }}>
             <div style={{ maxWidth: "680px", margin: "0 auto" }}>
 
               {/* Aspas decorativas */}
@@ -269,9 +268,8 @@ export default function DepoimentosPage() {
           description="Complemento aos depoimentos qualitativos. Números verificáveis reforçam credibilidade. Use em conjunto com a seção 06.1 ou 06.2, nunca isolado."
         />
         <PatternShell label="Faixa de prova social — números">
-          <div style={{ background: "var(--surface-raised)", padding: "40px 48px", borderTop: "4px solid var(--accent)" }}>
-            <div style={{
-              display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+          <div className="docs-pattern-block" style={{ background: "var(--surface-raised)", borderTop: "4px solid var(--accent)" }}>
+            <div className="docs-grid-3" style={{
               gap: "0", borderLeft: "2px solid var(--border-strong)",
             }}>
               {[

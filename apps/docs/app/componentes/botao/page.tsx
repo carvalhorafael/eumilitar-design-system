@@ -27,7 +27,7 @@ export default function BotaoPage() {
         description="Cinco variantes, três tamanhos. Hover com deslocamento de sombra neo-brutalista — a sombra colapsa e o botão translada 2px."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel number="01.1" title="Variantes" description="Hierarquia de ação: use Primary para a ação principal, Secondary para ações secundárias, Ghost para ações terciárias." />
         <div className="flex flex-col gap-4 mb-10">

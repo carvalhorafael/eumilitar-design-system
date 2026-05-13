@@ -49,7 +49,7 @@ export default function InstalacaoPage() {
         description="Passo inicial para consumir o design system como biblioteca. O uso varia conforme o tipo de consumer, mas a base sempre começa por tokens, CSS compartilhado e, quando necessário, as camadas web ou React."
       />
 
-      <div className="max-w-4xl px-10 py-10">
+      <div className="docs-page max-w-4xl">
         <SectionLabel
           number="01.1"
           title="Pacotes Base"

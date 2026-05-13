@@ -19,7 +19,7 @@ export function SectionLabel({ number, title, description }: SectionLabelProps) 
         </span>
       )}
       <h2
-        className="text-2xl font-black uppercase leading-none"
+        className="text-xl sm:text-2xl font-black uppercase leading-none"
         style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
       >
         {title}

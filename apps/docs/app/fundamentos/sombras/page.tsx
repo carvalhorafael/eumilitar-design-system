@@ -28,7 +28,7 @@ export default function SombrasPage() {
         description="O princípio do design system: sombras offset sem blur. Profundidade honesta — sem ilusionismo. O objeto existe no plano, a sombra mostra onde."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         {/* Princípio */}
         <div

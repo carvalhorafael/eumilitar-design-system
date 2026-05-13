@@ -157,7 +157,8 @@ function LeadForm() {
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "400px" }}
+      className="docs-field-stack"
+      style={{ padding: "32px" }}
     >
       {formError ? (
         <Alert variant="error" title="Não foi possível enviar">
@@ -273,7 +274,7 @@ function FullForm() {
 
   if (submitted) {
     return (
-      <div style={{ padding: "40px 48px" }}>
+      <div className="docs-pattern-block">
         <Alert variant="success" title="Inscrição confirmada">
           <p style={{ margin: "0 0 8px" }}>
             Você receberá as instruções de acesso no e-mail informado em até 10 minutos.
@@ -291,10 +292,10 @@ function FullForm() {
       ref={formRef}
       onSubmit={handleSubmit}
       noValidate
-      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0" }}
+      className="docs-split-pattern"
     >
       {/* Coluna esquerda — copy */}
-      <div style={{ background: "var(--surface-brand)", padding: "48px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+      <div className="docs-pattern-block" style={{ background: "var(--surface-brand)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-inverse-faint)", marginBottom: "16px" }}>
           Garanta sua vaga
         </p>
@@ -330,14 +331,14 @@ function FullForm() {
       </div>
 
       {/* Coluna direita — form */}
-      <div style={{ background: "var(--surface-raised)", padding: "48px 40px", display: "flex", flexDirection: "column", gap: "16px" }}>
+      <div className="docs-pattern-block" style={{ background: "var(--surface-raised)", display: "flex", flexDirection: "column", gap: "16px" }}>
         {formError ? (
           <Alert variant="error" title="Dados pendentes">
             <p style={{ margin: 0 }}>{formError}</p>
             <ErrorList items={Object.values(errors).filter(Boolean)} />
           </Alert>
         ) : null}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+        <div className="docs-grid-2 docs-grid-2--tight">
           <Input
             label="Nome"
             placeholder="Nome"
@@ -428,7 +429,7 @@ export default function CaptacaoPage() {
         description="Formulários de conversão: do lead simples ao form completo de inscrição. Todos os estados de validação aplicados."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {captureDefinition ? <PatternContract definition={captureDefinition} /> : null}
 
         <SectionLabel

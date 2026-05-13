@@ -8,11 +8,8 @@ interface HeaderProps {
 
 export function Header({ title, description, section }: HeaderProps) {
   return (
-    <header
-      className="border-b-2 px-10 py-8"
-      style={{ borderColor: "var(--border-strong)" }}
-    >
-      <div className="flex items-start justify-between gap-4">
+    <header className="docs-header">
+      <div className="docs-header__inner">
         <div>
           {section && (
             <span
@@ -23,8 +20,7 @@ export function Header({ title, description, section }: HeaderProps) {
             </span>
           )}
           <h1
-            className="text-4xl font-black uppercase leading-none"
-            style={{ fontFamily: "var(--font-display)", color: "var(--ink)" }}
+            className="docs-header__title"
           >
             {title}
           </h1>

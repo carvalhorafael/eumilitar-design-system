@@ -21,9 +21,9 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body>
         <Providers>
-          <div className="flex min-h-screen">
+          <div className="docs-shell">
             <Sidebar />
-            <main className="flex-1 overflow-auto" style={{ background: "var(--surface-base)" }}>
+            <main className="docs-main">
               {children}
             </main>
           </div>

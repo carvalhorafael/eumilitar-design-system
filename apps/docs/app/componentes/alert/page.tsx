@@ -16,7 +16,7 @@ export default function AlertPage() {
         description="Feedback contextual inline. Cinco variantes mapeadas ao sistema de estados e urgência — de informação neutra a prazo crítico."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel
           number="07.1"

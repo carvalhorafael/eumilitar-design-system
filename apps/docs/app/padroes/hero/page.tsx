@@ -35,7 +35,7 @@ export default function HeroPage() {
         description="Blocos de entrada de página. Estabelecem a proposta de valor, hierarquia de CTA e identidade visual da força. Três variações: claro, escuro e com urgência."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {heroDefinition ? <PatternContract definition={heroDefinition} /> : null}
 
         <SectionLabel
@@ -44,7 +44,7 @@ export default function HeroPage() {
           description="Fundo paper, headline em display, CTA primário verde + secundário. Padrão para páginas institucionais e de força."
         />
         <PatternShell label="Variação clara — fundo paper">
-          <div style={{ background: "var(--paper)", padding: "64px 48px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
             <div style={{ maxWidth: "640px" }}>
               <div style={{ marginBottom: "16px" }}>{forcaBadges}</div>
               <h1 style={{
@@ -89,7 +89,7 @@ export default function HeroPage() {
           description="Fundo verde da marca, texto inverse. Para páginas de conversão de alto impacto."
         />
         <PatternShell label="Variação escura — fundo brand">
-          <div style={{ background: "var(--surface-brand)", padding: "64px 48px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-brand)" }}>
             <div style={{ maxWidth: "640px" }}>
               <div style={{ marginBottom: "16px" }}>
                 <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
@@ -156,7 +156,7 @@ export default function HeroPage() {
             <Alert variant="urgent" title="Inscrições encerram em 48 horas">
               Restam apenas 23 vagas na turma de Sargento do Exército — Turma Julho 2025. Garanta sua vaga agora.
             </Alert>
-            <div style={{ background: "var(--paper)", padding: "56px 48px" }}>
+            <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
               <div style={{ maxWidth: "640px" }}>
                 <div style={{ marginBottom: "16px" }}>{forcaBadges}</div>
                 <h1 style={{

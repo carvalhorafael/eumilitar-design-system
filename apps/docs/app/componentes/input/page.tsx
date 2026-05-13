@@ -15,7 +15,7 @@ export default function InputPage() {
         description="Campos de texto com três estados, três tamanhos e foco neo-brutalista. A sombra offset 2×2 aparece no foco e some no blur."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel
           number="04.1"
@@ -139,8 +139,8 @@ export default function InputPage() {
           description="Composição realista com vários campos."
         />
         <ComponentDemo label="Formulário de inscrição">
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "400px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+          <div className="docs-field-stack">
+            <div className="docs-grid-2 docs-grid-2--tight">
               <Input label="Nome" placeholder="Nome" required />
               <Input label="Sobrenome" placeholder="Sobrenome" required />
             </div>

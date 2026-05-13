@@ -29,7 +29,7 @@ export function PatternGuidelines({
       {rows.map((row, index) => (
         <div
           key={`${row.title}-${index}`}
-          className={layout === "split" ? "flex gap-6 py-2 border-b last:border-0" : "flex flex-col py-3 border-b last:border-0"}
+          className={layout === "split" ? "docs-guideline-row--split py-2 border-b last:border-0" : "flex flex-col py-3 border-b last:border-0"}
           style={{ borderColor: "var(--rule)", gap: layout === "split" ? undefined : "4px" }}
         >
           {layout === "split" ? (

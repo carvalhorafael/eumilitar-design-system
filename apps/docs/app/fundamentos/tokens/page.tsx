@@ -131,7 +131,7 @@ export default function TokensPage() {
         title="Tokens"
         description="Referência completa de todas as CSS Custom Properties. Esta é a fonte da verdade — qualquer produto EuMilitar deve consumir esses tokens."
       />
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
         {allTokens.map((group, gi) => (
           <div key={group.group} className="mb-10">
             <SectionLabel number={`0${gi + 1}`} title={group.group} />

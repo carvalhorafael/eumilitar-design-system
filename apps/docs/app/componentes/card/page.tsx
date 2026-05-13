@@ -15,14 +15,14 @@ export default function CardPage() {
         description="Containers de conteúdo com estrutura Header / Body / Footer. Quatro variantes de cor, cinco de sombra."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel number="03.1" title="Estrutura" description="Composição via sub-componentes: Card + CardHeader + CardBody + CardFooter." />
         <ComponentDemo
           label="Card completo — Header + Body + Footer"
           code={`<Card>\n  <CardHeader>...</CardHeader>\n  <CardBody>...</CardBody>\n  <CardFooter>...</CardFooter>\n</Card>`}
         >
-          <Card style={{ width: "280px" }}>
+          <Card style={{ width: "min(100%, 280px)" }}>
             <CardHeader>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--pencil)", display: "block", marginBottom: "4px" }}>
                 01 — Destaque
@@ -48,7 +48,7 @@ export default function CardPage() {
         </div>
         <ComponentDemo label="Default · Brand · Dark · Ghost">
           {(["default", "brand", "dark", "ghost"] as const).map((variant) => (
-            <Card key={variant} variant={variant} shadow="md" style={{ width: "160px" }}>
+            <Card key={variant} variant={variant} shadow="md" style={{ width: "min(100%, 160px)" }}>
               <CardBody>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: variant === "default" || variant === "ghost" ? "var(--pencil)" : "rgba(245,240,232,0.6)", display: "block", marginBottom: "6px" }}>
                   {variant}
@@ -66,7 +66,7 @@ export default function CardPage() {
         </div>
         <ComponentDemo label="none · sm · md · lg · brand">
           {(["none", "sm", "md", "lg", "brand"] as const).map((shadow) => (
-            <Card key={shadow} variant="default" shadow={shadow} style={{ width: "120px" }}>
+            <Card key={shadow} variant="default" shadow={shadow} style={{ width: "min(100%, 120px)" }}>
               <CardBody>
                 <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--pencil)", display: "block", marginBottom: "4px" }}>
                   shadow
@@ -85,7 +85,7 @@ export default function CardPage() {
 
         {/* Exemplo: grid de cursos */}
         <ComponentDemo label="Grid de cursos — pattern de catálogo">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px", width: "100%" }}>
+          <div className="docs-grid-2">
             {[
               { titulo: "EsPCEx", forca: "ex" as const, vagas: "40", nivel: "Médio" },
               { titulo: "EN — Naval", forca: "mb" as const, vagas: "60", nivel: "Médio" },

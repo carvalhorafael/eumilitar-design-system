@@ -31,7 +31,7 @@ export default function UsoPage() {
         description="Como combinar as camadas da biblioteca em consumers React e não React, e qual ordem seguir quando um bloco novo precisar entrar no sistema."
       />
 
-      <div className="max-w-4xl px-10 py-10">
+      <div className="docs-page max-w-4xl">
         <SectionLabel
           number="02.1"
           title="Ordem de Consumo"

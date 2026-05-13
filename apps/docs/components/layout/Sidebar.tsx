@@ -54,11 +54,9 @@ export function Sidebar() {
 
   return (
     <aside
-      className="w-56 shrink-0 border-r-2 flex flex-col"
+      className="docs-sidebar flex flex-col"
       style={{
-        borderColor: "var(--border-strong)",
         background: "var(--paper)",
-        minHeight: "100vh",
       }}
     >
       {/* Logo */}
@@ -83,9 +81,9 @@ export function Sidebar() {
       </div>
 
       {/* Navegação */}
-      <nav className="flex-1 py-5 overflow-y-auto">
+      <nav className="docs-sidebar__nav flex-1">
         {nav.map((group) => (
-          <div key={group.label} className="mb-5">
+          <div key={group.label} className="docs-sidebar__group">
             <span
               className="px-5 block mb-1"
               style={{
@@ -127,7 +125,7 @@ export function Sidebar() {
 
       {/* Versão */}
       <div
-        className="px-5 py-3 border-t-2"
+        className="docs-sidebar__version px-5 py-3 border-t-2"
         style={{ borderColor: "var(--border-default)" }}
       >
         <span

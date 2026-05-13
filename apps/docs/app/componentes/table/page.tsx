@@ -48,7 +48,7 @@ export default function TablePage() {
         description="Tabela de dados com primitivos composáveis (Table, Thead, Tbody, Tr, Th, Td) e o atalho DataTable para casos simples. Hover por linha, listrado opcional."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         <SectionLabel
           number="09.1"
