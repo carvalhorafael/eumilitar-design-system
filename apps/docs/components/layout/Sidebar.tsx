@@ -47,6 +47,9 @@ const nav: NavbarGroup[] = [
       { href: "/componentes/accordion", label: "08 — Accordion" },
       { href: "/componentes/table",     label: "09 — Table" },
       { href: "/componentes/navbar",    label: "10 — Navbar" },
+      { href: "/componentes/drawer",    label: "11 — Drawer" },
+      { href: "/componentes/tabs",      label: "12 — Tabs" },
+      { href: "/componentes/breadcrumbs", label: "13 — Breadcrumbs" },
     ],
   },
 ];

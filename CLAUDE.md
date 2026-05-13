@@ -62,6 +62,9 @@ apps/docs/
       accordion/page.tsx
       table/page.tsx
       navbar/page.tsx
+      drawer/page.tsx
+      tabs/page.tsx
+      breadcrumbs/page.tsx
   components/
     layout/
       Sidebar.tsx
@@ -102,6 +105,9 @@ packages/
     Accordion.tsx
     Table.tsx
     Navbar.tsx
+    Drawer.tsx
+    Tabs.tsx
+    Breadcrumbs.tsx
     styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/

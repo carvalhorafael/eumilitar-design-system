@@ -35,7 +35,12 @@
 .ds-checkbox__control:focus-visible,
 .ds-radio__control:focus-visible,
 .ds-navbar__brand:focus-visible,
-.ds-navbar__link:focus-visible {
+.ds-navbar__link:focus-visible,
+.ds-breadcrumbs__link:focus-visible,
+.ds-drawer__trigger:focus-visible,
+.ds-drawer__close:focus-visible,
+.ds-drawer__overlay:focus-visible,
+.ds-tabs__tab:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -78,6 +83,210 @@
 
 .ds-select__field {
   appearance: none;
+}
+
+.ds-breadcrumbs {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ds-breadcrumbs__list {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  color: var(--pencil);
+  font-family: var(--font-body);
+  font-size: 14px;
+  list-style: none;
+  white-space: nowrap;
+}
+
+.ds-breadcrumbs__item {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-breadcrumbs__link,
+.ds-breadcrumbs__current {
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+}
+
+.ds-breadcrumbs__link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ds-breadcrumbs__separator {
+  color: var(--pencil-soft);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.ds-drawer {
+  display: inline-block;
+}
+
+.ds-drawer__trigger,
+.ds-drawer__close {
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-raised);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+
+.ds-drawer__trigger {
+  min-height: 40px;
+  padding: 9px 14px;
+  font-size: 14px;
+}
+
+.ds-drawer__layer {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+}
+
+.ds-drawer__overlay {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--ink) 54%, transparent);
+  cursor: pointer;
+}
+
+.ds-drawer__panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  width: min(86vw, 360px);
+  flex-direction: column;
+  border: 0;
+  background: var(--paper);
+  box-shadow: var(--shadow-lg);
+}
+
+.ds-drawer[data-side="left"] .ds-drawer__panel {
+  left: 0;
+  border-right: 2px solid var(--border-strong);
+}
+
+.ds-drawer[data-side="right"] .ds-drawer__panel {
+  right: 0;
+  border-left: 2px solid var(--border-strong);
+}
+
+.ds-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 18px;
+  border-bottom: 2px solid var(--border-strong);
+  background: var(--surface-raised);
+}
+
+.ds-drawer__title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ds-drawer__close {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.ds-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px;
+  color: var(--pencil);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ds-tabs {
+  width: 100%;
+}
+
+.ds-tabs__list {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--paper);
+}
+
+.ds-tabs__tab {
+  min-height: 42px;
+  flex: 0 0 auto;
+  border: 0;
+  border-right: 2px solid var(--border-strong);
+  background: transparent;
+  color: var(--pencil);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 14px;
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.ds-tabs__tab:last-child {
+  border-right: 0;
+}
+
+.ds-tabs__tab[aria-selected="true"] {
+  background: var(--surface-raised);
+  color: var(--ink);
+  box-shadow: inset 0 -3px 0 var(--accent);
+}
+
+.ds-tabs__tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.ds-tabs__tab:not(:disabled):hover {
+  background: var(--paper-deep);
+  color: var(--ink);
+}
+
+.ds-tabs__panel {
+  border: 2px solid var(--border-strong);
+  border-top: 0;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
+  color: var(--pencil);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 18px;
 }
 
 .ds-table-wrap {

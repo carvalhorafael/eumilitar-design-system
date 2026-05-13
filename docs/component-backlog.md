@@ -1,6 +1,6 @@
 # Backlog de Componentes do Design System
 
-Status: planejamento
+Status: em execucao
 Referencia externa: [daisyUI Components](https://daisyui.com/components/)
 Ultima revisao: 2026-05-13
 
@@ -32,6 +32,9 @@ Ja existem no pacote UI:
 - `Select`
 - `Table`
 - `Navbar`
+- `Drawer`
+- `Tabs`
+- `Breadcrumbs`
 
 Tambem existem padroes de composicao em `@carvalhorafael/eumilitar-patterns`, como Hero, urgencia, captacao, FAQ, beneficios, depoimentos e landing.
 
@@ -48,6 +51,8 @@ Tambem existem padroes de composicao em `@carvalhorafael/eumilitar-patterns`, co
 ## 04. Prioridade Alta
 
 ### 04.1 Drawer
+
+Status: implementado
 
 Valor:
 
@@ -72,6 +77,8 @@ Validacao:
 
 ### 04.2 Tabs
 
+Status: implementado
+
 Valor:
 
 - Muito util para documentacao de componentes, variantes, exemplos de codigo e comparacao de conteudo.
@@ -93,6 +100,8 @@ Validacao:
 - teste de overflow mobile
 
 ### 04.3 Breadcrumbs
+
+Status: implementado
 
 Valor:
 
@@ -313,9 +322,9 @@ Nao priorizar agora:
 
 ### Lote 1 - Navegacao e documentacao
 
-- [ ] `Drawer`
-- [ ] `Tabs`
-- [ ] `Breadcrumbs`
+- [x] `Drawer`
+- [x] `Tabs`
+- [x] `Breadcrumbs`
 
 Justificativa:
 

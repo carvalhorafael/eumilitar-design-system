@@ -3,8 +3,11 @@ import { expect, test } from "@playwright/test";
 const criticalRoutes = [
   "/",
   "/componentes/botao",
+  "/componentes/breadcrumbs",
+  "/componentes/drawer",
   "/componentes/input",
   "/componentes/navbar",
+  "/componentes/tabs",
   "/componentes/table",
   "/padroes/captacao",
   "/padroes/beneficios",
