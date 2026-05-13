@@ -264,13 +264,13 @@ Ainda falta:
 
 ## Consumidor mínimo validado
 
-O repositório agora inclui [apps/consumer-react](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-react) para provar:
+O repositório agora inclui `apps/consumer-react` para provar:
 
 - import de `@carvalhorafael/eumilitar-tokens` e `@carvalhorafael/eumilitar-css` no CSS global
 - consumo de `@carvalhorafael/eumilitar-ui` em outro app Next
 - leitura de `@carvalhorafael/eumilitar-patterns` fora do app `docs`
 
-O repositório também inclui [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) para provar:
+O repositório também inclui `apps/consumer-static` para provar:
 
 - geração de HTML a partir de `@carvalhorafael/eumilitar-web`
 - consumo da camada visual fora de React

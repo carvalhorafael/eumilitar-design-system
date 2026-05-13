@@ -43,8 +43,8 @@ packages/patterns/  ← contratos e helpers dos blocos de composição
 ```
 
 O app `docs` consome `@carvalhorafael/eumilitar-tokens`, `@carvalhorafael/eumilitar-css`, `@carvalhorafael/eumilitar-ui` e `@carvalhorafael/eumilitar-patterns` diretamente.
-O app [apps/consumer-react](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-react) existe como prova mínima de consumo fora do `docs`.
-O app [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) valida consumo em HTML/CSS/JS puro via `@carvalhorafael/eumilitar-web`.
+O app `apps/consumer-react` existe como prova mínima de consumo fora do `docs`.
+O app `apps/consumer-static` valida consumo em HTML/CSS/JS puro via `@carvalhorafael/eumilitar-web`.
 
 ## Biblioteca
 
@@ -61,12 +61,12 @@ O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 Os tokens agora também têm export em JSON para consumers que não querem depender de parsing de CSS.
 
 Documento de referência:
-- [ARQUITETURA-BIBLIOTECA.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ARQUITETURA-BIBLIOTECA.md)
-- [CONSUMO-E-VERSOES.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/CONSUMO-E-VERSOES.md)
-- [VALIDACAO-PROPAGACAO.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/VALIDACAO-PROPAGACAO.md)
-- [packages/web/HTML_CONSUMPTION.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/HTML_CONSUMPTION.md)
-- [packages/web/CONTRACT.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/CONTRACT.md)
-- [packages/tokens/README.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/tokens/README.md)
+- `ARQUITETURA-BIBLIOTECA.md`
+- `CONSUMO-E-VERSOES.md`
+- `VALIDACAO-PROPAGACAO.md`
+- `packages/web/HTML_CONSUMPTION.md`
+- `packages/web/CONTRACT.md`
+- `packages/tokens/README.md`
 
 ## Release
 
