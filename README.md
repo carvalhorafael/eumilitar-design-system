@@ -61,6 +61,7 @@ O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 Os tokens agora também têm export em JSON para consumers que não querem depender de parsing de CSS.
 
 Documento de referência:
+- `docs/component-development.md`
 - `ARQUITETURA-BIBLIOTECA.md`
 - `CONSUMO-E-VERSOES.md`
 - `VALIDACAO-PROPAGACAO.md`
@@ -112,6 +113,7 @@ As releases também ficam listadas em:
 - Input & Textarea — 3 estados, 3 tamanhos, foco com sombra offset
 - Select — dropdown estilizado com seta customizada
 - Checkbox & Radio — checkmark SVG animado, grupos
+- Alert, Accordion, Table e Navbar — feedback, disclosure, dados tabulares e navegação responsiva
 
 **Padrões**
 - Hero, Urgência, Captação, FAQ, Benefícios, Depoimentos e CTA final
