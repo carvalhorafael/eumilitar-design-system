@@ -24,7 +24,7 @@ Em um consumer não React:
 1. importar `@carvalhorafael/eumilitar-tokens` e `@carvalhorafael/eumilitar-css`
 2. consumir `@carvalhorafael/eumilitar-web` para markup canônico e JS progressivo
 3. usar `@carvalhorafael/eumilitar-tokens/json` quando precisar dos valores em scripts ou toolchains
-4. tratar [packages/web/CONTRACT.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/CONTRACT.md) como referência de API pública do consumer web
+4. tratar `packages/web/CONTRACT.md` como referência de API pública do consumer web
 
 Exemplo conceitual:
 

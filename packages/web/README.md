@@ -33,5 +33,5 @@ Servir como camada intermediária entre:
 
 ## Documentação complementar
 
-- [HTML_CONSUMPTION.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/HTML_CONSUMPTION.md)
-- [CONTRACT.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/CONTRACT.md)
+- `HTML_CONSUMPTION.md`
+- `CONTRACT.md`
