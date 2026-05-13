@@ -5,6 +5,6 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
-    include: ["packages/ui/**/*.test.tsx"],
+    include: ["packages/**/*.test.ts", "packages/**/*.test.tsx"],
   },
 });

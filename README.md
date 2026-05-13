@@ -37,24 +37,31 @@ Acesse `http://localhost:3000`.
 apps/docs/          ← site de documentação (Next.js)
 packages/tokens/    ← tokens CSS compartilhados
 packages/css/       ← camada CSS compartilhada e agnóstica de framework
+packages/web/       ← base HTML/CSS/JS para sites não React
 packages/ui/        ← primitives React reutilizáveis
 packages/patterns/  ← contratos e helpers dos blocos de composição
 ```
 
 O app `docs` consome `@eumilitar/tokens`, `@eumilitar/css`, `@eumilitar/ui` e `@eumilitar/patterns` diretamente.
 O app [apps/consumer-react](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-react) existe como prova mínima de consumo fora do `docs`.
+O app [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) valida consumo em HTML/CSS/JS puro via `@eumilitar/web`.
 
 ## Biblioteca
 
 Arquitetura ativa de distribuição:
 - `@eumilitar/tokens` para valores visuais
 - `@eumilitar/css` para a camada compartilhada e agnóstica de framework
+- `@eumilitar/web` para a base de sites tradicionais e CMSs fora de React
 - `@eumilitar/ui` para o adapter React
 - `@eumilitar/patterns` para contratos e blocos
+
+WordPress e Elementor ficam fora deste repositório.
+O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 
 Documento de referência:
 - [ARQUITETURA-BIBLIOTECA.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ARQUITETURA-BIBLIOTECA.md)
 - [CONSUMO-E-VERSOES.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/CONSUMO-E-VERSOES.md)
+- [packages/web/HTML_CONSUMPTION.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/HTML_CONSUMPTION.md)
 
 ## Conteúdo atual
 

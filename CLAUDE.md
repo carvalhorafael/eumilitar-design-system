@@ -6,7 +6,7 @@ Monorepo do design system da EuMilitar (plataforma de preparação para concurso
 
 ## Stack
 
-- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/css` + `packages/ui` + `packages/patterns`
+- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/css` + `packages/web` + `packages/ui` + `packages/patterns`
 - **Next.js 15 App Router** + TypeScript estrito
 - **Tailwind v4 CSS-first** via `@tailwindcss/postcss`
 - **next-themes** com `attribute="data-theme"`, `defaultTheme="light"`, `enableSystem={false}`
@@ -16,6 +16,8 @@ Monorepo do design system da EuMilitar (plataforma de preparação para concurso
 **Os tokens CSS vivem em `packages/tokens`** e a camada de estilos compartilhados vive em `packages/css`.
 
 `apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`; quando uma primitive visual mudar, a mudança deve acontecer primeiro em `packages/css/*.css`.
+
+`packages/web` é a base para sites tradicionais e CMSs fora de React. Ele deve concentrar renderização HTML canônica e comportamentos JS mínimos, sem acoplamento a WordPress.
 
 ## Estrutura de arquivos
 
@@ -74,6 +76,11 @@ packages/
     ui.css
     patterns.css
     index.css
+  web/
+    render.ts
+    behavior.ts
+    types.ts
+    index.ts
   ui/
     Button.tsx
     Badge.tsx
@@ -166,6 +173,18 @@ Todos os form components usam:
 4. Fazer a página consumir `PatternContract`, `PatternShell` e `UsedComponents` de `@eumilitar/patterns`
 5. Adicionar em `Sidebar.tsx` no grupo "Padrões"
 6. Sempre incluir seção de "Diretrizes de uso" ao final
+
+## Base Web
+
+- `packages/web` é a próxima camada central para consumo fora de React
+- novos blocos portáveis devem considerar, quando fizer sentido, uma forma canônica de renderização HTML nessa camada
+- comportamentos JS nessa camada devem ser mínimos, progressivos e independentes de WordPress
+
+## WordPress
+
+- WordPress e Elementor não são implementados neste repositório
+- o tema WordPress real deve viver em outro projeto e consumir `tokens + css + web + patterns`
+- este repositório deve permanecer focado na biblioteca base, não no consumer WordPress
 
 ## Comandos
 

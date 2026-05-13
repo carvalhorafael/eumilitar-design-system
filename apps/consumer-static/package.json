@@ -1,0 +1,11 @@
+{
+  "name": "consumer-static",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "tsx build.ts"
+  },
+  "dependencies": {
+    "@eumilitar/web": "*"
+  }
+}

@@ -3,7 +3,7 @@
 ## Status geral
 
 **Foco atual**: transformar o design system em uma biblioteca distribuível e versionada  
-**Objetivo de médio prazo**: permitir consumo consistente em múltiplos sistemas, incluindo app React/Next, site institucional e tema WordPress  
+**Objetivo de médio prazo**: permitir consumo consistente em múltiplos sistemas, incluindo app React/Next, site institucional e outros consumers web  
 **Objetivo de longo prazo**: ter uma base compartilhada de tokens, CSS, componentes e blocos que possa evoluir com versionamento previsível e atualização controlada
 
 ## Decisão arquitetural
@@ -14,9 +14,9 @@ Ele será tratado como uma arquitetura em camadas:
 
 1. `tokens` como fonte única de verdade
 2. `css` compartilhado e agnóstico de framework
-3. `ui` como adapter React
-4. `patterns` como contratos e markup de blocos
-5. `wordpress` como adapter de tema e editor
+3. `patterns` como contratos e markup de blocos
+4. `web` como base para HTML/CSS/JS agnóstica de plataforma
+5. `ui` como adapter React
 6. `docs` como vitrine e ambiente de validação
 
 ## O que já está consolidado
@@ -41,8 +41,8 @@ Esses itens não são mais o foco principal do plano. Eles passam a ser pré-req
 
 - [x] O compartilhamento entre plataformas deve acontecer por **tokens + CSS + contratos**, não por React apenas
 - [x] Atualizações devem acontecer por **versionamento**, não por acoplamento invisível
-- [x] WordPress será tratado como **consumidor de biblioteca**, não como exceção improvisada
-- [x] Elementor será tratado como **consumer layer**, não como fonte da verdade do design system
+- [x] WordPress será tratado como **consumer externo**, não como parte deste repositório
+- [x] Elementor será tratado como **consumer externo**, não como fonte da verdade do design system
 
 ## Arquitetura alvo do monorepo
 
@@ -56,7 +56,7 @@ Responsabilidade:
 Artefatos esperados:
 - CSS variables
 - JSON exportável
-- mapeamento para `theme.json` do WordPress
+- export que possa ser consumido por projetos externos, incluindo um futuro tema WordPress
 
 #### `packages/css`
 
@@ -88,7 +88,18 @@ Uso:
 - documentação
 - geração de templates
 - mapping de CMS
-- base para WordPress e Elementor
+- base para consumers externos, incluindo CMSs e um futuro projeto de tema WordPress
+
+#### `packages/web`
+
+Responsabilidade:
+- base para sites que consomem a biblioteca sem React e sem acoplamento a uma plataforma específica
+
+Conteúdo esperado:
+- HTML canônico por bloco
+- funções de renderização de markup
+- comportamentos JS mínimos para interações opcionais
+- ponto de integração para CMSs, temas tradicionais e páginas estáticas
 
 ### Camadas por plataforma
 
@@ -99,32 +110,12 @@ Responsabilidade:
 - ambiente de smoke visual/manual
 - documentação dos contratos
 
-#### `packages/wordpress`
-
-Responsabilidade:
-- adapter para consumo do design system em WordPress
-
-Conteúdo esperado:
-- `theme.json` derivado dos tokens
-- enqueue do CSS compartilhado
-- templates / template parts / patterns de tema
-- utilitários mínimos para integrar classes `ds-*` no tema
-
-#### Elementor
-
-Elementor entra como consumidor do adapter WordPress, não como camada central.
+#### Projeto externo de tema WordPress
 
 Direção recomendada:
-- o tema carrega tokens e CSS globais
-- o tema expõe classes e blocos compatíveis com o design system
-- o Elementor usa isso via:
-  - Style Kit alinhado aos tokens
-  - templates/seções prontos
-  - eventualmente widgets próprios, se necessário
-
-Regra importante:
-- **não duplicar o design system inteiro dentro do Elementor**
-- o Elementor deve usar a base já publicada pelo design system
+- o tema WordPress deve viver em outro repositório
+- esse projeto futuro deve consumir `@eumilitar/tokens`, `@eumilitar/css`, `@eumilitar/web` e `@eumilitar/patterns`
+- Elementor, quando existir, deve ser tratado nesse projeto do tema, não aqui
 
 ## Fases do trabalho
 
@@ -166,37 +157,46 @@ Entregas:
 - [x] preparar CI para validar build/lint/test antes de release
 - [x] documentar como um consumer atualiza de versão
 
-### Fase 4 — Adapter WordPress
+### Fase 4 — Web Core
 
 Objetivo:
-permitir consumo consistente do design system em tema WordPress
+criar uma base geral para sites não React antes de qualquer adapter de plataforma
 
 Entregas:
-- [ ] criar `packages/wordpress`
-- [ ] gerar base de `theme.json` a partir dos tokens relevantes
-- [ ] definir enqueue de CSS do design system no tema
-- [ ] criar estrutura mínima de tema compatível com a biblioteca
-- [ ] mapear os blocos prioritários para template parts / padrões de tema
+- [x] criar `packages/web`
+- [x] definir API inicial de renderização HTML por bloco
+- [x] definir comportamentos JS mínimos para interações opcionais
+- [x] documentar como um site tradicional consome tokens, CSS e markup
+- [x] validar a camada `web` sem dependência de WordPress
 
-### Fase 5 — Integração com Elementor
+### Fase 5 — Handoff para projeto de tema WordPress
 
 Objetivo:
-fazer Elementor usar o design system sem virar uma segunda fonte de verdade
+preparar esta biblioteca para ser consumida por um projeto separado de tema WordPress
 
 Entregas:
-- [ ] definir quais tokens precisam aparecer no Style Kit do Elementor
-- [ ] definir estratégia para classes `ds-*` em seções e widgets
-- [ ] preparar templates de página e seções reutilizáveis
-- [ ] decidir se haverá widgets customizados ou apenas templates e classes
-- [ ] documentar o fluxo de uso de Elementor com a biblioteca
+- [ ] documentar o contrato mínimo esperado pelo futuro projeto de tema
+- [ ] definir quais artefatos esse projeto deverá consumir
+- [ ] definir estratégia de export para tokens compatíveis com `theme.json`
+- [ ] preparar um handoff técnico para o repositório do tema
 
-### Fase 6 — Consumer real de validação
+### Fase 6 — Consumers externos futuros
+
+Objetivo:
+registrar os próximos consumers fora deste repositório
+
+Entregas:
+- [ ] definir escopo do futuro tema WordPress
+- [ ] definir escopo de Elementor dentro do projeto do tema
+- [ ] registrar limites entre biblioteca base e implementação do consumer
+
+### Fase 7 — Consumers reais e propagação de mudanças
 
 Objetivo:
 provar que a biblioteca funciona fora do app `docs`
 
 Entregas:
-- [ ] criar um consumer real mínimo da biblioteca
+- [x] criar um consumer real mínimo da biblioteca
 - [ ] validar update de versão em um consumer
 - [ ] validar que mudanças de tokens e CSS propagam de forma previsível
 - [ ] documentar limitações e pontos de atenção de compatibilidade
@@ -206,17 +206,18 @@ Entregas:
 1. Fase 1 — definir arquitetura final da biblioteca
 2. Fase 2 — gerar artefatos de distribuição
 3. Fase 3 — preparar versionamento e release
-4. Fase 4 — criar adapter WordPress
-5. Fase 5 — integrar com Elementor
-6. Fase 6 — validar em consumer real
+4. Fase 4 — criar a base `web` agnóstica
+5. Fase 5 — preparar handoff para projeto de tema WordPress
+6. Fase 6 — registrar consumers externos futuros
+7. Fase 7 — validar propagação em consumers reais
 
-## Decisões já tomadas para WordPress e Elementor
+## Decisões já tomadas sobre WordPress e Elementor
 
-- [x] WordPress será tratado como plataforma alvo real, não como adaptação tardia
+- [x] WordPress não será implementado neste repositório
+- [x] Elementor não será implementado neste repositório
+- [x] o tema WordPress real deve viver em outro projeto
 - [x] `theme.json` deve ser consumidor dos tokens, não fonte paralela
-- [x] `block.json` e padrões de bloco são relevantes para o futuro adapter WordPress
-- [x] Elementor será uma camada de composição por cima da biblioteca
-- [x] O design system não deve ficar dependente de Elementor para existir
+- [x] o design system não deve ficar dependente de WordPress ou Elementor para existir
 
 ## Critérios de sucesso
 
@@ -224,8 +225,9 @@ Consideraremos este ciclo bem-sucedido quando:
 
 - [ ] o design system puder ser instalado ou consumido como biblioteca
 - [ ] um consumer React usar os pacotes sem depender de arquivos internos do repo
-- [ ] um tema WordPress puder usar os mesmos tokens e CSS compartilhados
-- [ ] Elementor puder compor páginas usando essa mesma base visual
+- [ ] um site HTML/CSS/JS tradicional puder consumir a camada `web`
+- [ ] um projeto externo de tema WordPress puder usar os mesmos tokens e CSS compartilhados
+- [ ] Elementor, no projeto externo do tema, puder compor páginas usando essa mesma base visual
 - [ ] uma mudança no design system puder ser publicada em nova versão e adotada por consumidores de forma previsível
 
 ## Documento de referência complementar

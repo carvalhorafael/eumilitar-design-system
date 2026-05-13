@@ -5,9 +5,9 @@
 Registrar a arquitetura-alvo do design system como biblioteca distribuível, com artefatos claros para múltiplos consumidores:
 
 - app React/Next;
+- sites tradicionais em HTML/CSS/JS;
 - site institucional;
-- tema WordPress;
-- páginas compostas com Elementor por cima do tema.
+- e futuros consumers externos, como um projeto separado de tema WordPress.
 
 ## Camadas da biblioteca
 
@@ -38,7 +38,7 @@ Metadata de distribuição:
 Consumidores esperados:
 - `@eumilitar/css`
 - `apps/docs`
-- futuro adapter WordPress
+- futuros consumers externos
 
 ### 2. `@eumilitar/css`
 
@@ -60,9 +60,46 @@ Observação:
 
 Metadata de distribuição:
 - exporta entrypoints CSS explícitos
-- pode ser consumido por apps React, HTML puro e futuro tema WordPress
+- pode ser consumido por apps React, HTML puro e futuros consumers externos
 
-### 3. `@eumilitar/ui`
+### 3. `@eumilitar/patterns`
+
+Responsabilidade:
+- contratos de conteúdo, anatomia, variantes e referências de blocos
+
+Escopo:
+- contratos de hero, urgency, faq, capture, benefits, testimonials, cta
+- helpers de documentação
+- HTML de referência
+
+Artefatos atuais:
+- `@eumilitar/patterns`
+- `@eumilitar/patterns/docs`
+
+Metadata de distribuição:
+- contratos e helpers expostos por entrypoints públicos
+- app `docs` consome apenas esses entrypoints
+
+### 4. `@eumilitar/web`
+
+Responsabilidade:
+- base de renderização HTML e comportamentos JS mínimos para sites não React
+
+Escopo:
+- markup canônico por bloco
+- render helpers para HTML
+- interações progressivas opcionais
+
+Direção:
+- essa camada deve ser agnóstica de plataforma
+- WordPress e outros CMSs devem consumi-la como base em projetos externos
+
+Artefatos atuais:
+- `@eumilitar/web`
+- renderização HTML canônica para hero, urgency, faq, capture, benefits, testimonials e cta
+- comportamento progressivo mínimo para accordion
+
+### 5. `@eumilitar/ui`
 
 Responsabilidade:
 - adapter React do design system
@@ -81,25 +118,7 @@ Metadata de distribuição:
 - pacote preparado para publicação versionada
 - `styles.css` permanece apenas como ponte de compatibilidade
 
-### 4. `@eumilitar/patterns`
-
-Responsabilidade:
-- contratos de conteúdo, anatomia, variantes e referências de blocos
-
-Escopo:
-- contratos de hero, urgency, faq, capture, benefits, testimonials, cta
-- helpers de documentação
-- HTML de referência
-
-Artefatos atuais:
-- `@eumilitar/patterns`
-- `@eumilitar/patterns/docs`
-
-Metadata de distribuição:
-- contratos e helpers expostos por entrypoints públicos
-- app `docs` consome apenas esses entrypoints
-
-### 5. `apps/docs`
+### 6. `apps/docs`
 
 Responsabilidade:
 - vitrine
@@ -116,18 +135,29 @@ Regra:
 Consome:
 - `@eumilitar/tokens`
 - `@eumilitar/css`
+- `@eumilitar/web`
 - `@eumilitar/ui`
 - `@eumilitar/patterns`
+
+### Traditional Website / CMS
+
+Consome:
+- `@eumilitar/tokens`
+- `@eumilitar/css`
+- `@eumilitar/web`
+- opcionalmente `@eumilitar/patterns`
 
 ### WordPress Theme
 
 Consome:
 - `@eumilitar/tokens`
 - `@eumilitar/css`
+- `@eumilitar/web`
 - `@eumilitar/patterns`
 
-No futuro:
-- `@eumilitar/wordpress`
+Observação:
+- esse consumer deve viver em outro repositório
+- este repositório não contém mais adapter WordPress
 
 ### Elementor
 
@@ -137,6 +167,7 @@ Consome indiretamente:
 
 Regra:
 - Elementor não vira fonte de verdade do design system
+- Elementor também deve ser tratado no projeto externo do tema
 
 ## Política de exportações por pacote
 
@@ -147,7 +178,7 @@ Público:
 - subpaths por domínio (`colors`, `spacing`, `typography`, `effects`)
 
 Futuro:
-- export JSON para integração com `theme.json` e outras toolchains
+- export JSON para integração com consumers externos como `theme.json` e outras toolchains
 
 ### `@eumilitar/css`
 
@@ -155,6 +186,13 @@ Público:
 - entrypoint agregado
 - `ui.css`
 - `patterns.css`
+
+### `@eumilitar/web`
+
+Público:
+- render helpers HTML
+- comportamentos JS mínimos
+- entrypoints pensados para sites tradicionais e CMSs
 
 ### `@eumilitar/ui`
 
@@ -214,7 +252,8 @@ Já concluído:
 - base de versionamento inicial com Changesets
 
 Ainda falta:
-- formalizar pacote WordPress
+- formalizar pacote `@eumilitar/web`
+- definir export voltado ao futuro projeto de tema WordPress
 - definir export JSON de tokens
 - decidir estratégia real de publicação
 
@@ -225,3 +264,9 @@ O repositório agora inclui [apps/consumer-react](/Users/rafaelcarvalho/Developm
 - import de `@eumilitar/tokens` e `@eumilitar/css` no CSS global
 - consumo de `@eumilitar/ui` em outro app Next
 - leitura de `@eumilitar/patterns` fora do app `docs`
+
+O repositório também inclui [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) para provar:
+
+- geração de HTML a partir de `@eumilitar/web`
+- consumo da camada visual fora de React
+- uso de comportamento progressivo mínimo em HTML/JS puro

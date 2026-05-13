@@ -1,0 +1,16 @@
+{
+  "name": "@eumilitar/web",
+  "version": "0.1.0",
+  "files": [
+    "*.ts",
+    "README.md"
+  ],
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
