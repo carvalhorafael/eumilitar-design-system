@@ -50,6 +50,10 @@ const nav: NavbarGroup[] = [
       { href: "/componentes/drawer",    label: "11 — Drawer" },
       { href: "/componentes/tabs",      label: "12 — Tabs" },
       { href: "/componentes/breadcrumbs", label: "13 — Breadcrumbs" },
+      { href: "/componentes/toast",     label: "14 — Toast" },
+      { href: "/componentes/tooltip",   label: "15 — Tooltip" },
+      { href: "/componentes/skeleton",  label: "16 — Skeleton" },
+      { href: "/componentes/loading",   label: "17 — Loading" },
     ],
   },
 ];

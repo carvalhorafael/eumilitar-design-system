@@ -65,6 +65,10 @@ apps/docs/
       drawer/page.tsx
       tabs/page.tsx
       breadcrumbs/page.tsx
+      toast/page.tsx
+      tooltip/page.tsx
+      skeleton/page.tsx
+      loading/page.tsx
   components/
     layout/
       Sidebar.tsx
@@ -108,6 +112,10 @@ packages/
     Drawer.tsx
     Tabs.tsx
     Breadcrumbs.tsx
+    Toast.tsx
+    Tooltip.tsx
+    Skeleton.tsx
+    Loading.tsx
     styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/

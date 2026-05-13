@@ -9,10 +9,14 @@ import {
   CheckboxGroup,
   Drawer,
   Input,
+  Loading,
   Navbar,
   Radio,
   RadioGroup,
+  Skeleton,
   Tabs,
+  Toast,
+  Tooltip,
 } from "./index";
 
 describe("@carvalhorafael/eumilitar-ui smoke", () => {
@@ -205,5 +209,49 @@ describe("@carvalhorafael/eumilitar-ui smoke", () => {
     expect(screen.getByRole("navigation", { name: "Navegação estrutural" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "/");
     expect(screen.getByText("Breadcrumbs")).toHaveAttribute("aria-current", "page");
+  });
+
+  it("renderiza Loading com role status e label acessível", () => {
+    render(<Loading variant="dots" label="Processando dados" />);
+
+    const loading = screen.getByRole("status", { name: "Processando dados" });
+    expect(loading).toHaveAttribute("data-variant", "dots");
+  });
+
+  it("renderiza Skeleton como conteúdo decorativo", () => {
+    const { container } = render(<Skeleton variant="text" lines={3} />);
+
+    const skeleton = container.querySelector(".ds-skeleton");
+    expect(skeleton).toHaveAttribute("aria-hidden", "true");
+    expect(container.querySelectorAll(".ds-skeleton__line")).toHaveLength(3);
+  });
+
+  it("remove Toast dismissible e chama callback", () => {
+    const onDismiss = vi.fn();
+
+    render(
+      <Toast variant="success" title="Salvo" dismissible onDismiss={onDismiss}>
+        Alterações publicadas.
+      </Toast>,
+    );
+
+    expect(screen.getByRole("status")).toHaveTextContent("Salvo");
+    fireEvent.click(screen.getByRole("button", { name: "Fechar notificação" }));
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
+  it("associa Tooltip ao trigger por aria-describedby", () => {
+    render(
+      <Tooltip content="Publica a alteração">
+        <button type="button">Publicar</button>
+      </Tooltip>,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Publicar" });
+    const tooltip = screen.getByRole("tooltip");
+
+    expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
+    expect(tooltip).toHaveTextContent("Publica a alteração");
   });
 });

@@ -35,6 +35,10 @@ Ja existem no pacote UI:
 - `Drawer`
 - `Tabs`
 - `Breadcrumbs`
+- `Toast`
+- `Tooltip`
+- `Skeleton`
+- `Loading`
 
 Tambem existem padroes de composicao em `@carvalhorafael/eumilitar-patterns`, como Hero, urgencia, captacao, FAQ, beneficios, depoimentos e landing.
 
@@ -122,6 +126,8 @@ Validacao:
 
 ### 04.4 Toast
 
+Status: implementado
+
 Valor:
 
 - Feedback transitorio para salvar, copiar, enviar, erro de rede e confirmacoes.
@@ -146,6 +152,8 @@ Validacao:
 
 ### 04.5 Tooltip
 
+Status: implementado
+
 Valor:
 
 - Necessario para botoes com icones, controles compactos e UI mobile/desktop mais densa.
@@ -169,6 +177,8 @@ Validacao:
 
 ### 04.6 Skeleton
 
+Status: implementado
+
 Valor:
 
 - Estado de carregamento essencial para apps reais.
@@ -187,6 +197,8 @@ Validacao:
 - tokens de cor e movimento
 
 ### 04.7 Loading
+
+Status: implementado
 
 Valor:
 
@@ -334,10 +346,10 @@ Justificativa:
 
 ### Lote 2 - Feedback e loading
 
-- [ ] `Toast`
-- [ ] `Tooltip`
-- [ ] `Skeleton`
-- [ ] `Loading`
+- [x] `Toast`
+- [x] `Tooltip`
+- [x] `Skeleton`
+- [x] `Loading`
 
 Justificativa:
 
