@@ -1,6 +1,6 @@
 "use client";
 
-import { InputHTMLAttributes, forwardRef, useId } from "react";
+import { InputHTMLAttributes, forwardRef, useEffect, useId, useRef } from "react";
 import { HelperText, type InputState } from "./Input";
 
 /* ── Checkbox ── */
@@ -15,11 +15,19 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, helperText, inputState = "default", indeterminate, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     const borderColor =
       inputState === "error"   ? "var(--state-error)"   :
       inputState === "success" ? "var(--state-success)" :
       "var(--border-strong)";
+
+    useEffect(() => {
+      if (inputRef.current) {
+        inputRef.current.indeterminate = Boolean(indeterminate);
+      }
+    }, [indeterminate]);
 
     return (
       <div className="ds-checkbox" data-slot="checkbox-root" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -37,11 +45,17 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         >
           <span className="ds-checkbox__control-wrap" data-slot="control-wrap" style={{ position: "relative", flexShrink: 0, marginTop: "1px" }}>
             <input
-              ref={ref}
+              ref={(node) => {
+                inputRef.current = node;
+                if (typeof ref === "function") ref(node);
+                else if (ref) ref.current = node;
+              }}
               id={inputId}
               type="checkbox"
               className={["ds-checkbox__control", className].filter(Boolean).join(" ")}
               data-slot="control"
+              aria-invalid={inputState === "error"}
+              aria-describedby={helperId}
               style={{
                 appearance: "none",
                 width: "18px",
@@ -120,7 +134,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           )}
         </label>
         {helperText && (
-          <div className="ds-checkbox__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
+          <div id={helperId} className="ds-checkbox__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
             <HelperText state={inputState}>{helperText}</HelperText>
           </div>
         )}
@@ -141,6 +155,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ label, helperText, inputState = "default", id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
 
     const borderColor =
       inputState === "error"   ? "var(--state-error)"   :
@@ -168,6 +183,8 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
               type="radio"
               className={["ds-radio__control", className].filter(Boolean).join(" ")}
               data-slot="control"
+              aria-invalid={inputState === "error"}
+              aria-describedby={helperId}
               style={{
                 appearance: "none",
                 width: "18px",
@@ -230,7 +247,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
           )}
         </label>
         {helperText && (
-          <div className="ds-radio__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
+          <div id={helperId} className="ds-radio__helper-wrap" data-slot="helper-wrap" style={{ paddingLeft: "28px" }}>
             <HelperText state={inputState}>{helperText}</HelperText>
           </div>
         )}
@@ -249,10 +266,20 @@ interface CheckboxGroupProps {
 }
 
 export function CheckboxGroup({ label, helperText, inputState = "default", children }: CheckboxGroupProps) {
+  const uid = useId();
+  const helperId = helperText ? `${uid}-helper` : undefined;
   return (
-    <div className="ds-checkbox-group" data-slot="checkbox-group" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <fieldset
+      className="ds-checkbox-group"
+      data-slot="checkbox-group"
+      data-state={inputState}
+      aria-describedby={helperId}
+      aria-invalid={inputState === "error" ? "true" : undefined}
+      style={{ display: "flex", flexDirection: "column", gap: "10px", border: 0, margin: 0, padding: 0 }}
+    >
       {label && (
-        <span
+        <legend
+          data-slot="legend"
           style={{
             display: "block",
             fontFamily: "var(--font-mono)",
@@ -265,11 +292,19 @@ export function CheckboxGroup({ label, helperText, inputState = "default", child
           }}
         >
           {label}
-        </span>
+        </legend>
       )}
       {children}
-      {helperText && <HelperText state={inputState}>{helperText}</HelperText>}
-    </div>
+      {helperText && (
+        <HelperText
+          id={helperId}
+          state={inputState}
+          live={inputState === "error" ? "assertive" : inputState === "success" ? "polite" : "off"}
+        >
+          {helperText}
+        </HelperText>
+      )}
+    </fieldset>
   );
 }
 
@@ -282,10 +317,20 @@ interface RadioGroupProps {
 }
 
 export function RadioGroup({ label, helperText, inputState = "default", children }: RadioGroupProps) {
+  const uid = useId();
+  const helperId = helperText ? `${uid}-helper` : undefined;
   return (
-    <div className="ds-radio-group" data-slot="radio-group" data-state={inputState} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <fieldset
+      className="ds-radio-group"
+      data-slot="radio-group"
+      data-state={inputState}
+      aria-describedby={helperId}
+      aria-invalid={inputState === "error" ? "true" : undefined}
+      style={{ display: "flex", flexDirection: "column", gap: "10px", border: 0, margin: 0, padding: 0 }}
+    >
       {label && (
-        <span
+        <legend
+          data-slot="legend"
           style={{
             display: "block",
             fontFamily: "var(--font-mono)",
@@ -298,10 +343,18 @@ export function RadioGroup({ label, helperText, inputState = "default", children
           }}
         >
           {label}
-        </span>
+        </legend>
       )}
       {children}
-      {helperText && <HelperText state={inputState}>{helperText}</HelperText>}
-    </div>
+      {helperText && (
+        <HelperText
+          id={helperId}
+          state={inputState}
+          live={inputState === "error" ? "assertive" : inputState === "success" ? "polite" : "off"}
+        >
+          {helperText}
+        </HelperText>
+      )}
+    </fieldset>
   );
 }

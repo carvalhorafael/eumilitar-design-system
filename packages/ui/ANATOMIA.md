@@ -82,6 +82,77 @@ Registrar a anatomia estável dos componentes base para consumo futuro fora do a
 - header cell: `ds-table__th`
 - body cell: `ds-table__td`
 
+## Tokens por componente
+
+### Button
+
+- tipografia: `--font-body`
+- superfícies: `--surface-brand`, `--paper`, `--n-50`, `--surface-inverse-soft`
+- texto: `--ink`, `--text-inverse`, `--text-inverse-muted`
+- bordas: `--border-strong`, `--border-inverse-soft`, `--border-inverse-strong`
+- efeitos: `--shadow-sm`, `--shadow-md`, `--shadow-urgent`
+- semânticos: `--fire`
+
+### Badge
+
+- tipografia: `--font-mono`
+- texto: `--ink`, `--text-inverse`
+- superfícies: `--paper`, `--surface-dark`
+- bordas e semânticos: `--border-strong`, `--accent`, `--fire`, `--ex`, `--mb`, `--fab`, `--pm`, `--bm`
+
+### Card
+
+- tipografia: `--font-display`, `--font-body`
+- superfícies: `--surface-raised`, `--surface-brand`, `--surface-dark`, `--paper`
+- texto: `--ink`, `--text-inverse`, `--pencil`
+- bordas e efeitos: `--border-strong`, `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-brand`
+
+### Alert
+
+- tipografia: `--font-mono`, `--font-body`
+- superfícies: `--paper`, `--state-success-pale`, `--state-error-pale`, `--fire-pale`, `--fire`
+- texto e semânticos: `--ink`, `--ink-soft`, `--text-inverse`, `--text-inverse-soft`, `--state-success`, `--state-error`
+- bordas e efeitos: `--border-strong`, `--shadow-sm`, `--shadow-md`
+
+### Accordion
+
+- tipografia: `--font-body`
+- superfícies: `--surface-raised`, `--paper`, `--paper-deep`
+- texto: `--ink`, `--pencil`
+- bordas e efeitos: `--border-strong`, `--border-default`, `--shadow-sm`
+- semânticos: `--accent`
+
+### Input e Textarea
+
+- tipografia: `--font-mono`, `--font-body`
+- superfícies: `--surface-raised`, `--state-error-pale`, `--state-success-pale`
+- texto: `--ink`, `--pencil`
+- bordas e semânticos: `--border-strong`, `--state-error`, `--state-success`, `--accent`
+- raios: `--radius-sm`
+
+### Select
+
+- tipografia: `--font-mono`, `--font-body`
+- superfícies: `--surface-raised`, `--state-error-pale`, `--state-success-pale`
+- texto: `--ink`, `--pencil`
+- bordas e semânticos: `--border-strong`, `--state-error`, `--state-success`, `--accent`
+- raios: `--radius-sm`
+
+### Checkbox e Radio
+
+- tipografia: `--font-mono`, `--font-body`
+- superfícies: `--surface-raised`
+- texto: `--ink`, `--pencil`
+- bordas e semânticos: `--border-strong`, `--state-error`, `--state-success`, `--accent`
+- raios: `--radius-sm`
+
+### Table
+
+- tipografia: `--font-display`, `--font-body`, `--font-mono`
+- superfícies: `--surface-raised`, `--paper`, `--paper-deep`
+- texto: `--ink`, `--pencil`
+- bordas e efeitos: `--border-strong`, `--border-default`, `--shadow-sm`
+
 ## Checklist mínimo de reuso
 
 - Tokens vêm de `@eumilitar/tokens`
@@ -97,4 +168,4 @@ Registrar a anatomia estável dos componentes base para consumo futuro fora do a
 - reduzir mais estilos inline repetidos
 - documentar tokens usados por componente em detalhe
 - expandir checklist de acessibilidade por componente
-- criar exemplos HTML agnósticos de framework para os blocos
+- detalhar exemplos de integração com JavaScript para comportamento de accordion e dismiss

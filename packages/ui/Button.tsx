@@ -33,7 +33,7 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
   },
   danger: {
     background: "var(--bm)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "2px solid var(--border-strong)",
     boxShadow: "var(--shadow-md)",
   },
@@ -45,13 +45,13 @@ const variantStyles: Record<ButtonVariant, React.CSSProperties> = {
   },
   "ghost-inverse": {
     background: "transparent",
-    color: "rgba(245,240,232,0.80)",
-    border: "2px solid rgba(245,240,232,0.30)",
+    color: "var(--text-inverse-muted)",
+    border: "2px solid var(--border-inverse-soft)",
     boxShadow: "none",
   },
   urgent: {
     background: "var(--fire)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "2px solid var(--border-strong)",
     boxShadow: "var(--shadow-urgent)",
   },
@@ -110,9 +110,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             el.style.background = "var(--paper)";
             el.style.borderColor = "var(--border-default)";
           } else if (variant === "ghost-inverse") {
-            el.style.background = "rgba(245,240,232,0.12)";
-            el.style.borderColor = "rgba(245,240,232,0.55)";
-            el.style.color = "#f5f0e8";
+            el.style.background = "var(--surface-inverse-soft)";
+            el.style.borderColor = "var(--border-inverse-strong)";
+            el.style.color = "var(--text-inverse)";
           } else {
             el.style.boxShadow = "none";
             el.style.transform = "translate(2px, 2px)";
@@ -126,8 +126,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             el.style.borderColor = "transparent";
           } else if (variant === "ghost-inverse") {
             el.style.background = "transparent";
-            el.style.borderColor = "rgba(245,240,232,0.30)";
-            el.style.color = "rgba(245,240,232,0.80)";
+            el.style.borderColor = "var(--border-inverse-soft)";
+            el.style.color = "var(--text-inverse-muted)";
           } else {
             el.style.boxShadow = variantStyles[variant].boxShadow as string;
             el.style.transform = "translate(0, 0)";

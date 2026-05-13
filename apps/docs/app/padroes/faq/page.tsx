@@ -1,6 +1,8 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { Accordion, Button, Badge } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — FAQ" };
@@ -11,40 +13,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-function PatternShell({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--pencil)", marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{ border: "2px solid var(--border-strong)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function UsedComponents({ items }: { items: string[] }) {
-  return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)", padding: "10px 20px",
-      background: "var(--paper)", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
-      {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
-      ))}
-    </div>
-  );
-}
+const faqDefinition = getPatternDefinition("faq");
 
 const faqGeral = [
   {
@@ -107,6 +76,7 @@ export default function FaqPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {faqDefinition ? <PatternContract definition={faqDefinition} /> : null}
 
         <SectionLabel
           number="04.1"
@@ -175,20 +145,15 @@ export default function FaqPage() {
           number="04.3"
           title="Diretrizes de FAQ"
         />
-        <div className="border-2 p-6" style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}>
-          {[
-            { regra: "Abra o item mais estratégico por padrão via defaultOpen", motivo: "Guia o usuário para a informação que mais converte" },
-            { regra: "Limite de 5–7 perguntas por seção — use allowMultiple para FAQs técnicos", motivo: "Mais perguntas visíveis = mais paralisia de decisão" },
-            { regra: "Perguntas em linguagem do usuário, não do produto", motivo: "'Quanto tempo tenho acesso?' > 'Duração da licença'" },
-            { regra: "Respostas curtas no FAQ geral, detalhadas no FAQ técnico", motivo: "Contexto define o nível de profundidade adequado" },
-            { regra: "Finalize sempre com CTA para suporte — diminui abandono de dúvidas sem resposta", motivo: "Reduz churn por falta de informação" },
-          ].map((row, i) => (
-            <div key={i} className="flex flex-col py-3 border-b last:border-0" style={{ borderColor: "var(--rule)", gap: "4px" }}>
-              <span style={{ color: "var(--ink)", fontWeight: 600 }}>{row.regra}</span>
-              <span style={{ color: "var(--pencil)", fontSize: "11px" }}>↳ {row.motivo}</span>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Abra o item mais estratégico por padrão", description: "Guia o usuário para a informação que mais converte." },
+            { title: "Limite de 5–7 perguntas por seção", description: "Use allowMultiple apenas para FAQs técnicos mais densos." },
+            { title: "Perguntas em linguagem do usuário", description: "'Quanto tempo tenho acesso?' comunica melhor do que linguagem interna de produto." },
+            { title: "Respostas curtas no FAQ geral", description: "Contexto define o nível de profundidade adequado." },
+            { title: "Finalize com CTA para suporte", description: "Reduz abandono por dúvida não respondida." },
+          ]}
+        />
 
       </div>
     </div>

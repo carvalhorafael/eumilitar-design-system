@@ -1,6 +1,8 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { Badge, Button } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Depoimentos" };
@@ -24,41 +26,7 @@ const IconStar = () => (
   </svg>
 );
 
-/* ── Helpers ── */
-function PatternShell({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--pencil)", marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{ border: "2px solid var(--border-strong)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function UsedComponents({ items }: { items: string[] }) {
-  return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)", padding: "10px 20px",
-      background: "var(--paper)", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
-      {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
-      ))}
-    </div>
-  );
-}
+const testimonialsDefinition = getPatternDefinition("testimonials");
 
 function Stars({ count = 5 }: { count?: number }) {
   return (
@@ -126,6 +94,7 @@ export default function DepoimentosPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {testimonialsDefinition ? <PatternContract definition={testimonialsDefinition} /> : null}
 
         <SectionLabel
           number="06.1"
@@ -180,7 +149,7 @@ export default function DepoimentosPage() {
                     margin: 0, flex: 1,
                     fontStyle: "italic",
                   }}>
-                    "{d.citacao}"
+                    &ldquo;{d.citacao}&rdquo;
                   </p>
 
                   {/* Rodapé */}
@@ -234,16 +203,16 @@ export default function DepoimentosPage() {
               <blockquote style={{
                 fontFamily: "var(--font-display)", fontSize: "clamp(20px, 2.5vw, 28px)",
                 fontWeight: 700, textTransform: "uppercase",
-                color: "#f5f0e8", lineHeight: 1.3,
+                color: "var(--text-inverse)", lineHeight: 1.3,
                 margin: "0 0 32px",
               }}>
-                "{depoimentoDestaque.citacao}"
+                &ldquo;{depoimentoDestaque.citacao}&rdquo;
               </blockquote>
 
               {/* Autor */}
               <div style={{
                 display: "flex", alignItems: "center", gap: "16px",
-                borderTop: "1px solid rgba(245,240,232,0.15)", paddingTop: "24px",
+                borderTop: "1px solid var(--border-inverse-soft)", paddingTop: "24px",
                 marginBottom: "32px",
               }}>
                 {/* Avatar placeholder */}
@@ -254,7 +223,7 @@ export default function DepoimentosPage() {
                 }}>
                   <span style={{
                     fontFamily: "var(--font-display)", fontSize: "18px",
-                    fontWeight: 900, color: "#f5f0e8", textTransform: "uppercase",
+                    fontWeight: 900, color: "var(--text-inverse)", textTransform: "uppercase",
                   }}>
                     {depoimentoDestaque.nome.split(" ").pop()?.charAt(0)}
                   </span>
@@ -263,13 +232,13 @@ export default function DepoimentosPage() {
                   <p style={{
                     fontFamily: "var(--font-display)", fontSize: "15px",
                     fontWeight: 700, textTransform: "uppercase",
-                    color: "#f5f0e8", margin: "0 0 4px",
+                    color: "var(--text-inverse)", margin: "0 0 4px",
                   }}>
                     {depoimentoDestaque.nome}
                   </p>
                   <p style={{
                     fontFamily: "var(--font-body)", fontSize: "13px",
-                    color: "rgba(245,240,232,0.55)", margin: 0,
+                    color: "var(--text-inverse-faint)", margin: 0,
                   }}>
                     {depoimentoDestaque.cargo}
                   </p>
@@ -309,7 +278,7 @@ export default function DepoimentosPage() {
                 { numero: "4,9 / 5",  label: "Avaliação média", sub: "com base em 3.200 notas" },
                 { numero: "94%",      label: "Satisfação geral", sub: "em pesquisa pós-aprovação" },
                 { numero: "1ª tent.", label: "Aprovação", sub: "para 68% dos alunos" },
-              ].map((stat, i) => (
+              ].map((stat) => (
                 <div
                   key={stat.label}
                   style={{
@@ -349,24 +318,16 @@ export default function DepoimentosPage() {
           number="06.4"
           title="Diretrizes de uso"
         />
-        <div
-          className="border-2 p-6"
-          style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}
-        >
-          {[
-            { regra: "Citações sempre entre aspas e com nome completo identificável — sem anônimos", motivo: "Credibilidade" },
-            { regra: "Badge de força é obrigatório — o depoimento só é relevante se o leitor se identifica com a força", motivo: "Relevância contextual" },
-            { regra: "Estrelas somente quando a avaliação veio de plataforma verificável (Google, Reclame Aqui etc.)", motivo: "Evitar fabricação" },
-            { regra: "Máximo de 6 cards no grid 3 colunas — prefira 3 depoimentos fortes a 6 mediocres", motivo: "Qualidade > quantidade" },
-            { regra: "Destaques em fundo escuro (06.2) em seção própria, não intercalados com o grid claro", motivo: "Coerência de ritmo" },
-            { regra: "Números na faixa 06.3 devem ser reais e atualizados — data de referência visível se necessário", motivo: "Confiança legal" },
-          ].map((row, i) => (
-            <div key={i} className="flex flex-col py-3 border-b last:border-0" style={{ borderColor: "var(--rule)", gap: "4px" }}>
-              <span style={{ color: "var(--ink)", fontWeight: 600 }}>{row.regra}</span>
-              <span style={{ color: "var(--pencil)", fontSize: "11px" }}>↳ {row.motivo}</span>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Citações sempre entre aspas e com nome identificável", description: "Sem depoimentos anônimos se a intenção é credibilidade." },
+            { title: "Badge de força é obrigatório", description: "O leitor precisa se identificar com o aprovado." },
+            { title: "Estrelas só com origem verificável", description: "Evita prova social fabricada." },
+            { title: "Máximo de 6 cards no grid", description: "Prefira poucos depoimentos fortes a muitos medianos." },
+            { title: "Destaques em fundo escuro em seção própria", description: "Não intercale o bloco escuro com o grid claro sem ritmo." },
+            { title: "Números da faixa 06.3 devem ser reais", description: "Use data de referência visível quando necessário." },
+          ]}
+        />
 
       </div>
     </div>

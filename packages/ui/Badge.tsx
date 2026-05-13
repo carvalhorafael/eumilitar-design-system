@@ -20,32 +20,32 @@ const variantStyles: Record<NonNullable<BadgeProps["variant"]>, React.CSSPropert
   },
   urgent: {
     background: "var(--fire)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   ex: {
     background: "var(--ex)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   mb: {
     background: "var(--mb)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   fab: {
     background: "var(--fab)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   pm: {
     background: "var(--pm)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   bm: {
     background: "var(--bm)",
-    color: "#f5f0e8",
+    color: "var(--text-inverse)",
     border: "1.5px solid var(--border-strong)",
   },
   outline: {

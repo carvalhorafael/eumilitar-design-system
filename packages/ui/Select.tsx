@@ -46,6 +46,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const uid = useId();
     const inputId = id ?? uid;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
 
     return (
       <div className="ds-select" data-slot="select-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -58,6 +59,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             value={value}
             className={["ds-select__field", className].filter(Boolean).join(" ")}
             data-slot="field"
+            aria-invalid={inputState === "error"}
+            aria-describedby={helperId}
+            aria-required={required || undefined}
             style={{
               fontFamily: "var(--font-body)",
               fontWeight: 400,
@@ -119,7 +123,15 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             </svg>
           </div>
         </div>
-        {helperText && <HelperText state={inputState}>{helperText}</HelperText>}
+        {helperText && (
+          <HelperText
+            id={helperId}
+            state={inputState}
+            live={inputState === "error" ? "assertive" : inputState === "success" ? "polite" : "off"}
+          >
+            {helperText}
+          </HelperText>
+        )}
       </div>
     );
   }

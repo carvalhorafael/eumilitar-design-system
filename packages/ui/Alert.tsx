@@ -57,9 +57,9 @@ const config: Record<AlertVariant, {
   urgent: {
     bg:         "var(--fire)",
     border:     "var(--ink)",
-    titleColor: "#f5f0e8",
-    bodyColor:  "rgba(245,240,232,0.85)",
-    iconColor:  "#f5f0e8",
+    titleColor: "var(--text-inverse)",
+    bodyColor:  "var(--text-inverse-soft)",
+    iconColor:  "var(--text-inverse)",
     shadow:     "var(--shadow-md)",
   },
 };
@@ -179,7 +179,7 @@ export function Alert({
           </p>
         )}
         {children && (
-          <p
+          <div
             className="ds-alert__body"
             data-slot="body"
             style={{
@@ -191,7 +191,7 @@ export function Alert({
             }}
           >
             {children}
-          </p>
+          </div>
         )}
       </div>
 

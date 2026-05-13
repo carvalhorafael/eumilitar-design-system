@@ -26,6 +26,18 @@
   justify-content: center;
 }
 
+.ds-button:focus-visible,
+.ds-accordion__trigger:focus-visible,
+.ds-alert__dismiss:focus-visible,
+.ds-input__field:focus-visible,
+.ds-textarea-field:focus-visible,
+.ds-select__field:focus-visible,
+.ds-checkbox__control:focus-visible,
+.ds-radio__control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .ds-button__icon,
 .ds-alert__icon,
 .ds-alert__dismiss,

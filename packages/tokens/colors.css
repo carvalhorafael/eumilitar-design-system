@@ -40,16 +40,22 @@
   --text-placeholder: #a89c8a;
   --text-brand:       #1f4d2a;
   --text-inverse:     #f5f0e8;
+  --text-inverse-soft: rgba(245, 240, 232, 0.85);
+  --text-inverse-muted: rgba(245, 240, 232, 0.7);
+  --text-inverse-faint: rgba(245, 240, 232, 0.55);
 
   /* ── SEMÂNTICAS: Bordas ── */
   --border-brand:   #1f4d2a;
   --border-default: #c8bda5;
   --border-strong:  #433c34;
+  --border-inverse-soft: rgba(245, 240, 232, 0.3);
+  --border-inverse-strong: rgba(245, 240, 232, 0.55);
 
   /* ── SEMÂNTICAS: Acento ── */
   --accent:      #1f4d2a;
   --accent-pale: #c3d4bd;
   --accent-soft: #3b6a44;
+  --surface-inverse-soft: rgba(245, 240, 232, 0.12);
 
   /* ── METÁFORA DE MATERIAL IMPRESSO ── */
   --ink:          #1a1612;
@@ -124,9 +130,14 @@
   --text-placeholder: #5a5048;
   --text-brand:       #85b890;
   --text-inverse:     #1a1612;
+  --text-inverse-soft: rgba(26, 22, 18, 0.85);
+  --text-inverse-muted: rgba(26, 22, 18, 0.7);
+  --text-inverse-faint: rgba(26, 22, 18, 0.55);
 
   --border-default: #433c34;
   --border-strong:  #c8bda5;
+  --border-inverse-soft: rgba(26, 22, 18, 0.3);
+  --border-inverse-strong: rgba(26, 22, 18, 0.55);
 
   --ink:         #f5f0e8;
   --ink-soft:    #ede4cf;
@@ -137,4 +148,5 @@
   --block:       #433c34;
   --block-deep:  #c8bda5;
   --rule:        #433c34;
+  --surface-inverse-soft: rgba(26, 22, 18, 0.12);
 }

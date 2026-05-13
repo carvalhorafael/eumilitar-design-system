@@ -43,6 +43,15 @@ Documento complementar:
 - [x] Deploy automático na Vercel via integração Git com `main`
 - [x] Compatibilidade entre Codex e Claude Code via `AGENTS.md -> CLAUDE.md`
 - [x] Diagnóstico inicial de reutilização e roadmap documentado em `ROADMAP-REUTILIZACAO.md`
+- [x] Migrar lint para ESLint CLI não interativo
+- [x] Atualizar `README.md` e `CLAUDE.md` para refletir o monorepo real
+- [x] Eliminar o warning de ordem de `@import` em `apps/docs/app/globals.css`
+- [x] Fazer o app `docs` consumir `@eumilitar/patterns` na documentação dos blocos
+- [x] Documentar exemplos de HTML puro por componente
+- [x] Documentar limites e anti-padrões por componente
+- [x] Adicionar smoke tests mínimos para o pacote `@eumilitar/ui`
+- [x] Documentar tokens usados por componente
+- [x] Reduzir repetição estrutural nas páginas de padrões com helpers compartilhados
 
 ---
 
@@ -51,7 +60,7 @@ Documento complementar:
 ### Frente principal — Reutilização do sistema
 - [x] Consolidar tokens como fonte única real do sistema
 - [x] Separar componentes reutilizáveis do app de documentação
-- [ ] Estruturar padrões como blocos portáveis
+- [x] Estruturar padrões como blocos portáveis
 
 ---
 
@@ -74,11 +83,12 @@ Documento complementar:
 - [x] Definir uma convenção de classes semânticas ou utilitárias previsíveis para componentes e blocos
 - [x] Deixar inline style apenas para casos realmente dinâmicos
 - [x] Documentar a anatomia base dos componentes mais usados
+- [x] Refinar as páginas de padrões do app `docs` para consumir tokens semânticos em vez de cores literais inverse
 
 ### 4. Qualidade mínima para reuso
-- [ ] Auditar dark mode nos componentes principais
-- [ ] Revisar acessibilidade básica: labels, teclado, contraste e estados
-- [ ] Documentar props, variantes, estados e tokens usados por componente
+- [x] Auditar dark mode nos componentes principais
+- [x] Revisar acessibilidade básica: labels, teclado, contraste e estados
+- [x] Documentar props, variantes, estados e tokens usados por componente
 - [x] Definir checklist mínimo para considerar um componente “reutilizável”
 
 ---
@@ -86,19 +96,19 @@ Documento complementar:
 ## Fase seguinte — Preparação para WordPress
 
 ### Blocos e padrões reutilizáveis
-- [ ] Formalizar Hero, Urgência, Benefícios, FAQ, Depoimentos, Captação e CTA como blocos
-- [ ] Definir anatomia, variantes e conteúdo esperado de cada bloco
-- [ ] Criar contratos de conteúdo: obrigatório, opcional, lista, rich text, imagem, CTA
-- [ ] Documentar tokens usados e regras responsivas por bloco
+- [x] Formalizar Hero, Urgência, Benefícios, FAQ, Depoimentos, Captação e CTA como blocos
+- [x] Definir anatomia, variantes e conteúdo esperado de cada bloco
+- [x] Criar contratos de conteúdo: obrigatório, opcional, lista, rich text, imagem, CTA
+- [x] Documentar tokens usados e regras responsivas por bloco
 
 ### Referência agnóstica de framework
-- [ ] Criar versões HTML/CSS de referência para os blocos prioritários
-- [ ] Definir convenção de classes voltada para portabilidade, por exemplo `.ds-hero`, `.ds-faq`, `.ds-benefits`
-- [ ] Garantir que os blocos possam ser implementados fora de React sem redesenho estrutural
+- [x] Criar versões HTML/CSS de referência para os blocos prioritários
+- [x] Definir convenção de classes voltada para portabilidade, por exemplo `.ds-hero`, `.ds-faq`, `.ds-benefits`
+- [x] Garantir que os blocos possam ser implementados fora de React sem redesenho estrutural
 
 ### Caminho para o tema WordPress
-- [ ] Identificar quais blocos são prioridade real para o tema
-- [ ] Mapear os campos de CMS necessários por bloco
+- [x] Identificar quais blocos são prioridade real para o tema
+- [x] Mapear os campos de CMS necessários por bloco
 - [ ] Preparar um CSS global exportável para WordPress
 - [ ] Criar um protótipo de landing page com blocos portáveis e independentes do app `docs`
 

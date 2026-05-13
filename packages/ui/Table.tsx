@@ -88,6 +88,7 @@ export function Th({ children, align = "left", style, className, ...rest }: ThHT
     <th
       className={["ds-table__th", className].filter(Boolean).join(" ")}
       data-slot="th"
+      scope={rest.scope ?? "col"}
       style={{
         padding: "10px 14px",
         fontFamily: "var(--font-mono)",

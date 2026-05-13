@@ -61,10 +61,12 @@ export function Label({ htmlFor, required, children }: LabelProps) {
 /* ── Helper / Error text ── */
 interface HelperTextProps {
   state?: InputState;
+  id?: string;
+  live?: "off" | "polite" | "assertive";
   children: React.ReactNode;
 }
 
-export function HelperText({ state = "default", children }: HelperTextProps) {
+export function HelperText({ state = "default", id, live = "off", children }: HelperTextProps) {
   const color =
     state === "error"   ? "var(--state-error)"   :
     state === "success" ? "var(--state-success)"  :
@@ -75,6 +77,8 @@ export function HelperText({ state = "default", children }: HelperTextProps) {
       className="ds-input__helper"
       data-slot="helper"
       data-state={state}
+      id={id}
+      aria-live={live}
       style={{
         fontFamily: "var(--font-body)",
         fontSize: "12px",
@@ -101,6 +105,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ inputState = "default", size = "md", label, helperText, required, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
 
     return (
       <div className="ds-input" data-slot="input-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -110,6 +115,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           className={["ds-input__field", className].filter(Boolean).join(" ")}
           data-slot="field"
+          aria-invalid={inputState === "error"}
+          aria-describedby={helperId}
+          aria-required={required || undefined}
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: 400,
@@ -142,7 +150,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           }}
           {...rest}
         />
-        {helperText && <HelperText state={inputState}>{helperText}</HelperText>}
+        {helperText && (
+          <HelperText
+            id={helperId}
+            state={inputState}
+            live={inputState === "error" ? "assertive" : inputState === "success" ? "polite" : "off"}
+          >
+            {helperText}
+          </HelperText>
+        )}
       </div>
     );
   }
@@ -162,6 +178,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ inputState = "default", size = "md", label, helperText, required, id, style, className, ...rest }, ref) => {
     const uid = useId();
     const inputId = id ?? uid;
+    const helperId = helperText ? `${inputId}-helper` : undefined;
 
     return (
       <div className="ds-input" data-slot="textarea-root" data-state={inputState} data-size={size} style={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -171,6 +188,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={inputId}
           className={["ds-textarea-field", className].filter(Boolean).join(" ")}
           data-slot="field"
+          aria-invalid={inputState === "error"}
+          aria-describedby={helperId}
+          aria-required={required || undefined}
           style={{
             fontFamily: "var(--font-body)",
             fontWeight: 400,
@@ -205,7 +225,15 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           }}
           {...rest}
         />
-        {helperText && <HelperText state={inputState}>{helperText}</HelperText>}
+        {helperText && (
+          <HelperText
+            id={helperId}
+            state={inputState}
+            live={inputState === "error" ? "assertive" : inputState === "success" ? "polite" : "off"}
+          >
+            {helperText}
+          </HelperText>
+        )}
       </div>
     );
   }

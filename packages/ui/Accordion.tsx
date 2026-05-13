@@ -100,6 +100,7 @@ function Item({ id, title, open, onToggle, children, isLast }: AccordionItemProp
         id={`${id}-panel`}
         role="region"
         aria-labelledby={`${id}-trigger`}
+        hidden={!open}
         className="ds-accordion__panel"
         data-slot="panel"
         style={{
