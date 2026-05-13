@@ -1,14 +1,22 @@
 {
   "name": "@eumilitar/patterns",
   "version": "0.1.0",
-  "private": true,
+  "files": [
+    "*.ts",
+    "*.tsx",
+    "*.md"
+  ],
   "main": "./index.ts",
   "types": "./index.ts",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./docs": "./docs.tsx"
   },
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

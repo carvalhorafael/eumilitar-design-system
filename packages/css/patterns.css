@@ -1,0 +1,8 @@
+/*
+ * Reserved for framework-agnostic block styles such as
+ * .ds-hero, .ds-faq, .ds-capture and other composition patterns.
+ *
+ * In the current phase, block contracts and HTML references already exist in
+ * @eumilitar/patterns, but the shared CSS layer for patterns will be added
+ * incrementally to keep the migration controlled.
+ */

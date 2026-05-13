@@ -2,20 +2,20 @@
 
 ## O que é este projeto
 
-Monorepo do design system da EuMilitar (plataforma de preparação para concursos militares). O app principal continua sendo um site de documentação, mas o repositório agora também expõe camadas reutilizáveis de tokens, UI e padrões de composição.
+Monorepo do design system da EuMilitar (plataforma de preparação para concursos militares). O app principal continua sendo um site de documentação, mas o repositório agora também expõe camadas reutilizáveis de tokens, CSS compartilhado, UI e padrões de composição.
 
 ## Stack
 
-- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/ui` + `packages/patterns`
+- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/css` + `packages/ui` + `packages/patterns`
 - **Next.js 15 App Router** + TypeScript estrito
 - **Tailwind v4 CSS-first** via `@tailwindcss/postcss`
 - **next-themes** com `attribute="data-theme"`, `defaultTheme="light"`, `enableSystem={false}`
 
 ## Fonte da verdade dos tokens
 
-**Os tokens CSS vivem em `packages/tokens`** e são importados por `apps/docs/app/globals.css`.
+**Os tokens CSS vivem em `packages/tokens`** e a camada de estilos compartilhados vive em `packages/css`.
 
-`apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`.
+`apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`; quando uma primitive visual mudar, a mudança deve acontecer primeiro em `packages/css/*.css`.
 
 ## Estrutura de arquivos
 
@@ -70,6 +70,10 @@ packages/
     spacing.css
     effects.css
     index.css
+  css/
+    ui.css
+    patterns.css
+    index.css
   ui/
     Button.tsx
     Badge.tsx
@@ -80,7 +84,7 @@ packages/
     Alert.tsx
     Accordion.tsx
     Table.tsx
-    styles.css
+    styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/
     patterns.ts             ← contratos dos blocos

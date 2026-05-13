@@ -134,11 +134,13 @@ Objetivo:
 transformar o estado atual em uma arquitetura de biblioteca clara
 
 Entregas:
-- [ ] decidir se a camada CSS compartilhada viverá em `packages/css`
-- [ ] ajustar `@eumilitar/ui` para depender explicitamente da camada CSS compartilhada
-- [ ] definir quais artefatos cada pacote exporta
-- [ ] documentar a arquitetura alvo no repositório
-- [ ] definir a política de versionamento dos pacotes
+- [x] decidir se a camada CSS compartilhada viverá em `packages/css`
+- [x] ajustar `@eumilitar/ui` para depender explicitamente da camada CSS compartilhada
+- [x] definir quais artefatos cada pacote exporta
+- [x] documentar a arquitetura alvo no repositório
+- [x] definir a política de versionamento dos pacotes
+- [x] alinhar metadata inicial dos pacotes para distribuição versionada
+- [x] garantir que o app `docs` consuma entrypoints públicos dos pacotes compartilhados
 
 ### Fase 2 — Artefatos de distribuição
 
@@ -146,11 +148,11 @@ Objetivo:
 fazer os pacotes gerarem saídas consumíveis por outros sistemas
 
 Entregas:
-- [ ] criar exports claros para `@eumilitar/tokens`
-- [ ] criar build/export da camada CSS compartilhada
-- [ ] revisar `package.json` dos pacotes para consumo externo
-- [ ] garantir que o `docs` consuma esses artefatos como consumidor real
-- [ ] validar o fluxo de import em um consumer mínimo fora do app `docs`
+- [x] criar exports claros para `@eumilitar/tokens`
+- [x] criar build/export da camada CSS compartilhada
+- [x] revisar `package.json` dos pacotes para consumo externo
+- [x] garantir que o `docs` consuma esses artefatos como consumidor real
+- [x] validar o fluxo de import em um consumer mínimo fora do app `docs`
 
 ### Fase 3 — Base de release e versionamento
 
@@ -158,11 +160,11 @@ Objetivo:
 tirar o design system do modo “código local” e colocá-lo no modo “biblioteca versionada”
 
 Entregas:
-- [ ] escolher estratégia de release, preferencialmente `changesets`
-- [ ] configurar versionamento semântico
-- [ ] definir changelog por pacote
-- [ ] preparar CI para validar build/lint/test antes de release
-- [ ] documentar como um consumer atualiza de versão
+- [x] escolher estratégia de release, preferencialmente `changesets`
+- [x] configurar versionamento semântico
+- [x] definir changelog por pacote
+- [x] preparar CI para validar build/lint/test antes de release
+- [x] documentar como um consumer atualiza de versão
 
 ### Fase 4 — Adapter WordPress
 

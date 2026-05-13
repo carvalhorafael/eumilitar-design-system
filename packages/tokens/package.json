@@ -1,7 +1,13 @@
 {
   "name": "@eumilitar/tokens",
   "version": "0.1.0",
+  "files": [
+    "*.css"
+  ],
   "main": "index.css",
+  "sideEffects": [
+    "*.css"
+  ],
   "exports": {
     ".": "./index.css",
     "./colors": "./colors.css",

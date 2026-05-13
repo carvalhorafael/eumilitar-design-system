@@ -10,9 +10,15 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "changeset": "changeset",
+    "release:status": "changeset status",
+    "version-packages": "changeset version",
+    "release:snapshot": "changeset version --snapshot canary",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@eslint/eslintrc": "^3.3.5",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

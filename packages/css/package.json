@@ -1,0 +1,17 @@
+{
+  "name": "@eumilitar/css",
+  "version": "0.1.0",
+  "files": [
+    "*.css",
+    "README.md"
+  ],
+  "main": "./index.css",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./index.css",
+    "./ui": "./ui.css",
+    "./patterns": "./patterns.css"
+  }
+}

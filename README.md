@@ -36,11 +36,25 @@ Acesse `http://localhost:3000`.
 ```
 apps/docs/          ← site de documentação (Next.js)
 packages/tokens/    ← tokens CSS compartilhados
+packages/css/       ← camada CSS compartilhada e agnóstica de framework
 packages/ui/        ← primitives React reutilizáveis
 packages/patterns/  ← contratos e helpers dos blocos de composição
 ```
 
-O app `docs` consome `@eumilitar/tokens`, `@eumilitar/ui` e `@eumilitar/patterns` diretamente.
+O app `docs` consome `@eumilitar/tokens`, `@eumilitar/css`, `@eumilitar/ui` e `@eumilitar/patterns` diretamente.
+O app [apps/consumer-react](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-react) existe como prova mínima de consumo fora do `docs`.
+
+## Biblioteca
+
+Arquitetura ativa de distribuição:
+- `@eumilitar/tokens` para valores visuais
+- `@eumilitar/css` para a camada compartilhada e agnóstica de framework
+- `@eumilitar/ui` para o adapter React
+- `@eumilitar/patterns` para contratos e blocos
+
+Documento de referência:
+- [ARQUITETURA-BIBLIOTECA.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ARQUITETURA-BIBLIOTECA.md)
+- [CONSUMO-E-VERSOES.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/CONSUMO-E-VERSOES.md)
 
 ## Conteúdo atual
 
