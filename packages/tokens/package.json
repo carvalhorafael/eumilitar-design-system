@@ -1,8 +1,13 @@
 {
-  "name": "@eumilitar/tokens",
+  "name": "@carvalhorafael/eumilitar-tokens",
   "version": "0.1.0",
+  "scripts": {
+    "build": "tsx build-tokens.ts"
+  },
   "files": [
-    "*.css"
+    "*.css",
+    "dist/**/*.json",
+    "README.md"
   ],
   "main": "index.css",
   "sideEffects": [
@@ -13,6 +18,19 @@
     "./colors": "./colors.css",
     "./typography": "./typography.css",
     "./spacing": "./spacing.css",
-    "./effects": "./effects.css"
+    "./effects": "./effects.css",
+    "./json": "./dist/tokens.json",
+    "./colors.json": "./dist/colors.json",
+    "./typography.json": "./dist/typography.json",
+    "./spacing.json": "./dist/spacing.json",
+    "./effects.json": "./dist/effects.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhorafael/eumilitar-design-system.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }

@@ -1,8 +1,9 @@
 import { Header } from "@/components/layout/Header";
 import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Badge, Button } from "@eumilitar/ui";
-import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
+import { Badge, Button } from "@carvalhorafael/eumilitar-ui";
+import { getPatternDefinition } from "@carvalhorafael/eumilitar-patterns";
+import { PatternContract, PatternShell, UsedComponents } from "@carvalhorafael/eumilitar-patterns/docs";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Benefícios" };

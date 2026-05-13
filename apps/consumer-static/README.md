@@ -4,7 +4,7 @@ Consumer mínimo da biblioteca para validar uso em HTML/CSS/JS puro.
 
 ## Objetivo
 
-Provar que a base `@eumilitar/web` funciona fora de:
+Provar que a base `@carvalhorafael/eumilitar-web` funciona fora de:
 
 - React
 - Next.js

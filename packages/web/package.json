@@ -1,16 +1,25 @@
 {
-  "name": "@eumilitar/web",
+  "name": "@carvalhorafael/eumilitar-web",
   "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsup index.ts --format esm --dts --tsconfig ./tsconfig.json --clean --out-dir dist"
+  },
   "files": [
-    "*.ts",
+    "dist/**/*",
     "README.md"
   ],
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./index.ts"
+    ".": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhorafael/eumilitar-design-system.git"
   },
   "publishConfig": {
-    "access": "restricted"
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }

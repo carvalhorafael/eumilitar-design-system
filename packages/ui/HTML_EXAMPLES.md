@@ -1,13 +1,13 @@
-# @eumilitar/ui — Exemplos em HTML puro
+# @carvalhorafael/eumilitar-ui — Exemplos em HTML puro
 
 ## Objetivo
 
-Registrar exemplos mínimos de marcação HTML para consumo fora de React, preservando a anatomia e as classes semânticas do pacote `@eumilitar/ui`.
+Registrar exemplos mínimos de marcação HTML para consumo fora de React, preservando a anatomia e as classes semânticas do pacote `@carvalhorafael/eumilitar-ui`.
 
 ## Pré-requisitos
 
-- importar `@eumilitar/tokens`
-- importar `@eumilitar/ui/styles.css`
+- importar `@carvalhorafael/eumilitar-tokens`
+- importar `@carvalhorafael/eumilitar-ui/styles.css`
 - manter as classes `ds-*` e os `data-slot` quando quiser preservar compatibilidade com a anatomia documentada
 
 ## Button

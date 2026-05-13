@@ -1,5 +1,5 @@
-import { Badge, Button, Card, CardBody, CardHeader, Input } from "@eumilitar/ui";
-import { getPatternDefinition } from "@eumilitar/patterns";
+import { Badge, Button, Card, CardBody, CardHeader, Input } from "@carvalhorafael/eumilitar-ui";
+import { getPatternDefinition } from "@carvalhorafael/eumilitar-patterns";
 
 const hero = getPatternDefinition("hero");
 
@@ -79,7 +79,7 @@ export default function HomePage() {
               <div style={{ display: "grid", gap: "4px" }}>
                 <strong>Contrato de bloco</strong>
                 <span style={{ color: "var(--text-secondary)", fontSize: "0.9375rem" }}>
-                  Leitura direta de @eumilitar/patterns
+                  Leitura direta de @carvalhorafael/eumilitar-patterns
                 </span>
               </div>
             </CardHeader>
@@ -105,7 +105,7 @@ export default function HomePage() {
               <div style={{ display: "grid", gap: "4px" }}>
                 <strong>Primitive React</strong>
                 <span style={{ color: "var(--text-secondary)", fontSize: "0.9375rem" }}>
-                  Uso de @eumilitar/ui em um consumer separado
+                  Uso de @carvalhorafael/eumilitar-ui em um consumer separado
                 </span>
               </div>
             </CardHeader>

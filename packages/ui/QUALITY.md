@@ -1,12 +1,12 @@
-# @eumilitar/ui — Qualidade mínima para reuso
+# @carvalhorafael/eumilitar-ui — Qualidade mínima para reuso
 
 ## Escopo
 
-Este documento registra a base mínima de qualidade do pacote `@eumilitar/ui` para consumo em apps React hoje e para futura transposição de comportamento para HTML/CSS e WordPress.
+Este documento registra a base mínima de qualidade do pacote `@carvalhorafael/eumilitar-ui` para consumo em apps React hoje e para futura transposição de comportamento para HTML/CSS e WordPress.
 
 ## Padrões já adotados
 
-- Tokens visuais vêm de `@eumilitar/tokens`
+- Tokens visuais vêm de `@carvalhorafael/eumilitar-tokens`
 - Componentes expõem classes estáveis `ds-*`
 - Componentes expõem `data-slot` nas subpartes relevantes
 - `className` externo pode compor a maioria dos componentes principais

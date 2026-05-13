@@ -6,6 +6,6 @@
     "build": "tsx build.ts"
   },
   "dependencies": {
-    "@eumilitar/web": "*"
+    "@carvalhorafael/eumilitar-web": "*"
   }
 }

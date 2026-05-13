@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { ComponentDemo } from "@/components/docs/ComponentDemo";
-import { Input, Textarea } from "@eumilitar/ui";
+import { Input, Textarea } from "@carvalhorafael/eumilitar-ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Input" };

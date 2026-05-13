@@ -1,4 +1,4 @@
-# @eumilitar/web
+# @carvalhorafael/eumilitar-web
 
 Base agnóstica de plataforma para consumo do design system em sites não React.
 
@@ -6,8 +6,8 @@ Base agnóstica de plataforma para consumo do design system em sites não React.
 
 Servir como camada intermediária entre:
 
-- `@eumilitar/patterns`, que descreve contratos e anatomia;
-- `@eumilitar/css`, que fornece a camada visual compartilhada;
+- `@carvalhorafael/eumilitar-patterns`, que descreve contratos e anatomia;
+- `@carvalhorafael/eumilitar-css`, que fornece a camada visual compartilhada;
 - adapters de plataforma como WordPress.
 
 ## Escopo inicial
@@ -29,8 +29,9 @@ Servir como camada intermediária entre:
 
 ## Direção
 
-`@eumilitar/web` não deve depender de WordPress. O adapter WordPress deve consumir esta camada, e não o contrário.
+`@carvalhorafael/eumilitar-web` não deve depender de WordPress. O adapter WordPress deve consumir esta camada, e não o contrário.
 
 ## Documentação complementar
 
 - [HTML_CONSUMPTION.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/HTML_CONSUMPTION.md)
+- [CONTRACT.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/CONTRACT.md)

@@ -42,26 +42,59 @@ packages/ui/        ← primitives React reutilizáveis
 packages/patterns/  ← contratos e helpers dos blocos de composição
 ```
 
-O app `docs` consome `@eumilitar/tokens`, `@eumilitar/css`, `@eumilitar/ui` e `@eumilitar/patterns` diretamente.
+O app `docs` consome `@carvalhorafael/eumilitar-tokens`, `@carvalhorafael/eumilitar-css`, `@carvalhorafael/eumilitar-ui` e `@carvalhorafael/eumilitar-patterns` diretamente.
 O app [apps/consumer-react](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-react) existe como prova mínima de consumo fora do `docs`.
-O app [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) valida consumo em HTML/CSS/JS puro via `@eumilitar/web`.
+O app [apps/consumer-static](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/apps/consumer-static) valida consumo em HTML/CSS/JS puro via `@carvalhorafael/eumilitar-web`.
 
 ## Biblioteca
 
 Arquitetura ativa de distribuição:
-- `@eumilitar/tokens` para valores visuais
-- `@eumilitar/css` para a camada compartilhada e agnóstica de framework
-- `@eumilitar/web` para a base de sites tradicionais e CMSs fora de React
-- `@eumilitar/ui` para o adapter React
-- `@eumilitar/patterns` para contratos e blocos
+- `@carvalhorafael/eumilitar-tokens` para valores visuais
+- `@carvalhorafael/eumilitar-css` para a camada compartilhada e agnóstica de framework
+- `@carvalhorafael/eumilitar-web` para a base de sites tradicionais e CMSs fora de React
+- `@carvalhorafael/eumilitar-ui` para o adapter React
+- `@carvalhorafael/eumilitar-patterns` para contratos e blocos
 
 WordPress e Elementor ficam fora deste repositório.
 O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 
+Os tokens agora também têm export em JSON para consumers que não querem depender de parsing de CSS.
+
 Documento de referência:
 - [ARQUITETURA-BIBLIOTECA.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/ARQUITETURA-BIBLIOTECA.md)
 - [CONSUMO-E-VERSOES.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/CONSUMO-E-VERSOES.md)
+- [VALIDACAO-PROPAGACAO.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/VALIDACAO-PROPAGACAO.md)
 - [packages/web/HTML_CONSUMPTION.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/HTML_CONSUMPTION.md)
+- [packages/web/CONTRACT.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/web/CONTRACT.md)
+- [packages/tokens/README.md](/Users/rafaelcarvalho/Development/quest_edu/eumilitar-design-system/packages/tokens/README.md)
+
+## Release
+
+As versões da biblioteca são geridas com Changesets e publicadas via GitHub Actions para GitHub Packages.
+
+Fluxo resumido:
+- mudanças entram em branch de trabalho
+- cada mudança distribuível inclui um `changeset`
+- o merge em `main` dispara o workflow de release
+- o workflow cria ou atualiza o PR de versionamento
+- depois do merge desse PR, os pacotes são publicados
+
+Pacotes publicados:
+- `@carvalhorafael/eumilitar-tokens`
+- `@carvalhorafael/eumilitar-css`
+- `@carvalhorafael/eumilitar-web`
+- `@carvalhorafael/eumilitar-ui`
+- `@carvalhorafael/eumilitar-patterns`
+
+Para instalar a partir do GitHub Packages, o consumer precisa configurar o scope:
+
+```ini
+@carvalhorafael:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=SEU_TOKEN_GITHUB
+```
+
+As releases também ficam listadas em:
+- [GitHub Releases](https://github.com/carvalhorafael/eumilitar-design-system/releases)
 
 ## Conteúdo atual
 

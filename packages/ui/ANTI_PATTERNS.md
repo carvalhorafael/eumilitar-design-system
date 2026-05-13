@@ -1,4 +1,4 @@
-# @eumilitar/ui — Limites e anti-padrões
+# @carvalhorafael/eumilitar-ui — Limites e anti-padrões
 
 ## Objetivo
 
@@ -76,6 +76,6 @@ Registrar o que cada componente faz bem, onde ele deixa de ser a escolha correta
 
 ## Limite geral do pacote
 
-- O pacote `@eumilitar/ui` cobre primitives e não substitui blocos editoriais completos.
-- Quando a necessidade já é de composição de landing page, prefira começar por `@eumilitar/patterns`.
+- O pacote `@carvalhorafael/eumilitar-ui` cobre primitives e não substitui blocos editoriais completos.
+- Quando a necessidade já é de composição de landing page, prefira começar por `@carvalhorafael/eumilitar-patterns`.
 - Se um caso exigir comportamento muito específico de produto, é melhor compor por cima do pacote do que deformar a API base para um caso isolado.

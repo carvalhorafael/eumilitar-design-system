@@ -1,4 +1,4 @@
-# @eumilitar/patterns
+# @carvalhorafael/eumilitar-patterns
 
 Camada de formalização dos padrões de composição da EuMilitar.
 

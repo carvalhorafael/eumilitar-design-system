@@ -11,7 +11,7 @@ import {
   renderHeroBlock,
   renderTestimonialsBlock,
   renderUrgencyBlock,
-} from "@eumilitar/web";
+} from "@carvalhorafael/eumilitar-web";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -128,7 +128,7 @@ function buildHtml() {
     items: [
       {
         question: "Esse consumer usa React?",
-        answer: "Não. O HTML é renderizado a partir de @eumilitar/web e o estilo vem de tokens e CSS compartilhado.",
+        answer: "Não. O HTML é renderizado a partir de @carvalhorafael/eumilitar-web e o estilo vem de tokens e CSS compartilhado.",
       },
       {
         question: "WordPress é obrigatório para usar essa base?",

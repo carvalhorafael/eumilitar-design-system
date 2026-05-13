@@ -11,6 +11,7 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "test": "vitest run",
+    "validate:propagation": "node scripts/validate-consumer-propagation.mjs",
     "changeset": "changeset",
     "release:status": "changeset status",
     "version-packages": "changeset version",
@@ -25,6 +26,7 @@
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.6",
     "jsdom": "^29.1.1",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "turbo": "^2",
     "vitest": "^4.1.6"

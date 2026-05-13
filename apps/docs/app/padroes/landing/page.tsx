@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button, Badge, Alert, Accordion } from "@eumilitar/ui";
+import { Button, Badge, Alert, Accordion } from "@carvalhorafael/eumilitar-ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Landing Page Completa" };

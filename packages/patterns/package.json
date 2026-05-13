@@ -1,22 +1,30 @@
 {
-  "name": "@eumilitar/patterns",
+  "name": "@carvalhorafael/eumilitar-patterns",
   "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsup index.ts docs.tsx --format esm --dts --tsconfig ./tsconfig.json --clean --out-dir dist"
+  },
   "files": [
-    "*.ts",
-    "*.tsx",
+    "dist/**/*",
     "*.md"
   ],
-  "main": "./index.ts",
-  "types": "./index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./index.ts",
-    "./docs": "./docs.tsx"
+    ".": "./dist/index.js",
+    "./docs": "./dist/docs.js"
   },
   "peerDependencies": {
     "react": "^19",
     "react-dom": "^19"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhorafael/eumilitar-design-system.git"
+  },
   "publishConfig": {
-    "access": "restricted"
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   }
 }

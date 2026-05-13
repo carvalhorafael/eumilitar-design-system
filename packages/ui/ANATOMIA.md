@@ -1,4 +1,4 @@
-# @eumilitar/ui — Anatomia e checklist mínimo
+# @carvalhorafael/eumilitar-ui — Anatomia e checklist mínimo
 
 ## Objetivo
 
@@ -155,7 +155,7 @@ Registrar a anatomia estável dos componentes base para consumo futuro fora do a
 
 ## Checklist mínimo de reuso
 
-- Tokens vêm de `@eumilitar/tokens`
+- Tokens vêm de `@carvalhorafael/eumilitar-tokens`
 - Estrutura principal expõe classes estáveis
 - Subpartes importantes expõem `data-slot`
 - `className` externo pode compor o componente

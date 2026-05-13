@@ -1,5 +1,11 @@
 import { enhanceAccordion } from "./behavior";
 import {
+  webBlockBaseClasses,
+  webBlockIds,
+  webBlockVariants,
+  webStableContracts,
+} from "./manifest";
+import {
   renderBenefitsBlock,
   renderCaptureBlock,
   renderCtaBlock,
@@ -9,7 +15,24 @@ import {
   renderUrgencyBlock,
 } from "./render";
 
-describe("@eumilitar/web", () => {
+describe("@carvalhorafael/eumilitar-web", () => {
+  it("expõe manifesto público estável", () => {
+    expect(webBlockIds).toEqual([
+      "hero",
+      "urgency",
+      "faq",
+      "capture",
+      "benefits",
+      "testimonials",
+      "cta",
+    ]);
+
+    expect(webBlockBaseClasses.hero).toBe("ds-hero");
+    expect(webBlockVariants.hero).toContain("brand-dark");
+    expect(webStableContracts.behaviors.accordion).toBe("enhanceAccordion");
+    expect(webStableContracts.markupDataAttributes.accordionTrigger).toBe("data-accordion-trigger");
+  });
+
   it("renderiza hero com CTA secundário e badges", () => {
     const html = renderHeroBlock({
       eyebrow: "Preparação militar",

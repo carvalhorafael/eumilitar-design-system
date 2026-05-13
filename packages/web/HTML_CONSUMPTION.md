@@ -1,4 +1,4 @@
-# `@eumilitar/web` — Consumo em HTML puro
+# `@carvalhorafael/eumilitar-web` — Consumo em HTML puro
 
 Este guia mostra como usar a biblioteca em um site tradicional sem React e sem WordPress.
 
@@ -6,9 +6,9 @@ Este guia mostra como usar a biblioteca em um site tradicional sem React e sem W
 
 Para um site HTML/CSS/JS tradicional, a base recomendada é:
 
-1. `@eumilitar/tokens`
-2. `@eumilitar/css`
-3. `@eumilitar/web`
+1. `@carvalhorafael/eumilitar-tokens`
+2. `@carvalhorafael/eumilitar-css`
+3. `@carvalhorafael/eumilitar-web`
 
 ## Estrutura mínima
 
@@ -37,7 +37,7 @@ import {
   renderCtaBlock,
   renderFaqBlock,
   renderHeroBlock,
-} from "@eumilitar/web";
+} from "@carvalhorafael/eumilitar-web";
 
 const heroHtml = renderHeroBlock({
   eyebrow: "Preparação militar",
@@ -79,7 +79,7 @@ enhanceAccordion(document);
 
 Se um site tradicional precisar de um novo bloco, a ordem recomendada é:
 
-1. definir ou atualizar o contrato em `@eumilitar/patterns`
-2. garantir a camada visual em `@eumilitar/css`
-3. implementar a renderização canônica em `@eumilitar/web`
+1. definir ou atualizar o contrato em `@carvalhorafael/eumilitar-patterns`
+2. garantir a camada visual em `@carvalhorafael/eumilitar-css`
+3. implementar a renderização canônica em `@carvalhorafael/eumilitar-web`
 4. só depois adaptar isso para WordPress, Elementor ou outro CMS

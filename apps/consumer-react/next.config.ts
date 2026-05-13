@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@eumilitar/ui", "@eumilitar/patterns"],
+  transpilePackages: ["@carvalhorafael/eumilitar-ui", "@carvalhorafael/eumilitar-patterns"],
 };
 
 export default nextConfig;

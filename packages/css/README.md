@@ -1,4 +1,4 @@
-# @eumilitar/css
+# @carvalhorafael/eumilitar-css
 
 Camada CSS compartilhada e agnóstica de framework do design system da EuMilitar.
 
@@ -19,6 +19,6 @@ Servir como artefato principal de estilos reutilizáveis para consumidores que n
 
 ## Direção arquitetural
 
-- `@eumilitar/tokens` continua sendo a fonte de verdade dos tokens
-- `@eumilitar/css` passa a ser a fonte de verdade dos estilos compartilhados
-- `@eumilitar/ui` funciona como adapter React por cima dessa base
+- `@carvalhorafael/eumilitar-tokens` continua sendo a fonte de verdade dos tokens
+- `@carvalhorafael/eumilitar-css` passa a ser a fonte de verdade dos estilos compartilhados
+- `@carvalhorafael/eumilitar-ui` funciona como adapter React por cima dessa base

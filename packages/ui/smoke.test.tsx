@@ -11,7 +11,7 @@ import {
   RadioGroup,
 } from "./index";
 
-describe("@eumilitar/ui smoke", () => {
+describe("@carvalhorafael/eumilitar-ui smoke", () => {
   it("renderiza Button com type padrão button", () => {
     render(<Button>Começar agora</Button>);
 

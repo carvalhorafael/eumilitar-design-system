@@ -3,8 +3,9 @@
 import { Header } from "@/components/layout/Header";
 import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button, Input, Select, Checkbox, Alert } from "@eumilitar/ui";
-import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
+import { Button, Input, Select, Checkbox, Alert } from "@carvalhorafael/eumilitar-ui";
+import { getPatternDefinition } from "@carvalhorafael/eumilitar-patterns";
+import { PatternContract, PatternShell, UsedComponents } from "@carvalhorafael/eumilitar-patterns/docs";
 import { FormEvent, useRef, useState } from "react";
 
 const forcaOptions = [
