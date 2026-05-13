@@ -1,10 +1,10 @@
 # EuMilitar Design System
 
-Documentação de referência visual da EuMilitar — plataforma de preparação para concursos militares. Fonte da verdade para times de produto, design e desenvolvimento.
+Monorepo do design system da EuMilitar — plataforma de preparação para concursos militares. Fonte da verdade para times de produto, design e desenvolvimento.
 
 ## O que é
 
-Um site de documentação que centraliza a linguagem visual da EuMilitar: tokens de design, tipografia, paleta de cores, componentes de interface e diretrizes de uso. Não é um pacote npm publicável — é uma referência consultável.
+Uma base reutilizável que centraliza a linguagem visual da EuMilitar: tokens de design, tipografia, paleta de cores, componentes de interface, padrões de composição e um app de documentação para consulta.
 
 ## Estilo visual
 
@@ -35,8 +35,12 @@ Acesse `http://localhost:3000`.
 
 ```
 apps/docs/          ← site de documentação (Next.js)
-packages/tokens/    ← tokens CSS (referência para futura portabilidade)
+packages/tokens/    ← tokens CSS compartilhados
+packages/ui/        ← primitives React reutilizáveis
+packages/patterns/  ← contratos e helpers dos blocos de composição
 ```
+
+O app `docs` consome `@eumilitar/tokens`, `@eumilitar/ui` e `@eumilitar/patterns` diretamente.
 
 ## Conteúdo atual
 
@@ -54,6 +58,10 @@ packages/tokens/    ← tokens CSS (referência para futura portabilidade)
 - Input & Textarea — 3 estados, 3 tamanhos, foco com sombra offset
 - Select — dropdown estilizado com seta customizada
 - Checkbox & Radio — checkmark SVG animado, grupos
+
+**Padrões**
+- Hero, Urgência, Captação, FAQ, Benefícios, Depoimentos e CTA final
+- Contratos de anatomia, variantes, tokens e campos CMS em `packages/patterns`
 
 ## Cores principais
 

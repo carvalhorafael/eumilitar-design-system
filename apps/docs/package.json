@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
+    "@eumilitar/patterns": "*",
     "@eumilitar/tokens": "*",
+    "@eumilitar/ui": "*",
     "@next/mdx": "^15",
     "@mdx-js/loader": "^3",
     "@mdx-js/react": "^3",

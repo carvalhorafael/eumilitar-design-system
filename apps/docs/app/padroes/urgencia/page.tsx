@@ -1,9 +1,8 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Alert } from "@/components/ui/Alert";
-import { Card, CardBody } from "@/components/ui/Card";
+import { Button, Badge, Alert, Card, CardBody } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Urgência" };
@@ -14,40 +13,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-function PatternShell({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--pencil)", marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{ border: "2px solid var(--border-strong)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function UsedComponents({ items }: { items: string[] }) {
-  return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)", padding: "10px 20px",
-      background: "var(--paper)", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
-      {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
-      ))}
-    </div>
-  );
-}
+const urgencyDefinition = getPatternDefinition("urgency");
 
 export default function UrgenciaPage() {
   return (
@@ -59,6 +25,7 @@ export default function UrgenciaPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {urgencyDefinition ? <PatternContract definition={urgencyDefinition} /> : null}
 
         <SectionLabel
           number="02.1"
@@ -96,7 +63,7 @@ export default function UrgenciaPage() {
               fontSize: "clamp(32px, 5vw, 56px)",
               fontWeight: 900,
               textTransform: "uppercase",
-              color: "#f5f0e8",
+              color: "var(--text-inverse)",
               lineHeight: 1,
               margin: "0 0 12px",
             }}>
@@ -106,7 +73,7 @@ export default function UrgenciaPage() {
             <p style={{
               fontFamily: "var(--font-body)",
               fontSize: "16px",
-              color: "rgba(245,240,232,0.65)",
+              color: "var(--text-inverse-muted)",
               margin: "0 0 32px",
               lineHeight: 1.6,
             }}>
@@ -123,7 +90,7 @@ export default function UrgenciaPage() {
             <p style={{
               fontFamily: "var(--font-mono)",
               fontSize: "11px",
-              color: "rgba(245,240,232,0.35)",
+              color: "var(--border-inverse-soft)",
               marginTop: "20px",
               letterSpacing: "0.05em",
             }}>
@@ -208,21 +175,15 @@ export default function UrgenciaPage() {
           number="02.4"
           title="Regra de Uso — Hierarquia de Urgência"
         />
-        <div className="border-2 p-6" style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}>
-          {[
-            { nivel: "Baixo",   cor: "var(--pencil)",  desc: "Alert warning — prazo em dias, atenção necessária mas não crítica" },
-            { nivel: "Médio",   cor: "var(--fire)",    desc: "Alert urgent + Badge urgent — vagas abaixo de 20%, prazo em horas" },
-            { nivel: "Máximo",  cor: "var(--fire)",    desc: "Bloco CTA 02.2 — última turma, vagas em unidade, prazo < 24h" },
-          ].map((row) => (
-            <div key={row.nivel} className="flex gap-6 py-2 border-b last:border-0" style={{ borderColor: "var(--rule)" }}>
-              <span style={{ width: "64px", flexShrink: 0, fontWeight: 700, color: row.cor }}>{row.nivel}</span>
-              <span style={{ color: "var(--ink)", lineHeight: 1.6 }}>{row.desc}</span>
-            </div>
-          ))}
-          <p style={{ marginTop: "16px", color: "var(--pencil)", lineHeight: 1.7, fontSize: "11px" }}>
-            Nunca use os três níveis simultaneamente na mesma página — o usuário perde a referência de urgência real.
-          </p>
-        </div>
+        <PatternGuidelines
+          layout="split"
+          rows={[
+            { title: "Baixo", aside: "Baixo", asideColor: "var(--pencil)", description: "Alert warning — prazo em dias, atenção necessária mas não crítica." },
+            { title: "Médio", aside: "Médio", asideColor: "var(--fire)", description: "Alert urgent + Badge urgent — vagas abaixo de 20%, prazo em horas." },
+            { title: "Máximo", aside: "Máximo", asideColor: "var(--fire)", description: "Bloco CTA 02.2 — última turma, vagas em unidade, prazo < 24h." },
+          ]}
+          footer="Nunca use os três níveis simultaneamente na mesma página — o usuário perde a referência de urgência real."
+        />
 
       </div>
     </div>

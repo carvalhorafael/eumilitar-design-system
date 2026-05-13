@@ -1,13 +1,11 @@
 "use client";
 
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Select } from "@/components/ui/Select";
-import { Checkbox } from "@/components/ui/Checkbox";
-import { Alert } from "@/components/ui/Alert";
-import { useState } from "react";
+import { Button, Input, Select, Checkbox, Alert } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
+import { FormEvent, useRef, useState } from "react";
 
 const forcaOptions = [
   { value: "ex",  label: "Exército Brasileiro" },
@@ -23,98 +21,280 @@ const ArrowIcon = () => (
   </svg>
 );
 
-function PatternShell({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--pencil)", marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{ border: "2px solid var(--border-strong)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-        {children}
-      </div>
-    </div>
-  );
+const captureDefinition = getPatternDefinition("capture");
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type LeadValues = {
+  name: string;
+  email: string;
+  force: string;
+  consent: boolean;
+};
+
+type SignupValues = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  force: string;
+  consent: boolean;
+};
+
+function focusFirstInvalid(form: HTMLFormElement | null) {
+  if (!form) return;
+
+  requestAnimationFrame(() => {
+    const target = form.querySelector<HTMLElement>(
+      '[aria-invalid="true"], input:invalid, select:invalid, textarea:invalid',
+    );
+    target?.focus();
+  });
 }
 
-function UsedComponents({ items }: { items: string[] }) {
+function validateLead(values: LeadValues) {
+  return {
+    name: values.name.trim() ? "" : "Informe seu nome completo.",
+    email: values.email.trim()
+      ? emailPattern.test(values.email)
+        ? ""
+        : "Informe um e-mail válido."
+      : "Informe seu e-mail.",
+    force: values.force ? "" : "Selecione a força de interesse.",
+    consent: values.consent ? "" : "Você precisa aceitar o recebimento de comunicações.",
+  };
+}
+
+function validateSignup(values: SignupValues) {
+  return {
+    firstName: values.firstName.trim() ? "" : "Informe seu nome.",
+    lastName: values.lastName.trim() ? "" : "Informe seu sobrenome.",
+    email: values.email.trim()
+      ? emailPattern.test(values.email)
+        ? ""
+        : "Informe um e-mail válido."
+      : "Informe seu e-mail.",
+    phone: values.phone.trim() && values.phone.replace(/\D/g, "").length < 10
+      ? "Informe um telefone com DDD válido ou deixe o campo em branco."
+      : "",
+    force: values.force ? "" : "Selecione a força de interesse.",
+    consent: values.consent ? "" : "Você precisa aceitar o recebimento de comunicações.",
+  };
+}
+
+function hasErrors(errors: Record<string, string>) {
+  return Object.values(errors).some(Boolean);
+}
+
+function ErrorList({ items }: { items: string[] }) {
   return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)", padding: "10px 20px",
-      background: "var(--paper)", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
+    <ul style={{ margin: "8px 0 0", paddingLeft: "18px" }}>
       {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
+        <li key={item}>{item}</li>
       ))}
-    </div>
+    </ul>
   );
 }
 
 function LeadForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [aceito, setAceito] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [values, setValues] = useState<LeadValues>({
+    name: "",
+    email: "",
+    force: "",
+    consent: false,
+  });
+  const [errors, setErrors] = useState<Record<keyof LeadValues, string>>({
+    name: "",
+    email: "",
+    force: "",
+    consent: "",
+  });
+  const [formError, setFormError] = useState("");
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const updateField = <K extends keyof LeadValues>(key: K, value: LeadValues[K]) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: "" }));
+    setFormError("");
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors = validateLead(values);
+
+    setErrors(nextErrors);
+
+    if (hasErrors(nextErrors)) {
+      setFormError("Revise os campos destacados antes de continuar.");
+      focusFirstInvalid(formRef.current);
+      return;
+    }
+
+    setSubmitting(true);
+    setFormError("");
+    await new Promise((resolve) => setTimeout(resolve, 700));
+    setSubmitting(false);
+    setSubmitted(true);
+  };
 
   if (submitted) {
     return (
       <div style={{ padding: "32px" }}>
         <Alert variant="success" title="Inscrição recebida">
-          Em breve você receberá nosso material gratuito de preparação no e-mail informado.
+          <p style={{ margin: 0 }}>
+            Em breve você receberá nosso material gratuito de preparação no e-mail informado.
+          </p>
         </Alert>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "400px" }}>
-      <Input label="Nome completo" placeholder="Seu nome" required />
-      <Input label="E-mail" type="email" placeholder="email@exemplo.com" required />
-      <Select label="Força de interesse" options={forcaOptions} placeholder="Selecione..." required />
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      noValidate
+      style={{ padding: "32px", display: "flex", flexDirection: "column", gap: "16px", maxWidth: "400px" }}
+    >
+      {formError ? (
+        <Alert variant="error" title="Não foi possível enviar">
+          <p style={{ margin: 0 }}>{formError}</p>
+          <ErrorList items={Object.values(errors).filter(Boolean)} />
+        </Alert>
+      ) : null}
+
+      <Input
+        label="Nome completo"
+        placeholder="Seu nome"
+        required
+        value={values.name}
+        onChange={(e) => updateField("name", e.target.value)}
+        inputState={errors.name ? "error" : "default"}
+        helperText={errors.name || "Use o nome como ele deve aparecer no cadastro."}
+      />
+      <Input
+        label="E-mail"
+        type="email"
+        placeholder="email@exemplo.com"
+        required
+        value={values.email}
+        onChange={(e) => updateField("email", e.target.value)}
+        inputState={errors.email ? "error" : "default"}
+        helperText={errors.email || "Enviaremos o material gratuito para este endereço."}
+      />
+      <Select
+        label="Força de interesse"
+        options={forcaOptions}
+        placeholder="Selecione..."
+        required
+        value={values.force}
+        onChange={(e) => updateField("force", e.target.value)}
+        inputState={errors.force ? "error" : "default"}
+        helperText={errors.force || "Isso nos ajuda a personalizar a sequência inicial."}
+      />
       <Checkbox
         label="Aceito receber conteúdos e comunicações da EuMilitar"
-        checked={aceito}
-        onChange={(e) => setAceito(e.target.checked)}
+        checked={values.consent}
+        onChange={(e) => updateField("consent", e.target.checked)}
+        inputState={errors.consent ? "error" : "default"}
+        helperText={errors.consent || "Você pode cancelar esse recebimento depois."}
       />
       <Button
         variant="primary"
         size="md"
         icon={<ArrowIcon />}
         iconPosition="right"
-        onClick={() => setSubmitted(true)}
+        type="submit"
+        disabled={submitting}
+        aria-busy={submitting}
         style={{ marginTop: "4px" }}
       >
-        Receber material gratuito
+        {submitting ? "Enviando..." : "Receber material gratuito"}
       </Button>
-    </div>
+      <p
+        aria-live="polite"
+        style={{ margin: 0, minHeight: "18px", fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil-soft)" }}
+      >
+        {submitting ? "Validando e enviando seus dados..." : ""}
+      </p>
+    </form>
   );
 }
 
 function FullForm() {
   const [submitted, setSubmitted] = useState(false);
-  const [aceito, setAceito] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [values, setValues] = useState<SignupValues>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    force: "",
+    consent: false,
+  });
+  const [errors, setErrors] = useState<Record<keyof SignupValues, string>>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    force: "",
+    consent: "",
+  });
+  const [formError, setFormError] = useState("");
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const updateField = <K extends keyof SignupValues>(key: K, value: SignupValues[K]) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+    setErrors((prev) => ({ ...prev, [key]: "" }));
+    setFormError("");
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors = validateSignup(values);
+
+    setErrors(nextErrors);
+
+    if (hasErrors(nextErrors)) {
+      setFormError("Preencha os campos obrigatórios e revise os dados inválidos.");
+      focusFirstInvalid(formRef.current);
+      return;
+    }
+
+    setSubmitting(true);
+    setFormError("");
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    setSubmitting(false);
+    setSubmitted(true);
+  };
 
   if (submitted) {
     return (
       <div style={{ padding: "40px 48px" }}>
         <Alert variant="success" title="Inscrição confirmada">
-          Você receberá as instruções de acesso no e-mail informado em até 10 minutos.
+          <p style={{ margin: "0 0 8px" }}>
+            Você receberá as instruções de acesso no e-mail informado em até 10 minutos.
+          </p>
+          <p style={{ margin: 0 }}>
+            A equipe comercial pode entrar em contato para confirmar a força e a turma de interesse.
+          </p>
         </Alert>
       </div>
     );
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0" }}>
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      noValidate
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0" }}
+    >
       {/* Coluna esquerda — copy */}
       <div style={{ background: "var(--surface-brand)", padding: "48px 40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "rgba(245,240,232,0.5)", marginBottom: "16px" }}>
+        <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--text-inverse-faint)", marginBottom: "16px" }}>
           Garanta sua vaga
         </p>
         <h2 style={{
@@ -122,13 +302,13 @@ function FullForm() {
           fontSize: "36px",
           fontWeight: 900,
           textTransform: "uppercase",
-          color: "#f5f0e8",
+          color: "var(--text-inverse)",
           lineHeight: 1,
           margin: "0 0 16px",
         }}>
           Comece sua preparação hoje
         </h2>
-        <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "rgba(245,240,232,0.7)", lineHeight: 1.65, margin: "0 0 28px" }}>
+        <p style={{ fontFamily: "var(--font-body)", fontSize: "15px", color: "var(--text-inverse-muted)", lineHeight: 1.65, margin: "0 0 28px" }}>
           Acesso imediato ao curso completo. Cancele quando quiser.
         </p>
         <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -138,7 +318,7 @@ function FullForm() {
             "Simulados semanais",
             "Suporte por e-mail",
           ].map((item) => (
-            <li key={item} style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "var(--font-body)", fontSize: "14px", color: "rgba(245,240,232,0.8)" }}>
+            <li key={item} style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "var(--font-body)", fontSize: "14px", color: "var(--text-inverse-soft)" }}>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="var(--accent-pale)" strokeWidth="2">
                 <polyline points="2,7 5.5,10.5 12,3.5" strokeLinecap="square" />
               </svg>
@@ -150,33 +330,91 @@ function FullForm() {
 
       {/* Coluna direita — form */}
       <div style={{ background: "var(--surface-raised)", padding: "48px 40px", display: "flex", flexDirection: "column", gap: "16px" }}>
+        {formError ? (
+          <Alert variant="error" title="Dados pendentes">
+            <p style={{ margin: 0 }}>{formError}</p>
+            <ErrorList items={Object.values(errors).filter(Boolean)} />
+          </Alert>
+        ) : null}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
-          <Input label="Nome" placeholder="Nome" required />
-          <Input label="Sobrenome" placeholder="Sobrenome" required />
+          <Input
+            label="Nome"
+            placeholder="Nome"
+            required
+            value={values.firstName}
+            onChange={(e) => updateField("firstName", e.target.value)}
+            inputState={errors.firstName ? "error" : "default"}
+            helperText={errors.firstName || "Use o primeiro nome do candidato."}
+          />
+          <Input
+            label="Sobrenome"
+            placeholder="Sobrenome"
+            required
+            value={values.lastName}
+            onChange={(e) => updateField("lastName", e.target.value)}
+            inputState={errors.lastName ? "error" : "default"}
+            helperText={errors.lastName || "Use o sobrenome principal do cadastro."}
+          />
         </div>
-        <Input label="E-mail" type="email" placeholder="email@exemplo.com" required />
-        <Input label="Telefone" type="tel" placeholder="(11) 99999-9999" />
-        <Select label="Força de interesse" options={forcaOptions} placeholder="Selecione..." required />
+        <Input
+          label="E-mail"
+          type="email"
+          placeholder="email@exemplo.com"
+          required
+          value={values.email}
+          onChange={(e) => updateField("email", e.target.value)}
+          inputState={errors.email ? "error" : "default"}
+          helperText={errors.email || "O acesso será liberado para este endereço."}
+        />
+        <Input
+          label="Telefone"
+          type="tel"
+          placeholder="(11) 99999-9999"
+          value={values.phone}
+          onChange={(e) => updateField("phone", e.target.value)}
+          inputState={errors.phone ? "error" : "default"}
+          helperText={errors.phone || "Opcional. Informe com DDD se quiser atendimento prioritário."}
+        />
+        <Select
+          label="Força de interesse"
+          options={forcaOptions}
+          placeholder="Selecione..."
+          required
+          value={values.force}
+          onChange={(e) => updateField("force", e.target.value)}
+          inputState={errors.force ? "error" : "default"}
+          helperText={errors.force || "Usamos essa informação para direcionar a turma correta."}
+        />
         <Checkbox
           label="Aceito receber comunicações da EuMilitar por e-mail e WhatsApp"
-          checked={aceito}
-          onChange={(e) => setAceito(e.target.checked)}
+          checked={values.consent}
+          onChange={(e) => updateField("consent", e.target.checked)}
+          inputState={errors.consent ? "error" : "default"}
+          helperText={errors.consent || "Esse aceite é necessário para a sequência de matrícula e suporte."}
         />
         <Button
           variant="urgent"
           size="md"
           icon={<ArrowIcon />}
           iconPosition="right"
-          onClick={() => setSubmitted(true)}
+          type="submit"
+          disabled={submitting}
+          aria-busy={submitting}
           style={{ marginTop: "4px" }}
         >
-          Garantir minha vaga
+          {submitting ? "Processando inscrição..." : "Garantir minha vaga"}
         </Button>
+        <p
+          aria-live="polite"
+          style={{ margin: 0, minHeight: "18px", fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil-soft)" }}
+        >
+          {submitting ? "Verificando dados e reservando sua vaga..." : ""}
+        </p>
         <p style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil-soft)", textAlign: "center", lineHeight: 1.6 }}>
           Garantia de 7 dias · Cancele quando quiser
         </p>
       </div>
-    </div>
+    </form>
   );
 }
 
@@ -190,6 +428,7 @@ export default function CaptacaoPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {captureDefinition ? <PatternContract definition={captureDefinition} /> : null}
 
         <SectionLabel
           number="03.1"
@@ -217,20 +456,15 @@ export default function CaptacaoPage() {
           number="03.3"
           title="Diretrizes de Formulários"
         />
-        <div className="border-2 p-6" style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}>
-          {[
-            { regra: "Mínimo de campos: peça só o necessário para a ação imediata", motivo: "Cada campo extra reduz conversão" },
-            { regra: "Label sempre visível acima do campo — nunca só placeholder", motivo: "Acessibilidade e usabilidade" },
-            { regra: "Botão CTA descreve o resultado, não a ação — 'Receber material' > 'Enviar'", motivo: "Clareza da proposta de valor" },
-            { regra: "Feedback de sucesso substitui o form — não adiciona acima dele", motivo: "Evita confusão pós-submissão" },
-            { regra: "Urgência no CTA do form apenas quando há urgência real na oferta", motivo: "Button urgent reservado para escassez" },
-          ].map((row, i) => (
-            <div key={i} className="flex flex-col py-3 border-b last:border-0" style={{ borderColor: "var(--rule)", gap: "4px" }}>
-              <span style={{ color: "var(--ink)", fontWeight: 600 }}>{row.regra}</span>
-              <span style={{ color: "var(--pencil)", fontSize: "11px" }}>↳ {row.motivo}</span>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Peça só o necessário para a ação imediata", description: "Cada campo extra reduz conversão." },
+            { title: "Label sempre visível acima do campo", description: "Nunca dependa só de placeholder para contexto." },
+            { title: "CTA descreve o resultado", description: "'Receber material' comunica melhor do que 'Enviar'." },
+            { title: "Feedback de sucesso substitui o form", description: "Evita confusão pós-submissão e duplicidade de estado." },
+            { title: "Urgência no CTA apenas quando for real", description: "Button urgent deve permanecer reservado para escassez." },
+          ]}
+        />
 
       </div>
     </div>

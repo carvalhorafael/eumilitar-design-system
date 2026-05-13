@@ -11,6 +11,7 @@ interface AlertProps {
   icon?: ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
+  className?: string;
 }
 
 const config: Record<AlertVariant, {
@@ -56,9 +57,9 @@ const config: Record<AlertVariant, {
   urgent: {
     bg:         "var(--fire)",
     border:     "var(--ink)",
-    titleColor: "#f5f0e8",
-    bodyColor:  "rgba(245,240,232,0.85)",
-    iconColor:  "#f5f0e8",
+    titleColor: "var(--text-inverse)",
+    bodyColor:  "var(--text-inverse-soft)",
+    iconColor:  "var(--text-inverse)",
     shadow:     "var(--shadow-md)",
   },
 };
@@ -114,6 +115,7 @@ export function Alert({
   icon,
   dismissible = false,
   onDismiss,
+  className,
 }: AlertProps) {
   const [dismissed, setDismissed] = useState(false);
   const c = config[variant];
@@ -128,8 +130,10 @@ export function Alert({
   return (
     <div
       role="alert"
+      className={["ds-alert", className].filter(Boolean).join(" ")}
+      data-slot="alert"
+      data-variant={variant}
       style={{
-        display: "flex",
         gap: "12px",
         padding: "14px 16px",
         border: "2px solid",
@@ -142,9 +146,10 @@ export function Alert({
     >
       {/* Icon */}
       <span
+        className="ds-alert__icon"
+        data-slot="icon"
         style={{
           color: c.iconColor,
-          flexShrink: 0,
           marginTop: title ? "2px" : "0",
           display: "flex",
           alignItems: title ? "flex-start" : "center",
@@ -154,9 +159,11 @@ export function Alert({
       </span>
 
       {/* Content */}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="ds-alert__content" data-slot="content" style={{ flex: 1, minWidth: 0 }}>
         {title && (
           <p
+            className="ds-alert__title"
+            data-slot="title"
             style={{
               fontFamily: "var(--font-mono)",
               fontSize: "12px",
@@ -172,7 +179,9 @@ export function Alert({
           </p>
         )}
         {children && (
-          <p
+          <div
+            className="ds-alert__body"
+            data-slot="body"
             style={{
               fontFamily: "var(--font-body)",
               fontSize: "14px",
@@ -182,7 +191,7 @@ export function Alert({
             }}
           >
             {children}
-          </p>
+          </div>
         )}
       </div>
 
@@ -191,8 +200,10 @@ export function Alert({
         <button
           onClick={handleDismiss}
           aria-label="Fechar"
+          type="button"
+          className="ds-alert__dismiss"
+          data-slot="dismiss"
           style={{
-            flexShrink: 0,
             display: "flex",
             alignItems: "flex-start",
             paddingTop: "2px",

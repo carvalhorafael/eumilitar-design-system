@@ -1,8 +1,8 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Alert } from "@/components/ui/Alert";
+import { Button, Badge, Alert } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Hero" };
@@ -23,53 +23,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-function PatternShell({ children, label }: { children: React.ReactNode; label: string }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)",
-        fontSize: "11px",
-        fontWeight: 700,
-        textTransform: "uppercase",
-        letterSpacing: "0.08em",
-        color: "var(--pencil)",
-        marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{
-        border: "2px solid var(--border-strong)",
-        boxShadow: "var(--shadow-md)",
-        overflow: "hidden",
-      }}>
-        {children}
-      </div>
-      </div>
-  );
-}
-
-function UsedComponents({ items }: { items: string[] }) {
-  return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)",
-      padding: "10px 20px",
-      background: "var(--paper)",
-      display: "flex",
-      alignItems: "center",
-      gap: "8px",
-      flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
-      {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
-      ))}
-    </div>
-  );
-}
+const heroDefinition = getPatternDefinition("hero");
 
 export default function HeroPage() {
   return (
@@ -81,6 +35,7 @@ export default function HeroPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {heroDefinition ? <PatternContract definition={heroDefinition} /> : null}
 
         <SectionLabel
           number="01.1"
@@ -146,8 +101,8 @@ export default function HeroPage() {
                         fontWeight: 700,
                         textTransform: "uppercase",
                         letterSpacing: "0.1em",
-                        color: "rgba(245,240,232,0.55)",
-                        border: "1px solid rgba(245,240,232,0.25)",
+                        color: "var(--text-inverse-faint)",
+                        border: "1px solid var(--border-inverse-soft)",
                         padding: "3px 8px",
                       }}
                     >
@@ -162,7 +117,7 @@ export default function HeroPage() {
                 fontWeight: 900,
                 textTransform: "uppercase",
                 lineHeight: 0.95,
-                color: "#f5f0e8",
+                color: "var(--text-inverse)",
                 margin: "0 0 20px",
               }}>
                 Sua aprovação<br />começa aqui
@@ -170,7 +125,7 @@ export default function HeroPage() {
               <p style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "18px",
-                color: "rgba(245,240,232,0.75)",
+                color: "var(--text-inverse-muted)",
                 lineHeight: 1.6,
                 margin: "0 0 32px",
                 maxWidth: "480px",
@@ -243,23 +198,15 @@ export default function HeroPage() {
           number="01.4"
           title="Diretrizes de uso"
         />
-        <div
-          className="border-2 p-6"
-          style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}
-        >
-          {[
-            { regra: "Headline sempre em Barlow Condensed 900 uppercase", token: "--font-display" },
-            { regra: "Uma única ação primária por hero — não use dois botões primary", token: "Button hierarchy" },
-            { regra: "Urgência real apenas — não use Hero 01.3 como padrão decorativo", token: "--fire (parcimônia)" },
-            { regra: "Subtítulo em Barlow regular, máximo 2 linhas", token: "--font-body" },
-            { regra: "Force badges orientam o usuário — sempre presente quando há múltiplas forças", token: "Badge (ex/mb/fab...)" },
-          ].map((row, i) => (
-            <div key={i} className="flex gap-6 py-2 border-b last:border-0" style={{ borderColor: "var(--rule)" }}>
-              <span style={{ flex: 1, color: "var(--ink)", lineHeight: 1.6 }}>{row.regra}</span>
-              <code style={{ flexShrink: 0, color: "var(--pencil)", fontSize: "11px" }}>{row.token}</code>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Headline sempre em Barlow Condensed 900 uppercase", description: "Mantenha o hero com hierarquia de entrada forte.", aside: "--font-display" },
+            { title: "Uma única ação primária por hero", description: "Não use dois botões primary no mesmo agrupamento.", aside: "Button hierarchy" },
+            { title: "Urgência real apenas", description: "Não use Hero 01.3 como padrão decorativo.", aside: "--fire (parcimônia)" },
+            { title: "Subtítulo em Barlow regular, máximo 2 linhas", description: "Evite heros verbosos ou com quebra excessiva.", aside: "--font-body" },
+            { title: "Force badges orientam o usuário", description: "Sempre presente quando há múltiplas forças.", aside: "Badge (ex/mb/fab...)" },
+          ]}
+        />
 
       </div>
     </div>

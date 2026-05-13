@@ -2,27 +2,27 @@
 
 ## O que é este projeto
 
-Documentação de referência do design system da EuMilitar (plataforma de preparação para concursos militares). Não é um pacote npm — é um site de documentação que serve como fonte da verdade para devs, designers e como referência para agentes de IA gerarem interfaces seguindo as convenções do sistema.
+Monorepo do design system da EuMilitar (plataforma de preparação para concursos militares). O app principal continua sendo um site de documentação, mas o repositório agora também expõe camadas reutilizáveis de tokens, UI e padrões de composição.
 
 ## Stack
 
-- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` (CSS vars, atualmente secundário)
+- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/ui` + `packages/patterns`
 - **Next.js 15 App Router** + TypeScript estrito
 - **Tailwind v4 CSS-first** via `@tailwindcss/postcss`
 - **next-themes** com `attribute="data-theme"`, `defaultTheme="light"`, `enableSystem={false}`
 
 ## Fonte da verdade dos tokens
 
-**Todos os tokens CSS estão em `apps/docs/app/globals.css`** — não em `packages/tokens`.
+**Os tokens CSS vivem em `packages/tokens`** e são importados por `apps/docs/app/globals.css`.
 
-O `packages/tokens/` existe para futura portabilidade (Style Dictionary → iOS/Android/Figma), mas não é a fonte ativa. Nunca importe de `@eumilitar/tokens` nos componentes; use as CSS custom properties diretamente.
+`apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`.
 
 ## Estrutura de arquivos
 
 ```
 apps/docs/
   app/
-    globals.css              ← TOKENS: toda a paleta, tipografia, espaçamento, sombras
+    globals.css              ← imports dos pacotes compartilhados + reset + estilos do app
     layout.tsx               ← Root layout (Providers + Sidebar)
     providers.tsx            ← ThemeProvider "use client"
     page.tsx                 ← Home
@@ -39,6 +39,7 @@ apps/docs/
       faq/page.tsx
       beneficios/page.tsx
       depoimentos/page.tsx
+      landing/page.tsx
     componentes/
       botao/page.tsx
       badge/page.tsx
@@ -48,29 +49,44 @@ apps/docs/
       checkbox/page.tsx
       alert/page.tsx
       accordion/page.tsx
-      table/page.tsx         ← "use client" (usa render functions)
+      table/page.tsx
   components/
     layout/
-      Sidebar.tsx            ← "use client" (usePathname) — grupos: Fundamentos, Padrões, Componentes
-      Header.tsx             ← server component
-      ThemeToggle.tsx        ← "use client"
+      Sidebar.tsx
+      Header.tsx
+      ThemeToggle.tsx
     docs/
-      ComponentDemo.tsx      ← wrapper de demo com code block
-      SectionLabel.tsx       ← heading numerado estilo Field Manual
-      ColorSwatch.tsx        ← swatches clicáveis (copy hex)
-      ShadowHoverDemo.tsx    ← "use client" demo interativo de sombras
-      CheckboxDemo.tsx       ← "use client" demos interativos de Checkbox/Radio
-      AlertDemo.tsx          ← "use client" demo de dismiss interativo
-    ui/
-      Button.tsx
-      Badge.tsx
-      Card.tsx
-      Input.tsx              ← também exporta: Label, HelperText, InputState, InputSize
-      Select.tsx
-      Checkbox.tsx           ← também exporta: Radio, CheckboxGroup, RadioGroup
-      Alert.tsx
-      Accordion.tsx
-      Table.tsx              ← também exporta: Thead, Tbody, Tr, Th, Td, DataTable
+      ComponentDemo.tsx
+      SectionLabel.tsx
+      ColorSwatch.tsx
+      ShadowHoverDemo.tsx
+      CheckboxDemo.tsx
+      AlertDemo.tsx
+
+packages/
+  tokens/
+    colors.css
+    typography.css
+    spacing.css
+    effects.css
+    index.css
+  ui/
+    Button.tsx
+    Badge.tsx
+    Card.tsx
+    Input.tsx
+    Select.tsx
+    Checkbox.tsx
+    Alert.tsx
+    Accordion.tsx
+    Table.tsx
+    styles.css
+    index.ts
+  patterns/
+    patterns.ts             ← contratos dos blocos
+    docs.tsx                ← helpers visuais reutilizados pelo app docs
+    HTML_REFERENCES.md
+    index.ts
 ```
 
 ## Convenções de componentes
@@ -79,33 +95,14 @@ apps/docs/
 - Páginas de documentação são **Server Components** por padrão
 - Use `"use client"` apenas quando há event handlers, hooks de estado ou `usePathname`
 - Extraia demos interativos para arquivos separados em `components/docs/` com `"use client"`
-- **Exceção**: páginas que passam funções `render` para componentes client (ex: `table/page.tsx`) precisam de `"use client"` e não podem exportar `metadata`
-- Páginas de Padrões que usam componentes interativos (formulários, etc.) usam `"use client"`
+- Páginas que passam funções `render` para componentes client, como `table/page.tsx`, precisam de `"use client"`
+- Páginas de padrões que usam componentes interativos, como formulários, usam `"use client"`
 
 ### Estilo — sem Tailwind nos componentes UI
-Os componentes em `components/ui/` usam **inline styles com CSS custom properties**, não classes Tailwind. Tailwind é usado apenas nas páginas de documentação para layout (`px-10`, `grid`, `gap-4`, etc.).
-
-```tsx
-// CORRETO — componente UI
-style={{ borderColor: "var(--border-strong)", boxShadow: "var(--shadow-md)" }}
-
-// ERRADO — não use Tailwind em componentes UI
-className="border-2 shadow-md"
-```
+Os componentes em `packages/ui/` usam CSS custom properties e classes semânticas próprias, com `inline style` reservado para casos realmente dinâmicos. Tailwind segue restrito ao layout e à composição do app `docs`.
 
 ### Foco neo-brutalista
-O foco nunca usa `ring` ou `outline`. Aplica `boxShadow: "2px 2px 0 {color}"` via `onFocus`/`onBlur`:
-
-```tsx
-onFocus={(e) => {
-  e.currentTarget.style.borderColor = "var(--accent)";
-  e.currentTarget.style.boxShadow = "2px 2px 0 var(--accent)";
-}}
-onBlur={(e) => {
-  e.currentTarget.style.borderColor = "var(--border-strong)";
-  e.currentTarget.style.boxShadow = "none";
-}}
-```
+O foco visual segue a lógica de sombra offset via tokens e classes do pacote de UI. Evite introduzir `ring` genérico ou `outline` fora dos casos em que a acessibilidade exigir comportamento adicional.
 
 ### Props padrão de formulários
 Todos os form components usam:
@@ -122,7 +119,7 @@ Todos os form components usam:
 | `--font-body` | Barlow | Corpo de texto, botões, labels |
 | `--font-mono` | JetBrains Mono | Código, labels uppercase, metadados |
 
-### Cores semânticas (use sempre estas, nunca os primitivos)
+### Cores semânticas
 | Token | Valor | Uso |
 |---|---|---|
 | `--ink` | `#1a1612` | Texto principal, bordas de sombra |
@@ -137,90 +134,55 @@ Todos os form components usam:
 | `--state-success` | `var(--b-700)` | Sucesso |
 | `--fire` | `#C4521A` | Urgência, escassez, CTA máximo |
 
-### Sombras (zero blur — estilo neo-brutalista)
-```css
---shadow-sm:     2px 2px 0 var(--ink)
---shadow-md:     4px 4px 0 var(--ink)
---shadow-lg:     6px 6px 0 var(--ink)
---shadow-brand:  4px 4px 0 var(--accent)
---shadow-urgent: 4px 4px 0 var(--fire)
-```
-
-### Hover de botão (padrão do sistema)
-Normal: `boxShadow: var(--shadow-md)` + `transform: none`
-Hover: `boxShadow: none` + `transform: translate(2px, 2px)`
-Transition: `100ms ease`
-
-## Variantes do Button
-
-| Variante | Fundo | Uso |
-|---|---|---|
-| `primary` | `--surface-brand` verde | Ação principal |
-| `secondary` | `--paper` bege | Ação secundária |
-| `ghost` | transparente | Ação terciária em fundo **claro** |
-| `ghost-inverse` | transparente | Ação terciária em fundo **escuro ou verde** |
-| `brand-inverse` | `--n-50` creme | Ação primária em fundo escuro/verde |
-| `danger` | `--bm` vermelho | Ação destrutiva |
-| `urgent` | `--fire` laranja | Escassez real, prazo crítico |
-
-> **Atenção**: `ghost` em fundo escuro fica ilegível no hover (aplica `--paper`). Use sempre `ghost-inverse` sobre `--surface-brand` ou `--surface-dark`.
-
 ## Padrões de composição disponíveis
 
-| Padrão | Localização | Descrição |
+| Padrão | Fonte | Descrição |
 |---|---|---|
-| Hero | `app/padroes/hero` | 3 variações: claro, brand, com urgência |
-| Urgência | `app/padroes/urgencia` | Banner topo, bloco CTA escuro, cards de turma |
-| Captação | `app/padroes/captacao` | Lead form simples + form 2 colunas com confirmação |
-| FAQ | `app/padroes/faq` | FAQ geral + FAQ por força com conteúdo rico |
-| Benefícios | `app/padroes/beneficios` | Grid 3 col com ícone, grid 2 col com checklist, stats em fundo brand |
-| Depoimentos | `app/padroes/depoimentos` | Grid de cards, depoimento único em destaque, faixa de números |
+| Hero | `@eumilitar/patterns` + `app/padroes/hero` | variações clara, brand e urgente |
+| Urgência | `@eumilitar/patterns` + `app/padroes/urgencia` | banner, CTA escuro, disponibilidade |
+| Captação | `@eumilitar/patterns` + `app/padroes/captacao` | lead form simples e form completo |
+| FAQ | `@eumilitar/patterns` + `app/padroes/faq` | FAQ geral e específico por força |
+| Benefícios | `@eumilitar/patterns` + `app/padroes/beneficios` | grid, checklist e faixa de stats |
+| Depoimentos | `@eumilitar/patterns` + `app/padroes/depoimentos` | cards, destaque e prova social |
+| CTA Final | `@eumilitar/patterns` + `app/padroes/landing` | fechamento de conversão |
 
 ## Adicionando novos componentes UI
 
-1. Criar `components/ui/NomeComponente.tsx` com `"use client"` se necessário
+1. Criar `packages/ui/NomeComponente.tsx` com `"use client"` se necessário
 2. Se o demo precisar de estado, criar `components/docs/NomeComponenteDemo.tsx` com `"use client"`
-3. Criar `app/componentes/nome/page.tsx` (Server Component, exceto se passar `render` functions)
-4. Adicionar rota no array `nav` em `components/layout/Sidebar.tsx` no grupo "Componentes"
-5. Numeração sequencial: próximo componente é **10**
+3. Criar `app/componentes/nome/page.tsx` para documentar o componente
+4. Exportar o componente em `packages/ui/index.ts`
+5. Adicionar rota no array `nav` em `components/layout/Sidebar.tsx`
 
 ## Adicionando novos padrões
 
-1. Criar `app/padroes/nome/page.tsx`
-2. Adicionar em `Sidebar.tsx` no grupo "Padrões"
-3. Numeração sequencial: próximo padrão é **07**
-4. Usar o helper `PatternShell` + `UsedComponents` inline para consistência visual
-5. Sempre incluir seção de "Diretrizes de uso" ao final
-
-## Sidebar — estrutura atual
-
-```
-Fundamentos:  01-Cores · 02-Tipografia · 03-Espaçamento · 04-Tokens · 05-Sombras & Efeitos
-Padrões:      01-Hero · 02-Urgência · 03-Captação · 04-FAQ · 05-Benefícios · 06-Depoimentos
-Componentes:  01-Button · 02-Badge · 03-Card · 04-Input & Textarea · 05-Select
-              06-Checkbox & Radio · 07-Alert · 08-Accordion · 09-Table
-```
+1. Adicionar o contrato do bloco em `packages/patterns/patterns.ts`
+2. Se necessário, expandir helpers em `packages/patterns/docs.tsx`
+3. Criar `app/padroes/nome/page.tsx`
+4. Fazer a página consumir `PatternContract`, `PatternShell` e `UsedComponents` de `@eumilitar/patterns`
+5. Adicionar em `Sidebar.tsx` no grupo "Padrões"
+6. Sempre incluir seção de "Diretrizes de uso" ao final
 
 ## Comandos
 
 ```bash
-# Desenvolvimento (da raiz do monorepo)
+# Desenvolvimento
 npm run dev --workspace=apps/docs
 
-# Ou via Turborepo
-turbo dev
-
 # Build
-turbo build
+npm run build
 
-# TypeScript check
+# Lint
+npm run lint
+
+# TypeScript check do app
 npx tsc --noEmit -p apps/docs/tsconfig.json
 ```
 
 ## Idioma e convenções de conteúdo
 
 - Todo conteúdo da documentação em **PT-BR**
-- Nomes de arquivos e componentes em inglês (PascalCase para componentes, kebab-case para rotas)
+- Nomes de arquivos e componentes em inglês
 - Seções numeradas no estilo Field Manual: `01.1`, `01.2`, `02.1`...
 - Sem comentários em código exceto quando o motivo não for óbvio
 - Sem emojis

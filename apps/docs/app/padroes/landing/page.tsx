@@ -1,9 +1,7 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Button } from "@/components/ui/Button";
-import { Badge } from "@/components/ui/Badge";
-import { Alert } from "@/components/ui/Alert";
-import { Accordion } from "@/components/ui/Accordion";
+import { Button, Badge, Alert, Accordion } from "@eumilitar/ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Landing Page Completa" };
@@ -50,7 +48,7 @@ function HeroSection() {
               <span key={f} style={{
                 fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700,
                 textTransform: "uppercase", letterSpacing: "0.1em",
-                color: "rgba(245,240,232,0.55)", border: "1px solid rgba(245,240,232,0.25)", padding: "3px 8px",
+                color: "var(--text-inverse-faint)", border: "1px solid var(--border-inverse-soft)", padding: "3px 8px",
               }}>
                 {f}
               </span>
@@ -59,14 +57,14 @@ function HeroSection() {
           <h1 style={{
             fontFamily: "var(--font-display)", fontSize: "clamp(42px, 6vw, 72px)",
             fontWeight: 900, textTransform: "uppercase", lineHeight: 0.95,
-            color: "#f5f0e8", margin: "0 0 20px",
+            color: "var(--text-inverse)", margin: "0 0 20px",
           }}>
             Última turma<br />
             <span style={{ color: "var(--fire)" }}>do semestre</span>
           </h1>
           <p style={{
             fontFamily: "var(--font-body)", fontSize: "18px",
-            color: "rgba(245,240,232,0.75)", lineHeight: 1.6, margin: "0 0 32px", maxWidth: "480px",
+            color: "var(--text-inverse-muted)", lineHeight: 1.6, margin: "0 0 32px", maxWidth: "480px",
           }}>
             Método validado por mais de 12.000 aprovados. Trilhas por força, banco de questões comentadas e simulados no formato real.
           </p>
@@ -80,7 +78,7 @@ function HeroSection() {
           </div>
           <p style={{
             fontFamily: "var(--font-mono)", fontSize: "11px",
-            color: "rgba(245,240,232,0.30)", marginTop: "20px", letterSpacing: "0.05em",
+            color: "var(--border-inverse-soft)", marginTop: "20px", letterSpacing: "0.05em",
           }}>
             Acesso imediato · Garantia de 7 dias · Cancele quando quiser
           </p>
@@ -278,17 +276,17 @@ function DepoimentosSection() {
         ].map((s, i) => (
           <div key={s.label} style={{
             padding: "32px 28px", textAlign: "center",
-            borderLeft: i > 0 ? "1px solid rgba(245,240,232,0.15)" : "none",
+            borderLeft: i > 0 ? "1px solid var(--border-inverse-soft)" : "none",
           }}>
             <p style={{
               fontFamily: "var(--font-display)", fontSize: "clamp(32px, 4vw, 48px)",
-              fontWeight: 900, color: "#f5f0e8", margin: "0 0 8px", lineHeight: 1,
+              fontWeight: 900, color: "var(--text-inverse)", margin: "0 0 8px", lineHeight: 1,
             }}>
               {s.numero}
             </p>
             <p style={{
               fontFamily: "var(--font-body)", fontSize: "14px",
-              color: "rgba(245,240,232,0.65)", margin: 0,
+              color: "var(--text-inverse-muted)", margin: 0,
             }}>
               {s.label}
             </p>
@@ -321,7 +319,7 @@ function DepoimentosSection() {
               fontFamily: "var(--font-body)", fontSize: "14px",
               color: "var(--ink)", lineHeight: 1.7, margin: 0, flex: 1, fontStyle: "italic",
             }}>
-              "{d.citacao}"
+              &ldquo;{d.citacao}&rdquo;
             </p>
             <div style={{ borderTop: "1px solid var(--border-default)", paddingTop: "14px", display: "flex", flexDirection: "column", gap: "8px" }}>
               <Badge variant={d.forca} size="sm">{d.forcaLabel}</Badge>
@@ -430,14 +428,14 @@ function CtaFinalSection() {
         </div>
         <h2 style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(32px, 5vw, 60px)",
-          fontWeight: 900, textTransform: "uppercase", color: "#f5f0e8",
+          fontWeight: 900, textTransform: "uppercase", color: "var(--text-inverse)",
           lineHeight: 1, margin: "0 0 16px",
         }}>
           Pronto para ser aprovado?
         </h2>
         <p style={{
           fontFamily: "var(--font-body)", fontSize: "16px",
-          color: "rgba(245,240,232,0.65)", lineHeight: 1.6, margin: "0 0 40px", maxWidth: "520px",
+          color: "var(--text-inverse-muted)", lineHeight: 1.6, margin: "0 0 40px", maxWidth: "520px",
         }}>
           Acesso imediato após a confirmação do pagamento. Comece a estudar hoje.
         </p>
@@ -459,7 +457,7 @@ function CtaFinalSection() {
               </span>
               <span style={{
                 fontFamily: "var(--font-body)", fontSize: "13px",
-                color: "rgba(245,240,232,0.80)", lineHeight: 1.5,
+                color: "var(--text-inverse-soft)", lineHeight: 1.5,
               }}>
                 {item}
               </span>
@@ -477,7 +475,7 @@ function CtaFinalSection() {
         </div>
         <p style={{
           fontFamily: "var(--font-mono)", fontSize: "11px",
-          color: "rgba(245,240,232,0.25)", marginTop: "20px", letterSpacing: "0.05em",
+          color: "var(--border-inverse-soft)", marginTop: "20px", letterSpacing: "0.05em",
         }}>
           Vagas atualizadas em tempo real · Pagamento seguro · Garantia de 7 dias
         </p>
@@ -576,25 +574,17 @@ export default function LandingPage() {
           title="Diretrizes para Agentes de IA"
           description="Instruções de como usar esta referência para gerar variações de landing pages."
         />
-        <div
-          className="border-2 p-6"
-          style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}
-        >
-          {[
-            { regra: "Hero escuro (surface-brand) quando há urgência — hero claro (paper) para páginas informativas", motivo: "Tom da página" },
-            { regra: "Alert de urgência apenas quando vagas ou prazo são reais — nunca decorativo", motivo: "Credibilidade" },
-            { regra: "Seção 'Como Funciona' com 3 passos no máximo — mais do que isso fragmenta o método", motivo: "Clareza" },
-            { regra: "Depoimentos devem vir depois dos benefícios, não antes — validação após proposta de valor", motivo: "Sequência persuasiva" },
-            { regra: "CTA final repete a urgência do hero — não introduz nova proposta de valor", motivo: "Coerência de mensagem" },
-            { regra: "Badge de força obrigatório em depoimentos — o leitor precisa se identificar com o aprovado", motivo: "Relevância" },
-            { regra: "Variar fundos entre seções: brand escuro → paper bege → branco → paper → branco → dark. Nunca dois fundos iguais adjacentes", motivo: "Ritmo visual" },
-          ].map((row, i) => (
-            <div key={i} className="flex flex-col py-3 border-b last:border-0" style={{ borderColor: "var(--rule)", gap: "4px" }}>
-              <span style={{ color: "var(--ink)", fontWeight: 600 }}>{row.regra}</span>
-              <span style={{ color: "var(--pencil)", fontSize: "11px" }}>↳ {row.motivo}</span>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Hero escuro quando há urgência", description: "Use hero claro para páginas informativas e surface-brand para cenário de urgência real." },
+            { title: "Alert de urgência nunca decorativo", description: "Só use quando vagas ou prazo forem reais." },
+            { title: "Seção 'Como Funciona' com 3 passos no máximo", description: "Mais do que isso fragmenta o método." },
+            { title: "Depoimentos depois dos benefícios", description: "A validação deve vir após a proposta de valor." },
+            { title: "CTA final repete a urgência do hero", description: "Não introduza nova proposta de valor no fechamento." },
+            { title: "Badge de força obrigatório em depoimentos", description: "O leitor precisa se identificar com o aprovado." },
+            { title: "Variar fundos entre seções", description: "Evite blocos adjacentes com o mesmo fundo para preservar ritmo visual." },
+          ]}
+        />
 
       </div>
     </div>

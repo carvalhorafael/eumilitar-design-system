@@ -1,7 +1,8 @@
 import { Header } from "@/components/layout/Header";
+import { PatternGuidelines } from "@/components/docs/PatternGuidelines";
 import { SectionLabel } from "@/components/docs/SectionLabel";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
+import { Badge, Button } from "@eumilitar/ui";
+import { PatternContract, PatternShell, UsedComponents, getPatternDefinition } from "@eumilitar/patterns";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Padrão — Benefícios" };
@@ -58,41 +59,7 @@ const IconArrow = () => (
   </svg>
 );
 
-/* ── Helpers ── */
-function PatternShell({ children, label, dark }: { children: React.ReactNode; label: string; dark?: boolean }) {
-  return (
-    <div style={{ marginBottom: "48px" }}>
-      <p style={{
-        fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700,
-        textTransform: "uppercase", letterSpacing: "0.08em",
-        color: "var(--pencil)", marginBottom: "12px",
-      }}>
-        {label}
-      </p>
-      <div style={{ border: "2px solid var(--border-strong)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function UsedComponents({ items }: { items: string[] }) {
-  return (
-    <div style={{
-      borderTop: "1px solid var(--border-default)", padding: "10px 20px",
-      background: "var(--paper)", display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap",
-    }}>
-      <span style={{ fontFamily: "var(--font-mono)", fontSize: "10px", color: "var(--pencil)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-        Composto por:
-      </span>
-      {items.map((item) => (
-        <code key={item} style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--ink)", background: "var(--paper-deep)", padding: "2px 6px" }}>
-          {item}
-        </code>
-      ))}
-    </div>
-  );
-}
+const benefitsDefinition = getPatternDefinition("benefits");
 
 /* ── Dados ── */
 const beneficios3col = [
@@ -149,6 +116,7 @@ export default function BeneficiosPage() {
       />
 
       <div className="px-10 py-10 max-w-5xl">
+        {benefitsDefinition ? <PatternContract definition={benefitsDefinition} /> : null}
 
         <SectionLabel
           number="05.1"
@@ -281,7 +249,7 @@ export default function BeneficiosPage() {
               <h2 style={{
                 fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.5vw, 40px)",
                 fontWeight: 900, textTransform: "uppercase",
-                color: "#f5f0e8", margin: 0,
+                color: "var(--text-inverse)", margin: 0,
               }}>
                 Aprovação em números
               </h2>
@@ -297,19 +265,19 @@ export default function BeneficiosPage() {
                   style={{
                     padding: "32px 28px",
                     textAlign: "center",
-                    borderLeft: i > 0 ? "1px solid rgba(245,240,232,0.15)" : "none",
+                    borderLeft: i > 0 ? "1px solid var(--border-inverse-soft)" : "none",
                   }}
                 >
                   <p style={{
                     fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5vw, 56px)",
-                    fontWeight: 900, color: "#f5f0e8",
+                    fontWeight: 900, color: "var(--text-inverse)",
                     margin: "0 0 8px", lineHeight: 1,
                   }}>
                     {stat.numero}
                   </p>
                   <p style={{
                     fontFamily: "var(--font-body)", fontSize: "14px",
-                    color: "rgba(245,240,232,0.65)",
+                    color: "var(--text-inverse-muted)",
                     margin: 0, lineHeight: 1.4,
                   }}>
                     {stat.label}
@@ -325,23 +293,15 @@ export default function BeneficiosPage() {
           number="05.4"
           title="Diretrizes de uso"
         />
-        <div
-          className="border-2 p-6"
-          style={{ borderColor: "var(--border-default)", background: "var(--paper)", fontFamily: "var(--font-mono)", fontSize: "12px" }}
-        >
-          {[
-            { regra: "Máximo 6 itens no grid 3 colunas — mais do que isso perde impacto", motivo: "Escaneabilidade" },
-            { regra: "Ícones sempre no mesmo tamanho e estilo (stroke, não fill)", motivo: "Consistência visual" },
-            { regra: "Uma única seção de benefícios por página — escolha o formato mais adequado", motivo: "Evitar redundância" },
-            { regra: "Números de destaque (05.3) apenas com dados reais e verificáveis", motivo: "Credibilidade" },
-            { regra: "Grid em fundo paper após hero claro; fundo brand como quebra de ritmo no meio da página", motivo: "Hierarquia de seções" },
-          ].map((row, i) => (
-            <div key={i} className="flex flex-col py-3 border-b last:border-0" style={{ borderColor: "var(--rule)", gap: "4px" }}>
-              <span style={{ color: "var(--ink)", fontWeight: 600 }}>{row.regra}</span>
-              <span style={{ color: "var(--pencil)", fontSize: "11px" }}>↳ {row.motivo}</span>
-            </div>
-          ))}
-        </div>
+        <PatternGuidelines
+          rows={[
+            { title: "Máximo 6 itens no grid 3 colunas", description: "Mais do que isso perde impacto e escaneabilidade." },
+            { title: "Ícones sempre no mesmo tamanho e estilo", description: "Prefira stroke consistente em vez de misturar estilos." },
+            { title: "Uma única seção de benefícios por página", description: "Escolha o formato mais adequado e evite redundância." },
+            { title: "Números de destaque apenas com dados reais", description: "Os dados da faixa 05.3 precisam ser verificáveis." },
+            { title: "Fundo brand como quebra de ritmo", description: "Use o bloco escuro para hierarquia de seções, não como padrão contínuo." },
+          ]}
+        />
 
       </div>
     </div>

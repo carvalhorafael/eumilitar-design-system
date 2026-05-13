@@ -4,21 +4,21 @@ import { ReactNode, HTMLAttributes, ThHTMLAttributes, TdHTMLAttributes } from "r
 
 /* ── Primitivos composáveis ── */
 
-export function Table({ children, style, ...rest }: HTMLAttributes<HTMLTableElement>) {
+export function Table({ children, style, className, ...rest }: HTMLAttributes<HTMLTableElement>) {
   return (
     <div
+      className="ds-table-wrap"
+      data-slot="table-wrap"
       style={{
-        width: "100%",
-        overflowX: "auto",
         border: "2px solid var(--border-strong)",
         borderRadius: "var(--radius-sm)",
         boxShadow: "var(--shadow-sm)",
       }}
     >
       <table
+        className={["ds-table", className].filter(Boolean).join(" ")}
+        data-slot="table"
         style={{
-          width: "100%",
-          borderCollapse: "collapse",
           fontFamily: "var(--font-body)",
           fontSize: "14px",
           ...style,
@@ -34,6 +34,8 @@ export function Table({ children, style, ...rest }: HTMLAttributes<HTMLTableElem
 export function Thead({ children, ...rest }: HTMLAttributes<HTMLTableSectionElement>) {
   return (
     <thead
+      className="ds-table__head"
+      data-slot="head"
       style={{
         background: "var(--paper-deep)",
         borderBottom: "2px solid var(--border-strong)",
@@ -55,6 +57,7 @@ export function Tr({
   index,
   hoverable = true,
   style,
+  className,
   ...rest
 }: HTMLAttributes<HTMLTableRowElement> & { striped?: boolean; index?: number; hoverable?: boolean }) {
   const isEven = index !== undefined && index % 2 === 0;
@@ -62,6 +65,8 @@ export function Tr({
 
   return (
     <tr
+      className={["ds-table__row", className].filter(Boolean).join(" ")}
+      data-slot="row"
       style={{
         background: bg,
         borderBottom: "1px solid var(--border-default)",
@@ -78,9 +83,12 @@ export function Tr({
   );
 }
 
-export function Th({ children, align = "left", style, ...rest }: ThHTMLAttributes<HTMLTableCellElement> & { align?: "left" | "center" | "right" }) {
+export function Th({ children, align = "left", style, className, ...rest }: ThHTMLAttributes<HTMLTableCellElement> & { align?: "left" | "center" | "right" }) {
   return (
     <th
+      className={["ds-table__th", className].filter(Boolean).join(" ")}
+      data-slot="th"
+      scope={rest.scope ?? "col"}
       style={{
         padding: "10px 14px",
         fontFamily: "var(--font-mono)",
@@ -100,9 +108,12 @@ export function Th({ children, align = "left", style, ...rest }: ThHTMLAttribute
   );
 }
 
-export function Td({ children, align = "left", muted, style, ...rest }: TdHTMLAttributes<HTMLTableCellElement> & { align?: "left" | "center" | "right"; muted?: boolean }) {
+export function Td({ children, align = "left", muted, style, className, ...rest }: TdHTMLAttributes<HTMLTableCellElement> & { align?: "left" | "center" | "right"; muted?: boolean }) {
   return (
     <td
+      className={["ds-table__td", className].filter(Boolean).join(" ")}
+      data-slot="td"
+      data-muted={muted ? "true" : "false"}
       style={{
         padding: "10px 14px",
         color: muted ? "var(--pencil)" : "var(--ink)",
