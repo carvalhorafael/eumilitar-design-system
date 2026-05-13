@@ -3,6 +3,8 @@ node_modules
 .turbo
 dist
 out
+test-results
+playwright-report
 .env
 .env.local
 .DS_Store
