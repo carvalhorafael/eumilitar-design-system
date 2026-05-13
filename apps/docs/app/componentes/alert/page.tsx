@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { ComponentDemo } from "@/components/docs/ComponentDemo";
-import { Alert } from "@eumilitar/ui";
+import { Alert } from "@carvalhorafael/eumilitar-ui";
 import { DismissDemo } from "@/components/docs/AlertDemo";
 import type { Metadata } from "next";
 

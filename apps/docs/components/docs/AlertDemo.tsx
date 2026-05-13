@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Alert } from "@eumilitar/ui";
+import { Alert } from "@carvalhorafael/eumilitar-ui";
 
 export function DismissDemo() {
   const [visible, setVisible] = useState({

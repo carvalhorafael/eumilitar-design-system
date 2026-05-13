@@ -1,0 +1,25 @@
+{
+  "name": "@carvalhorafael/eumilitar-css",
+  "version": "0.1.0",
+  "files": [
+    "*.css",
+    "README.md"
+  ],
+  "main": "./index.css",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./index.css",
+    "./ui": "./ui.css",
+    "./patterns": "./patterns.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carvalhorafael/eumilitar-design-system.git"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

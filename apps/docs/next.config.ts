@@ -10,7 +10,7 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  transpilePackages: ["@eumilitar/ui"],
+  transpilePackages: ["@carvalhorafael/eumilitar-ui", "@carvalhorafael/eumilitar-patterns"],
 };
 
 export default withMDX(nextConfig);

@@ -9,9 +9,10 @@
     "lint": "eslint . --max-warnings=0"
   },
   "dependencies": {
-    "@eumilitar/patterns": "*",
-    "@eumilitar/tokens": "*",
-    "@eumilitar/ui": "*",
+    "@carvalhorafael/eumilitar-css": "*",
+    "@carvalhorafael/eumilitar-patterns": "*",
+    "@carvalhorafael/eumilitar-tokens": "*",
+    "@carvalhorafael/eumilitar-ui": "*",
     "@next/mdx": "^15",
     "@mdx-js/loader": "^3",
     "@mdx-js/react": "^3",

@@ -10,15 +10,24 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "lint": "turbo lint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "validate:propagation": "node scripts/validate-consumer-propagation.mjs",
+    "changeset": "changeset",
+    "release:status": "changeset status",
+    "version-packages": "changeset version",
+    "release:snapshot": "changeset version --snapshot canary",
+    "release": "npm run build && changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "@eslint/eslintrc": "^3.3.5",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.6",
     "jsdom": "^29.1.1",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "turbo": "^2",
     "vitest": "^4.1.6"
   }

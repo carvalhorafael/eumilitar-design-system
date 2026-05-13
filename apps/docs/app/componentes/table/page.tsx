@@ -3,7 +3,7 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { ComponentDemo } from "@/components/docs/ComponentDemo";
-import { Table, Thead, Tbody, Tr, Th, Td, DataTable, Badge, type Column } from "@eumilitar/ui";
+import { Table, Thead, Tbody, Tr, Th, Td, DataTable, Badge, type Column } from "@carvalhorafael/eumilitar-ui";
 
 /* ── Dados de exemplo ── */
 

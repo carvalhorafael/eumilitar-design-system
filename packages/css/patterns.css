@@ -1,0 +1,207 @@
+.ds-hero,
+.ds-urgency,
+.ds-faq,
+.ds-capture,
+.ds-benefits,
+.ds-testimonials,
+.ds-cta {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border: 2px solid var(--border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+.ds-hero,
+.ds-faq,
+.ds-capture,
+.ds-benefits,
+.ds-testimonials {
+  background: var(--surface-raised);
+}
+
+.ds-cta,
+.ds-hero--brand-dark,
+.ds-cta--brand-dark {
+  background: var(--surface-brand);
+  color: var(--text-inverse);
+}
+
+.ds-hero--urgent,
+.ds-cta--urgent,
+.ds-urgency--max-conversion-cta {
+  background: var(--surface-dark);
+  color: var(--text-inverse);
+}
+
+.ds-hero__eyebrow,
+.ds-faq__eyebrow,
+.ds-capture__eyebrow,
+.ds-testimonials__eyebrow {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ds-hero--brand-dark .ds-hero__eyebrow,
+.ds-hero--urgent .ds-hero__eyebrow,
+.ds-cta--brand-dark .ds-badge,
+.ds-cta--urgent .ds-badge,
+.ds-urgency--max-conversion-cta .ds-badge {
+  color: inherit;
+}
+
+.ds-hero__title,
+.ds-urgency__title,
+.ds-faq__title,
+.ds-capture__title,
+.ds-benefits__title,
+.ds-testimonials__title,
+.ds-cta__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.ds-hero__body,
+.ds-urgency__body,
+.ds-capture__body,
+.ds-cta__body {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.ds-hero--brand-dark .ds-hero__body,
+.ds-hero--urgent .ds-hero__body,
+.ds-urgency--max-conversion-cta .ds-urgency__body,
+.ds-cta--brand-dark .ds-cta__body,
+.ds-cta--urgent .ds-cta__body {
+  color: var(--text-inverse-soft);
+}
+
+.ds-hero__badges,
+.ds-hero__actions,
+.ds-urgency__actions,
+.ds-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ds-alert.ds-hero__alert {
+  margin-top: 4px;
+}
+
+.ds-urgency__stat,
+.ds-benefits__stat,
+.ds-testimonials__stat {
+  display: grid;
+  gap: 4px;
+}
+
+.ds-urgency__stat-value,
+.ds-benefits__stat-value,
+.ds-testimonials__stat-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ds-urgency__stat-label,
+.ds-benefits__stat-label,
+.ds-testimonials__stat-label {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+}
+
+.ds-urgency--max-conversion-cta .ds-urgency__stat-label {
+  color: var(--text-inverse-soft);
+}
+
+.ds-accordion__item {
+  border-bottom: 2px solid var(--border-default);
+}
+
+.ds-accordion__trigger {
+  margin: 0;
+  padding: 16px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ds-accordion__panel {
+  padding-bottom: 16px;
+}
+
+.ds-accordion__content {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ds-capture__form {
+  display: grid;
+  gap: 16px;
+}
+
+.ds-benefits__grid,
+.ds-testimonials__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.ds-benefits__item,
+.ds-testimonials__item {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 2px solid var(--border-default);
+  background: var(--paper);
+}
+
+.ds-benefits__item-title,
+.ds-testimonials__author {
+  margin: 0;
+  font-weight: 700;
+}
+
+.ds-benefits__item-body,
+.ds-testimonials__quote,
+.ds-testimonials__meta {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.ds-benefits__stats,
+.ds-testimonials__stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .ds-hero,
+  .ds-urgency,
+  .ds-faq,
+  .ds-capture,
+  .ds-benefits,
+  .ds-testimonials,
+  .ds-cta {
+    padding: 20px;
+  }
+}

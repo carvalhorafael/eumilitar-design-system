@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
+jobs:
+  release:
+    name: Release PR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: "@carvalhorafael"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate quality gates
+        run: |
+          npm run lint
+          npm run test
+          npm run build
+
+      - name: Create release pull request or publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: npm run version-packages
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

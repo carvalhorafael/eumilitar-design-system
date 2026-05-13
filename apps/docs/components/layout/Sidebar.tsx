@@ -5,6 +5,13 @@ import { usePathname } from "next/navigation";
 
 const nav = [
   {
+    label: "Biblioteca",
+    items: [
+      { href: "/biblioteca/instalacao",   label: "01 — Instalação" },
+      { href: "/biblioteca/uso",          label: "02 — Uso" },
+    ],
+  },
+  {
     label: "Fundamentos",
     items: [
       { href: "/fundamentos/cores",       label: "01 — Cores" },

@@ -2,20 +2,22 @@
 
 ## O que é este projeto
 
-Monorepo do design system da EuMilitar (plataforma de preparação para concursos militares). O app principal continua sendo um site de documentação, mas o repositório agora também expõe camadas reutilizáveis de tokens, UI e padrões de composição.
+Monorepo do design system da EuMilitar (plataforma de preparação para concursos militares). O app principal continua sendo um site de documentação, mas o repositório agora também expõe camadas reutilizáveis de tokens, CSS compartilhado, UI e padrões de composição.
 
 ## Stack
 
-- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/ui` + `packages/patterns`
+- **Turborepo** monorepo: `apps/docs` (Next.js 15) + `packages/tokens` + `packages/css` + `packages/web` + `packages/ui` + `packages/patterns`
 - **Next.js 15 App Router** + TypeScript estrito
 - **Tailwind v4 CSS-first** via `@tailwindcss/postcss`
 - **next-themes** com `attribute="data-theme"`, `defaultTheme="light"`, `enableSystem={false}`
 
 ## Fonte da verdade dos tokens
 
-**Os tokens CSS vivem em `packages/tokens`** e são importados por `apps/docs/app/globals.css`.
+**Os tokens CSS vivem em `packages/tokens`** e a camada de estilos compartilhados vive em `packages/css`.
 
-`apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`.
+`apps/docs/app/globals.css` deve concentrar imports, reset, `@theme inline` e estilos específicos do app. Quando um token mudar, a mudança deve acontecer primeiro em `packages/tokens/*.css`; quando uma primitive visual mudar, a mudança deve acontecer primeiro em `packages/css/*.css`.
+
+`packages/web` é a base para sites tradicionais e CMSs fora de React. Ele deve concentrar renderização HTML canônica e comportamentos JS mínimos, sem acoplamento a WordPress.
 
 ## Estrutura de arquivos
 
@@ -70,6 +72,15 @@ packages/
     spacing.css
     effects.css
     index.css
+  css/
+    ui.css
+    patterns.css
+    index.css
+  web/
+    render.ts
+    behavior.ts
+    types.ts
+    index.ts
   ui/
     Button.tsx
     Badge.tsx
@@ -80,7 +91,7 @@ packages/
     Alert.tsx
     Accordion.tsx
     Table.tsx
-    styles.css
+    styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/
     patterns.ts             ← contratos dos blocos
@@ -138,13 +149,13 @@ Todos os form components usam:
 
 | Padrão | Fonte | Descrição |
 |---|---|---|
-| Hero | `@eumilitar/patterns` + `app/padroes/hero` | variações clara, brand e urgente |
-| Urgência | `@eumilitar/patterns` + `app/padroes/urgencia` | banner, CTA escuro, disponibilidade |
-| Captação | `@eumilitar/patterns` + `app/padroes/captacao` | lead form simples e form completo |
-| FAQ | `@eumilitar/patterns` + `app/padroes/faq` | FAQ geral e específico por força |
-| Benefícios | `@eumilitar/patterns` + `app/padroes/beneficios` | grid, checklist e faixa de stats |
-| Depoimentos | `@eumilitar/patterns` + `app/padroes/depoimentos` | cards, destaque e prova social |
-| CTA Final | `@eumilitar/patterns` + `app/padroes/landing` | fechamento de conversão |
+| Hero | `@carvalhorafael/eumilitar-patterns` + `app/padroes/hero` | variações clara, brand e urgente |
+| Urgência | `@carvalhorafael/eumilitar-patterns` + `app/padroes/urgencia` | banner, CTA escuro, disponibilidade |
+| Captação | `@carvalhorafael/eumilitar-patterns` + `app/padroes/captacao` | lead form simples e form completo |
+| FAQ | `@carvalhorafael/eumilitar-patterns` + `app/padroes/faq` | FAQ geral e específico por força |
+| Benefícios | `@carvalhorafael/eumilitar-patterns` + `app/padroes/beneficios` | grid, checklist e faixa de stats |
+| Depoimentos | `@carvalhorafael/eumilitar-patterns` + `app/padroes/depoimentos` | cards, destaque e prova social |
+| CTA Final | `@carvalhorafael/eumilitar-patterns` + `app/padroes/landing` | fechamento de conversão |
 
 ## Adicionando novos componentes UI
 
@@ -159,9 +170,66 @@ Todos os form components usam:
 1. Adicionar o contrato do bloco em `packages/patterns/patterns.ts`
 2. Se necessário, expandir helpers em `packages/patterns/docs.tsx`
 3. Criar `app/padroes/nome/page.tsx`
-4. Fazer a página consumir `PatternContract`, `PatternShell` e `UsedComponents` de `@eumilitar/patterns`
+4. Fazer a página consumir `PatternContract`, `PatternShell` e `UsedComponents` de `@carvalhorafael/eumilitar-patterns`
 5. Adicionar em `Sidebar.tsx` no grupo "Padrões"
 6. Sempre incluir seção de "Diretrizes de uso" ao final
+
+## Base Web
+
+- `packages/web` é a próxima camada central para consumo fora de React
+- novos blocos portáveis devem considerar, quando fizer sentido, uma forma canônica de renderização HTML nessa camada
+- comportamentos JS nessa camada devem ser mínimos, progressivos e independentes de WordPress
+
+## WordPress
+
+- WordPress e Elementor não são implementados neste repositório
+- o tema WordPress real deve viver em outro projeto e consumir `tokens + css + web + patterns`
+- este repositório deve permanecer focado na biblioteca base, não no consumer WordPress
+
+## Branches e Main
+
+- **Nunca** trabalhar diretamente na `main`
+- **Nunca** commitar diretamente na `main`
+- todo trabalho deve acontecer em uma branch de trabalho separada
+- a `main` deve receber mudanças **apenas via Pull Request**
+- se o agente encontrar a thread na `main` e precisar implementar algo, o primeiro passo deve ser criar ou mudar para uma branch de trabalho
+
+## Regra de Versionamento
+
+- levar código para `main` deve gerar **nova versão**
+- PRs que alteram a biblioteca e serão mergeados em `main` devem incluir changeset correspondente
+- quando o usuário disser que quer “criar uma nova versão”, o agente deve orientar o fluxo com `changeset`, PR de versionamento e release
+- o versionamento não deve ser inferido silenciosamente; o agente deve deixar claro se a mudança é `patch`, `minor` ou `major`
+
+## Fluxo de Release Recomendado
+
+1. implementar a mudança em branch de trabalho
+2. criar um changeset real descrevendo o impacto de versão
+3. abrir PR para `main`
+4. depois do merge, deixar o workflow de release criar ou atualizar o PR de versionamento
+5. mergear o PR de versionamento
+6. publicar a nova versão no registry configurado
+
+## GitHub Packages
+
+- se o registry escolhido for GitHub Packages, o namespace dos pacotes deve ser compatível com a conta ou organização que publica
+- hoje os pacotes usam o scope `@carvalhorafael/*`
+- o fluxo automático de release deve publicar no GitHub Packages usando esse scope
+- qualquer mudança futura de scope deve ser tratada como mudança de distribuição e refletida em documentação, workflow e consumers
+
+## Como orientar criação de versão
+
+Quando o usuário pedir uma nova versão, o agente deve verificar:
+
+1. se existe branch de trabalho ou PR em andamento
+2. se já existe changeset para a mudança
+3. se o bump esperado é `patch`, `minor` ou `major`
+4. se `build`, `lint`, `test` e validações relevantes passaram
+5. se o próximo passo é:
+   - criar o changeset
+   - gerar o versionamento
+   - preparar o PR de versionamento
+   - ou publicar a versão já pronta
 
 ## Comandos
 

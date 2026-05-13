@@ -1,0 +1,26 @@
+{
+  "name": "consumer-react",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0"
+  },
+  "dependencies": {
+    "@carvalhorafael/eumilitar-css": "*",
+    "@carvalhorafael/eumilitar-patterns": "*",
+    "@carvalhorafael/eumilitar-tokens": "*",
+    "@carvalhorafael/eumilitar-ui": "*",
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  }
+}

@@ -1,7 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { SectionLabel } from "@/components/docs/SectionLabel";
 import { ComponentDemo } from "@/components/docs/ComponentDemo";
-import { Select } from "@eumilitar/ui";
+import { Select } from "@carvalhorafael/eumilitar-ui";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Select" };
