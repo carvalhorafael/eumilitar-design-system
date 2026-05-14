@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 const criticalRoutes = [
   "/",
+  "/componentes",
   "/componentes/botao",
   "/componentes/avatar",
   "/componentes/breadcrumbs",

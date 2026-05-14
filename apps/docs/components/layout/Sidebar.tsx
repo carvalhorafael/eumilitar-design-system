@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { componentGroups } from "@/lib/componentCatalog";
 import { Navbar, type NavbarGroup } from "@carvalhorafael/eumilitar-ui";
 
 const nav: NavbarGroup[] = [
@@ -37,36 +38,16 @@ const nav: NavbarGroup[] = [
   {
     label: "Componentes",
     items: [
-      { href: "/componentes/botao",    label: "01 — Button" },
-      { href: "/componentes/badge",    label: "02 — Badge" },
-      { href: "/componentes/card",     label: "03 — Card" },
-      { href: "/componentes/input",    label: "04 — Input & Textarea" },
-      { href: "/componentes/select",   label: "05 — Select" },
-      { href: "/componentes/checkbox", label: "06 — Checkbox & Radio" },
-      { href: "/componentes/alert",     label: "07 — Alert" },
-      { href: "/componentes/accordion", label: "08 — Accordion" },
-      { href: "/componentes/table",     label: "09 — Table" },
-      { href: "/componentes/navbar",    label: "10 — Navbar" },
-      { href: "/componentes/drawer",    label: "11 — Drawer" },
-      { href: "/componentes/tabs",      label: "12 — Tabs" },
-      { href: "/componentes/breadcrumbs", label: "13 — Breadcrumbs" },
-      { href: "/componentes/toast",     label: "14 — Toast" },
-      { href: "/componentes/tooltip",   label: "15 — Tooltip" },
-      { href: "/componentes/skeleton",  label: "16 — Skeleton" },
-      { href: "/componentes/loading",   label: "17 — Loading" },
-      { href: "/componentes/fieldset",  label: "18 — Fieldset" },
-      { href: "/componentes/toggle",    label: "19 — Toggle" },
-      { href: "/componentes/file-input", label: "20 — FileInput" },
-      { href: "/componentes/progress",  label: "21 — Progress" },
-      { href: "/componentes/steps",     label: "22 — Steps" },
-      { href: "/componentes/stat",      label: "23 — Stat" },
-      { href: "/componentes/avatar",    label: "24 — Avatar" },
-      { href: "/componentes/status",    label: "25 — Status" },
-      { href: "/componentes/list",      label: "26 — List" },
-      { href: "/componentes/divider",   label: "27 — Divider" },
-      { href: "/componentes/pagination", label: "28 — Pagination" },
+      { href: "/componentes", label: "Todos os componentes" },
     ],
   },
+  ...componentGroups.map((group) => ({
+    label: group.title,
+    items: group.items.map((item) => ({
+      href: item.href,
+      label: `${item.number} — ${item.title}`,
+    })),
+  })),
 ];
 
 export function Sidebar() {

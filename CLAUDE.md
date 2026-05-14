@@ -52,6 +52,7 @@ apps/docs/
       depoimentos/page.tsx
       landing/page.tsx
     componentes/
+      page.tsx
       botao/page.tsx
       badge/page.tsx
       card/page.tsx
