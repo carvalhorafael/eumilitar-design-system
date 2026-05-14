@@ -1,6 +1,6 @@
 {
   "name": "@carvalhorafael/eumilitar-web",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "build": "tsup index.ts --format esm --dts --tsconfig ./tsconfig.json --clean --out-dir dist"
