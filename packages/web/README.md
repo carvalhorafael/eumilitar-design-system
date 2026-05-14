@@ -13,6 +13,7 @@ Servir como camada intermediária entre:
 ## Escopo inicial
 
 - funções de renderização HTML para blocos portáveis;
+- funções de renderização HTML para componentes base portáveis;
 - comportamento JS mínimo para interações progressivas;
 - base para CMSs, temas tradicionais e páginas estáticas.
 
@@ -26,6 +27,35 @@ Servir como camada intermediária entre:
 - `renderTestimonialsBlock`
 - `renderCtaBlock`
 - `enhanceAccordion`
+
+## Componentes portáveis
+
+- `renderNavbar`
+- `renderBreadcrumbs`
+- `renderDrawer`
+- `renderTabs`
+- `renderToast`
+- `renderTooltip`
+- `renderSkeleton`
+- `renderLoading`
+- `renderFieldset`
+- `renderToggle`
+- `renderFileInput`
+- `renderProgress`
+- `renderSteps`
+- `renderStats` / `renderStat`
+- `renderAvatar`
+- `renderStatus`
+- `renderList`
+- `renderDivider`
+- `renderPagination`
+
+Comportamentos progressivos disponíveis:
+
+- `enhanceNavbar`
+- `enhanceDrawer`
+- `enhanceTabs`
+- `enhanceToastDismiss`
 
 ## Direção
 

@@ -34,9 +34,11 @@ Para um site HTML/CSS/JS tradicional, a base recomendada é:
 ```js
 import {
   enhanceAccordion,
+  enhanceTabs,
   renderCtaBlock,
   renderFaqBlock,
   renderHeroBlock,
+  renderTabs,
 } from "@carvalhorafael/eumilitar-web";
 
 const heroHtml = renderHeroBlock({
@@ -70,16 +72,34 @@ const ctaHtml = renderCtaBlock({
   secondaryCta: { label: "Saiba mais", href: "#faq", variant: "ghost-inverse" },
 });
 
-document.querySelector("#app").innerHTML = [heroHtml, faqHtml, ctaHtml].join("");
+const tabsHtml = renderTabs({
+  items: [
+    {
+      value: "curso",
+      label: "Curso",
+      contentHtml: "<p>Trilha completa por edital.</p>",
+    },
+    {
+      value: "simulados",
+      label: "Simulados",
+      contentHtml: "<p>Treino com correção e ranking.</p>",
+    },
+  ],
+});
+
+document.querySelector("#app").innerHTML = [heroHtml, tabsHtml, faqHtml, ctaHtml].join("");
 
 enhanceAccordion(document);
+enhanceTabs(document);
 ```
 
 ## Regra de arquitetura
 
-Se um site tradicional precisar de um novo bloco, a ordem recomendada é:
+Se um site tradicional precisar de um novo bloco ou componente, a ordem recomendada é:
 
-1. definir ou atualizar o contrato em `@carvalhorafael/eumilitar-patterns`
+1. definir ou atualizar o contrato em `@carvalhorafael/eumilitar-patterns`, quando for bloco/padrão editorial
 2. garantir a camada visual em `@carvalhorafael/eumilitar-css`
 3. implementar a renderização canônica em `@carvalhorafael/eumilitar-web`
 4. só depois adaptar isso para WordPress, Elementor ou outro CMS
+
+Para componentes base, `@carvalhorafael/eumilitar-web` deve acompanhar `@carvalhorafael/eumilitar-ui` sempre que o componente for viável em HTML/CSS/JS sem React.

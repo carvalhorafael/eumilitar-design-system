@@ -89,6 +89,7 @@ Responsabilidade:
 
 Escopo:
 - markup canônico por bloco
+- renderização HTML canônica para componentes portáveis
 - render helpers para HTML
 - interações progressivas opcionais
 
@@ -99,6 +100,7 @@ Direção:
 Artefatos atuais:
 - `@carvalhorafael/eumilitar-web`
 - renderização HTML canônica para hero, urgency, faq, capture, benefits, testimonials e cta
+- renderização HTML canônica para componentes base portáveis do design system
 - comportamento progressivo mínimo para accordion
 - manifesto público de blocos, variantes e classes-base
 
@@ -198,6 +200,11 @@ Público:
 - render helpers HTML
 - comportamentos JS mínimos
 - entrypoints pensados para sites tradicionais e CMSs
+
+Regra:
+- todo componente público novo ou alterado deve avaliar impacto em `web`
+- se o componente puder ser usado em HTML/CSS/JS sem React, `web` deve expor renderização canônica e enhancement progressivo quando necessário
+- exceções React-only devem ser explícitas no PR
 
 ### `@carvalhorafael/eumilitar-ui`
 

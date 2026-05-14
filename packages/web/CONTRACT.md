@@ -22,9 +22,59 @@ Este documento registra o que deve ser tratado como **estável** para consumidor
 - `renderTestimonialsBlock`
 - `renderCtaBlock`
 
+## Componentes portáveis suportados
+
+- `navbar`
+- `breadcrumbs`
+- `drawer`
+- `tabs`
+- `toast`
+- `tooltip`
+- `skeleton`
+- `loading`
+- `fieldset`
+- `toggle`
+- `file-input`
+- `progress`
+- `steps`
+- `stat`
+- `avatar`
+- `status`
+- `list`
+- `divider`
+- `pagination`
+
+## Renderers públicos de componentes
+
+- `renderNavbar`
+- `renderBreadcrumbs`
+- `renderDrawer`
+- `renderTabs`
+- `renderToast`
+- `renderToastViewport`
+- `renderTooltip`
+- `renderSkeleton`
+- `renderLoading`
+- `renderFieldset`
+- `renderToggle`
+- `renderFileInput`
+- `renderProgress`
+- `renderSteps`
+- `renderStats`
+- `renderStat`
+- `renderAvatar`
+- `renderStatus`
+- `renderList`
+- `renderDivider`
+- `renderPagination`
+
 ## Comportamentos públicos
 
 - `enhanceAccordion`
+- `enhanceNavbar`
+- `enhanceDrawer`
+- `enhanceTabs`
+- `enhanceToastDismiss`
 
 ## Classes-base estáveis
 
@@ -35,6 +85,25 @@ Este documento registra o que deve ser tratado como **estável** para consumidor
 - `ds-benefits`
 - `ds-testimonials`
 - `ds-cta`
+- `ds-navbar`
+- `ds-breadcrumbs`
+- `ds-drawer`
+- `ds-tabs`
+- `ds-toast`
+- `ds-tooltip`
+- `ds-skeleton`
+- `ds-loading`
+- `ds-fieldset`
+- `ds-toggle`
+- `ds-file-input`
+- `ds-progress`
+- `ds-steps`
+- `ds-stat`
+- `ds-avatar`
+- `ds-status`
+- `ds-list`
+- `ds-divider`
+- `ds-pagination`
 
 ## Atributos de markup estáveis para accordion
 
@@ -42,6 +111,19 @@ Este documento registra o que deve ser tratado como **estável** para consumidor
 - `data-accordion-item`
 - `data-accordion-trigger`
 - `data-accordion-panel`
+
+## Atributos de markup estáveis para componentes
+
+- `data-navbar-root`
+- `data-navbar-trigger`
+- `data-drawer-root`
+- `data-drawer-trigger`
+- `data-drawer-layer`
+- `data-drawer-close`
+- `data-tabs-root`
+- `data-tabs-tab`
+- `data-tabs-panel`
+- `data-toast-close`
 
 ## Variantes suportadas hoje
 
