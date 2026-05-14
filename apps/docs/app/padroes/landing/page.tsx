@@ -41,7 +41,7 @@ function HeroSection() {
       <Alert variant="urgent" title="Inscrições encerram em 36 horas">
         Restam apenas 14 vagas na turma de Sargento do Exército — Turma Agosto 2025. Garanta sua vaga agora.
       </Alert>
-      <div style={{ background: "var(--surface-brand)", padding: "80px 64px" }}>
+      <div className="docs-pattern-block" style={{ background: "var(--surface-brand)" }}>
         <div style={{ maxWidth: "640px" }}>
           <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "20px" }}>
             {["Exército", "Marinha", "Aeronáutica", "PM", "Bombeiros"].map((f) => (
@@ -117,7 +117,7 @@ const beneficios = [
 
 function BeneficiosSection() {
   return (
-    <div style={{ background: "var(--paper)", padding: "80px 64px" }}>
+    <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
       <div style={{ textAlign: "center", marginBottom: "48px" }}>
         <p style={{
           fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700,
@@ -132,8 +132,7 @@ function BeneficiosSection() {
           Tudo que você precisa<br />para ser aprovado
         </h2>
       </div>
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+      <div className="docs-grid-3" style={{
         gap: "2px", background: "var(--border-default)",
         border: "2px solid var(--border-strong)",
       }}>
@@ -183,7 +182,7 @@ const passos = [
 
 function ComoFuncionaSection() {
   return (
-    <div style={{ background: "var(--surface-raised)", padding: "80px 64px", borderTop: "2px solid var(--border-strong)", borderBottom: "2px solid var(--border-strong)" }}>
+    <div className="docs-pattern-block" style={{ background: "var(--surface-raised)", borderTop: "2px solid var(--border-strong)", borderBottom: "2px solid var(--border-strong)" }}>
       <div style={{ textAlign: "center", marginBottom: "56px" }}>
         <p style={{
           fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700,
@@ -198,8 +197,8 @@ function ComoFuncionaSection() {
           Como funciona
         </h2>
       </div>
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0",
+      <div className="docs-grid-3" style={{
+        gap: "0",
         border: "2px solid var(--border-strong)",
       }}>
         {passos.map((p, i) => (
@@ -262,10 +261,9 @@ const depoimentos = [
 
 function DepoimentosSection() {
   return (
-    <div style={{ background: "var(--paper)", padding: "80px 64px" }}>
+    <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
       {/* Números */}
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+      <div className="docs-grid-3" style={{
         gap: "0", border: "2px solid var(--border-strong)",
         background: "var(--surface-brand)", marginBottom: "48px",
       }}>
@@ -295,8 +293,7 @@ function DepoimentosSection() {
       </div>
 
       {/* Cards */}
-      <div style={{
-        display: "grid", gridTemplateColumns: "repeat(3, 1fr)",
+      <div className="docs-grid-3" style={{
         gap: "2px", background: "var(--border-default)",
         border: "2px solid var(--border-strong)",
       }}>
@@ -391,7 +388,7 @@ const faqItems = [
 
 function FaqSection() {
   return (
-    <div style={{ background: "var(--surface-raised)", padding: "80px 64px", borderTop: "2px solid var(--border-strong)" }}>
+    <div className="docs-pattern-block" style={{ background: "var(--surface-raised)", borderTop: "2px solid var(--border-strong)" }}>
       <div style={{ textAlign: "center", marginBottom: "48px" }}>
         <h2 style={{
           fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4vw, 44px)",
@@ -421,7 +418,7 @@ const incluso = [
 
 function CtaFinalSection() {
   return (
-    <div style={{ background: "var(--surface-dark)", padding: "80px 64px" }}>
+    <div className="docs-pattern-block" style={{ background: "var(--surface-dark)" }}>
       <div style={{ maxWidth: "780px", margin: "0 auto" }}>
         <div style={{ marginBottom: "20px" }}>
           <Badge variant="urgent">Última turma — 14 vagas restantes</Badge>
@@ -441,8 +438,8 @@ function CtaFinalSection() {
         </p>
 
         {/* Lista do que está incluso */}
-        <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 40px",
+        <div className="docs-grid-2" style={{
+          gap: "10px 40px",
           marginBottom: "40px", maxWidth: "520px",
         }}>
           {incluso.map((item) => (
@@ -494,7 +491,7 @@ export default function LandingPage() {
         description="Composição sequencial de todos os padrões. Referência para geração de páginas por agentes de IA. Sequência: Urgência → Hero → Benefícios → Como Funciona → Depoimentos → FAQ → CTA Final."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         <SectionLabel
           number="07.1"

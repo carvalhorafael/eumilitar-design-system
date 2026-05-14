@@ -119,7 +119,7 @@ export default function TipografiaPage() {
         description="Trio tipográfico: Barlow Condensed para display, Barlow para body e JetBrains Mono para elementos técnicos e código."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         {/* Famílias */}
         <SectionLabel

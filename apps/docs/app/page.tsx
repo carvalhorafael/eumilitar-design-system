@@ -57,7 +57,7 @@ export default function HomePage() {
     <div>
       {/* Hero */}
       <div
-        className="relative border-b-2 px-10 py-16 overflow-hidden"
+        className="relative border-b-2 px-5 py-10 sm:px-10 sm:py-16 overflow-hidden"
         style={{
           borderColor: "var(--border-strong)",
           background: "var(--surface-brand)",
@@ -79,7 +79,7 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative flex items-start justify-between">
+        <div className="relative flex items-start justify-between gap-6">
           <div>
             <span
               className="text-xs font-bold uppercase tracking-widest block mb-4"
@@ -88,7 +88,7 @@ export default function HomePage() {
               EuMilitar — Sistema de Design
             </span>
             <h1
-              className="text-6xl font-black uppercase leading-none mb-6"
+              className="text-5xl sm:text-6xl font-black uppercase leading-none mb-6"
               style={{
                 fontFamily: "var(--font-display)",
                 color: "var(--n-50)",
@@ -107,7 +107,9 @@ export default function HomePage() {
               tipografia, componentes e padrões para todos os produtos EuMilitar.
             </p>
           </div>
-          <ThemeToggle />
+          <div className="shrink-0">
+            <ThemeToggle />
+          </div>
         </div>
 
         {/* Swatches de preview */}
@@ -122,7 +124,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="px-10 py-12 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         {/* Princípios visuais */}
         <div className="mb-12">

@@ -82,7 +82,7 @@ export default function AccordionPage() {
         description="Conteúdo expansível com transição suave. Modo exclusivo (um por vez) ou múltiplo. Ícone +/− animado e hover no header."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel
           number="08.1"

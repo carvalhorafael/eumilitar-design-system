@@ -116,7 +116,7 @@ export default function BeneficiosPage() {
         description="Blocos de diferenciais e features. Três variações: grid de 3 colunas com ícone, grid de 2 colunas com lista e destaque em fundo escuro."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {benefitsDefinition ? <PatternContract definition={benefitsDefinition} /> : null}
 
         <SectionLabel
@@ -125,7 +125,7 @@ export default function BeneficiosPage() {
           description="Formato mais comum em landing pages. Ícone SVG no topo, título em display, descrição em body. Fundo paper cria separação sutil da seção anterior."
         />
         <PatternShell label="6 diferenciais — grid 3 colunas">
-          <div style={{ background: "var(--paper)", padding: "56px 48px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
             <div style={{ textAlign: "center", marginBottom: "48px" }}>
               <p style={{
                 fontFamily: "var(--font-mono)", fontSize: "10px", fontWeight: 700,
@@ -142,9 +142,7 @@ export default function BeneficiosPage() {
                 Tudo que você precisa<br />para ser aprovado
               </h2>
             </div>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
+            <div className="docs-grid-3" style={{
               gap: "2px",
               background: "var(--border-default)",
               border: "2px solid var(--border-strong)",
@@ -187,8 +185,8 @@ export default function BeneficiosPage() {
           description="Para listas longas de features onde a descrição detalhada é secundária. Eficiente em espaço, fácil de escanear."
         />
         <PatternShell label="Lista de features — 2 colunas com checklist">
-          <div style={{ background: "var(--surface-raised)", padding: "56px 48px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "center" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-raised)" }}>
+            <div className="docs-grid-2" style={{ gap: "48px", alignItems: "center" }}>
               {/* Copy */}
               <div>
                 <Badge variant="brand" size="sm" style={{ marginBottom: "16px" }}>Plano completo</Badge>
@@ -210,9 +208,7 @@ export default function BeneficiosPage() {
                 </Button>
               </div>
               {/* Lista */}
-              <div style={{
-                display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px 24px",
-              }}>
+              <div className="docs-grid-2" style={{ gap: "12px 24px" }}>
                 {beneficios2col.map((item) => (
                   <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
                     <span style={{
@@ -245,7 +241,7 @@ export default function BeneficiosPage() {
           description="Variação de alto contraste para seções intermediárias de uma landing page. Quebra o ritmo visual entre seções claras."
         />
         <PatternShell label="Benefícios em fundo brand — 3 itens horizontais">
-          <div style={{ background: "var(--surface-brand)", padding: "56px 48px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-brand)" }}>
             <div style={{ textAlign: "center", marginBottom: "40px" }}>
               <h2 style={{
                 fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.5vw, 40px)",
@@ -255,7 +251,7 @@ export default function BeneficiosPage() {
                 Aprovação em números
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0" }}>
+            <div className="docs-grid-3" style={{ gap: "0" }}>
               {[
                 { numero: "12.400+", label: "Aprovados desde 2019" },
                 { numero: "94%",     label: "Taxa de satisfação dos alunos" },

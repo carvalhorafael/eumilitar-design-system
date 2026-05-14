@@ -55,12 +55,15 @@ Arquitetura ativa de distribuição:
 - `@carvalhorafael/eumilitar-ui` para o adapter React
 - `@carvalhorafael/eumilitar-patterns` para contratos e blocos
 
+Componentes atuais incluem controles de formulário, navegação mobile-first, feedback, carregamento, progresso, dados e suporte visual.
+
 WordPress e Elementor ficam fora deste repositório.
 O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 
 Os tokens agora também têm export em JSON para consumers que não querem depender de parsing de CSS.
 
 Documento de referência:
+- `docs/component-development.md`
 - `ARQUITETURA-BIBLIOTECA.md`
 - `CONSUMO-E-VERSOES.md`
 - `VALIDACAO-PROPAGACAO.md`
@@ -112,6 +115,7 @@ As releases também ficam listadas em:
 - Input & Textarea — 3 estados, 3 tamanhos, foco com sombra offset
 - Select — dropdown estilizado com seta customizada
 - Checkbox & Radio — checkmark SVG animado, grupos
+- Alert, Accordion, Table, Navbar, Drawer, Tabs, Breadcrumbs, Toast, Tooltip, Skeleton, Loading, Fieldset, Toggle, FileInput, Progress e Steps — feedback, disclosure, dados, navegação, ajuda contextual, formulários e progresso
 
 **Padrões**
 - Hero, Urgência, Captação, FAQ, Benefícios, Depoimentos e CTA final

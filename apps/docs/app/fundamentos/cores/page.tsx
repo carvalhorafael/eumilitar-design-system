@@ -136,7 +136,7 @@ export default function CoresPage() {
         description="Sistema de cores da EuMilitar: escala primitiva, tokens semânticos e paletas das forças militares. Clique em qualquer swatch para copiar o valor hex."
       />
 
-      <div className="px-10 py-10 max-w-6xl">
+      <div className="docs-page max-w-6xl">
 
         {/* Escala primitiva */}
         <SectionLabel

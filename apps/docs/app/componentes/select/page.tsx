@@ -43,7 +43,7 @@ export default function SelectPage() {
         description="Dropdown nativo estilizado com seta customizada e o mesmo sistema de estados do Input. Preferível para listas longas e enumerações fixas."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel
           number="05.1"
@@ -135,10 +135,10 @@ export default function SelectPage() {
           description="Select combinado com Input em um formulário de perfil."
         />
         <ComponentDemo label="Formulário de perfil militar">
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px", width: "100%", maxWidth: "400px" }}>
+          <div className="docs-field-stack">
             <Select label="Força Armada" options={forcas} placeholder="Selecione..." required />
             <Select label="Patente" options={patentes} required />
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <div className="docs-grid-2 docs-grid-2--tight">
               <Select label="Ano de ingresso" options={anos} placeholder="Ano..." />
               <Select
                 label="Situação"

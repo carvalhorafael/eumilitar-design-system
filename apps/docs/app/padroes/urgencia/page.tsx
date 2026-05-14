@@ -25,7 +25,7 @@ export default function UrgenciaPage() {
         description="Padrões para comunicar escassez real: vagas limitadas, prazo próximo, último lote. Use com parcimônia — o impacto depende da raridade."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {urgencyDefinition ? <PatternContract definition={urgencyDefinition} /> : null}
 
         <SectionLabel
@@ -57,7 +57,7 @@ export default function UrgenciaPage() {
           description="Seção dedicada a urgência: fundo escuro, contador de vagas, botão urgent. Use no final de páginas de vendas."
         />
         <PatternShell label="Bloco CTA — fundo escuro + urgência">
-          <div style={{ background: "var(--surface-dark)", padding: "56px 48px", textAlign: "center" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-dark)", textAlign: "center" }}>
             <div style={{ marginBottom: "20px" }}><Badge variant="urgent">Última turma do semestre</Badge></div>
             <h2 style={{
               fontFamily: "var(--font-display)",

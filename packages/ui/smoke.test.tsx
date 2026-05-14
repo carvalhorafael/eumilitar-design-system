@@ -3,12 +3,32 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import {
   Accordion,
   Alert,
+  Avatar,
   Button,
+  Breadcrumbs,
   Checkbox,
   CheckboxGroup,
+  Drawer,
+  Divider,
+  Fieldset,
+  FileInput,
   Input,
+  List,
+  Loading,
+  Navbar,
+  Pagination,
   Radio,
   RadioGroup,
+  Skeleton,
+  Progress,
+  Stat,
+  Stats,
+  Status,
+  Steps,
+  Tabs,
+  Toast,
+  Tooltip,
+  Toggle,
 } from "./index";
 
 describe("@carvalhorafael/eumilitar-ui smoke", () => {
@@ -105,5 +125,255 @@ describe("@carvalhorafael/eumilitar-ui smoke", () => {
     expect(checkboxGroup).toHaveAttribute("aria-describedby");
     expect(radioGroup).toHaveAttribute("aria-invalid", "true");
     expect(radioGroup).toHaveAttribute("aria-describedby");
+  });
+
+  it("abre e fecha Navbar mobile com aria-expanded", () => {
+    render(
+      <Navbar
+        brand={<span>EuMilitar</span>}
+        groups={[{ label: "Componentes", items: [{ href: "/componentes/botao", label: "Button" }] }]}
+        activeHref="/componentes/botao"
+        renderLink={({ item, className, style, onClick }) => (
+          <a
+            href={item.href}
+            className={className}
+            style={style}
+            onClick={(event) => {
+              event.preventDefault();
+              onClick();
+            }}
+          >
+            {item.label}
+          </a>
+        )}
+      />,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Abrir menu" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: "Button" })).toHaveAttribute("href", "/componentes/botao");
+
+    fireEvent.click(screen.getByRole("link", { name: "Button" }));
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("abre e fecha Drawer por trigger, botão e Escape", () => {
+    render(
+      <Drawer title="Filtros" trigger="Abrir filtros">
+        <p>Conteúdo do painel</p>
+      </Drawer>,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Abrir filtros" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+
+    fireEvent.click(trigger);
+    expect(trigger).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("dialog", { name: "Filtros" })).toBeInTheDocument();
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+
+    fireEvent.click(trigger);
+    fireEvent.click(screen.getByRole("button", { name: "Fechar painel" }));
+    expect(trigger).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("troca Tabs por clique e teclado", () => {
+    render(
+      <Tabs
+        label="Exemplo"
+        items={[
+          { value: "primeira", label: "Primeira", content: "Painel inicial" },
+          { value: "segunda", label: "Segunda", content: "Painel seguinte" },
+        ]}
+      />,
+    );
+
+    const first = screen.getByRole("tab", { name: "Primeira" });
+    const second = screen.getByRole("tab", { name: "Segunda" });
+    expect(first).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel", { name: "Primeira" })).toHaveTextContent("Painel inicial");
+
+    fireEvent.click(second);
+    expect(second).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel", { name: "Segunda" })).toHaveTextContent("Painel seguinte");
+
+    fireEvent.keyDown(second, { key: "ArrowLeft" });
+    expect(first).toHaveAttribute("aria-selected", "true");
+  });
+
+  it("renderiza Breadcrumbs com aria-current no item atual", () => {
+    render(
+      <Breadcrumbs
+        items={[
+          { href: "/", label: "Início" },
+          { href: "/componentes", label: "Componentes" },
+          { label: "Breadcrumbs" },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole("navigation", { name: "Navegação estrutural" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Início" })).toHaveAttribute("href", "/");
+    expect(screen.getByText("Breadcrumbs")).toHaveAttribute("aria-current", "page");
+  });
+
+  it("renderiza Loading com role status e label acessível", () => {
+    render(<Loading variant="dots" label="Processando dados" />);
+
+    const loading = screen.getByRole("status", { name: "Processando dados" });
+    expect(loading).toHaveAttribute("data-variant", "dots");
+  });
+
+  it("renderiza Skeleton como conteúdo decorativo", () => {
+    const { container } = render(<Skeleton variant="text" lines={3} />);
+
+    const skeleton = container.querySelector(".ds-skeleton");
+    expect(skeleton).toHaveAttribute("aria-hidden", "true");
+    expect(container.querySelectorAll(".ds-skeleton__line")).toHaveLength(3);
+  });
+
+  it("remove Toast dismissible e chama callback", () => {
+    const onDismiss = vi.fn();
+
+    render(
+      <Toast variant="success" title="Salvo" dismissible onDismiss={onDismiss}>
+        Alterações publicadas.
+      </Toast>,
+    );
+
+    expect(screen.getByRole("status")).toHaveTextContent("Salvo");
+    fireEvent.click(screen.getByRole("button", { name: "Fechar notificação" }));
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
+  it("associa Tooltip ao trigger por aria-describedby", () => {
+    render(
+      <Tooltip content="Publica a alteração">
+        <button type="button">Publicar</button>
+      </Tooltip>,
+    );
+
+    const trigger = screen.getByRole("button", { name: "Publicar" });
+    const tooltip = screen.getByRole("tooltip");
+
+    expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
+    expect(tooltip).toHaveTextContent("Publica a alteração");
+  });
+
+  it("renderiza Fieldset com legend, helper e aria-invalid", () => {
+    render(
+      <Fieldset legend="Dados" helperText="Preencha os campos." inputState="error">
+        <Input label="Nome" />
+      </Fieldset>,
+    );
+
+    const group = screen.getByRole("group", { name: "Dados" });
+    expect(group).toHaveAttribute("aria-invalid", "true");
+    expect(group).toHaveAttribute("aria-describedby");
+    expect(screen.getByText("Preencha os campos.")).toBeInTheDocument();
+  });
+
+  it("renderiza Toggle como switch acessível", () => {
+    render(<Toggle label="Receber alertas" defaultChecked />);
+
+    const toggle = screen.getByRole("switch", { name: "Receber alertas" });
+    expect(toggle).toBeChecked();
+  });
+
+  it("liga FileInput com label, helper e required", () => {
+    render(<FileInput label="Comprovante" helperText="Envie em PDF." required />);
+
+    const input = screen.getByLabelText(/Comprovante/);
+    expect(input).toHaveAttribute("type", "file");
+    expect(input).toHaveAttribute("aria-required", "true");
+    expect(input).toHaveAttribute("aria-describedby");
+  });
+
+  it("renderiza Progress determinado com aria-valuenow", () => {
+    render(<Progress label="Inscrição" value={45} showValue />);
+
+    const progress = screen.getByRole("progressbar", { name: "Inscrição" });
+    expect(progress).toHaveAttribute("aria-valuenow", "45");
+    expect(screen.getByText("45%")).toBeInTheDocument();
+  });
+
+  it("renderiza Steps com etapa atual", () => {
+    render(
+      <Steps
+        items={[
+          { label: "Cadastro", state: "complete" },
+          { label: "Documentos", state: "current" },
+          { label: "Pagamento", state: "pending" },
+        ]}
+      />,
+    );
+
+    expect(screen.getByText("Documentos").closest("li")).toHaveAttribute("aria-current", "step");
+  });
+
+  it("renderiza Status com tom e pulso", () => {
+    render(<Status label="Online" tone="success" pulse />);
+
+    const status = screen.getByText("Online").closest(".ds-status");
+    expect(status).toHaveAttribute("data-tone", "success");
+    expect(status).toHaveAttribute("data-pulse", "true");
+  });
+
+  it("renderiza Avatar com fallback e status", () => {
+    render(<Avatar fallback="EM" status={<Status label="Ativo" tone="success" size="sm" />} />);
+
+    expect(screen.getByText("EM")).toBeInTheDocument();
+    expect(screen.getByText("Ativo")).toBeInTheDocument();
+  });
+
+  it("renderiza Divider semântico", () => {
+    render(<Divider>Próxima etapa</Divider>);
+
+    expect(screen.getByRole("separator")).toHaveAttribute("aria-orientation", "horizontal");
+    expect(screen.getByText("Próxima etapa")).toBeInTheDocument();
+  });
+
+  it("renderiza List com itens estruturados", () => {
+    render(
+      <List
+        label="Inscrições"
+        items={[
+          { title: "ESA 2026", description: "Turma intensiva", meta: "Aberta" },
+          { title: "EEAR 2026", description: "Lista de espera", meta: "Em breve" },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole("list", { name: "Inscrições" })).toBeInTheDocument();
+    expect(screen.getByText("ESA 2026")).toBeInTheDocument();
+    expect(screen.getByText("Aberta")).toBeInTheDocument();
+  });
+
+  it("renderiza Stats com valores", () => {
+    render(
+      <Stats>
+        <Stat title="Aprovados" value="12k" description="Alunos acompanhados." />
+      </Stats>,
+    );
+
+    expect(screen.getByText("Aprovados")).toBeInTheDocument();
+    expect(screen.getByText("12k")).toBeInTheDocument();
+  });
+
+  it("aciona Pagination por clique", () => {
+    const onPageChange = vi.fn();
+
+    render(<Pagination page={2} totalPages={4} onPageChange={onPageChange} />);
+
+    expect(screen.getByRole("button", { name: "Página 2" })).toHaveAttribute("aria-current", "page");
+    fireEvent.click(screen.getByRole("button", { name: "Próxima página" }));
+    expect(onPageChange).toHaveBeenCalledWith(3);
   });
 });

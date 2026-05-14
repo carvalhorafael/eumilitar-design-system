@@ -36,7 +36,7 @@ export function ComponentDemo({
         </div>
       )}
       <div
-        className="px-8 py-10 flex flex-wrap items-center gap-4"
+        className="docs-demo-body"
         style={{ background: bgMap[background] }}
       >
         {children}

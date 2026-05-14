@@ -21,7 +21,7 @@ export default function CheckboxPage() {
         description="Controles de seleção com checkmark SVG customizado e ponto interno para Radio. Foco neo-brutalista com sombra offset 2×2."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel
           number="06.1"

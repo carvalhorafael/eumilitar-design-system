@@ -80,3 +80,135 @@ html {
 ::-webkit-scrollbar-thumb { background: var(--n-400); border-radius: 0; }
 
 ::selection { background: var(--highlight); }
+
+body {
+  margin: 0;
+}
+
+.docs-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.docs-main {
+  min-width: 0;
+  flex: 1;
+  overflow: auto;
+  background: var(--surface-base);
+}
+
+.docs-header {
+  border-bottom: 2px solid var(--border-strong);
+  padding: 24px 20px;
+}
+
+.docs-header__inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.docs-header__title {
+  font-family: var(--font-display);
+  color: var(--ink);
+  font-size: clamp(2.25rem, 14vw, 4rem);
+  font-weight: 900;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.docs-page {
+  width: 100%;
+  padding: 28px 20px;
+}
+
+.docs-demo-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 20px;
+}
+
+.docs-field-stack {
+  display: flex;
+  width: 100%;
+  max-width: 400px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.docs-grid-2,
+.docs-grid-3,
+.docs-grid-4 {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.docs-grid-2--tight {
+  gap: 12px;
+}
+
+.docs-pattern-block {
+  padding: 28px 20px;
+}
+
+.docs-split-pattern {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.docs-guideline-row--split {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 640px) {
+  .docs-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .docs-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .docs-grid-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .docs-pattern-block {
+    padding: 56px 48px;
+  }
+
+  .docs-split-pattern {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .docs-guideline-row--split {
+    flex-direction: row;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 900px) {
+  .docs-shell {
+    flex-direction: row;
+  }
+
+  .docs-header {
+    padding: 32px 40px;
+  }
+
+  .docs-page {
+    padding: 40px;
+  }
+
+  .docs-demo-body {
+    padding: 40px 32px;
+  }
+}

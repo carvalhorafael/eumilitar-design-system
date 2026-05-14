@@ -19,6 +19,15 @@ Monorepo do design system da EuMilitar (plataforma de preparação para concurso
 
 `packages/web` é a base para sites tradicionais e CMSs fora de React. Ele deve concentrar renderização HTML canônica e comportamentos JS mínimos, sem acoplamento a WordPress.
 
+## Documentos de referência
+
+- `docs/component-development.md` — processo canônico para criar, revisar e documentar componentes UI
+- `ARQUITETURA-BIBLIOTECA.md` — visão de arquitetura da biblioteca
+- `CONSUMO-E-VERSOES.md` — consumo, versionamento e publicação
+- `VALIDACAO-PROPAGACAO.md` — validação de propagação entre pacotes e consumers
+- `packages/web/CONTRACT.md` — contrato da base web para consumo fora de React
+- `packages/web/HTML_CONSUMPTION.md` — consumo HTML/CSS/JS puro
+
 ## Estrutura de arquivos
 
 ```
@@ -43,6 +52,7 @@ apps/docs/
       depoimentos/page.tsx
       landing/page.tsx
     componentes/
+      page.tsx
       botao/page.tsx
       badge/page.tsx
       card/page.tsx
@@ -52,6 +62,25 @@ apps/docs/
       alert/page.tsx
       accordion/page.tsx
       table/page.tsx
+      navbar/page.tsx
+      drawer/page.tsx
+      tabs/page.tsx
+      breadcrumbs/page.tsx
+      toast/page.tsx
+      tooltip/page.tsx
+      skeleton/page.tsx
+      loading/page.tsx
+      fieldset/page.tsx
+      toggle/page.tsx
+      file-input/page.tsx
+      progress/page.tsx
+      steps/page.tsx
+      stat/page.tsx
+      avatar/page.tsx
+      status/page.tsx
+      list/page.tsx
+      divider/page.tsx
+      pagination/page.tsx
   components/
     layout/
       Sidebar.tsx
@@ -91,6 +120,25 @@ packages/
     Alert.tsx
     Accordion.tsx
     Table.tsx
+    Navbar.tsx
+    Drawer.tsx
+    Tabs.tsx
+    Breadcrumbs.tsx
+    Toast.tsx
+    Tooltip.tsx
+    Skeleton.tsx
+    Loading.tsx
+    Fieldset.tsx
+    Toggle.tsx
+    FileInput.tsx
+    Progress.tsx
+    Steps.tsx
+    Stat.tsx
+    Avatar.tsx
+    Status.tsx
+    List.tsx
+    Divider.tsx
+    Pagination.tsx
     styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/
@@ -100,26 +148,18 @@ packages/
     index.ts
 ```
 
-## Convenções de componentes
+## Desenvolvimento de componentes UI
 
-### Server vs Client
-- Páginas de documentação são **Server Components** por padrão
-- Use `"use client"` apenas quando há event handlers, hooks de estado ou `usePathname`
-- Extraia demos interativos para arquivos separados em `components/docs/` com `"use client"`
-- Páginas que passam funções `render` para componentes client, como `table/page.tsx`, precisam de `"use client"`
-- Páginas de padrões que usam componentes interativos, como formulários, usam `"use client"`
+O processo completo de criação, revisão, documentação, teste e versionamento de componentes está em `docs/component-development.md`.
 
-### Estilo — sem Tailwind nos componentes UI
-Os componentes em `packages/ui/` usam CSS custom properties e classes semânticas próprias, com `inline style` reservado para casos realmente dinâmicos. Tailwind segue restrito ao layout e à composição do app `docs`.
+Regras essenciais para agentes:
 
-### Foco neo-brutalista
-O foco visual segue a lógica de sombra offset via tokens e classes do pacote de UI. Evite introduzir `ring` genérico ou `outline` fora dos casos em que a acessibilidade exigir comportamento adicional.
-
-### Props padrão de formulários
-Todos os form components usam:
-- `inputState?: "default" | "error" | "success"` — importado de `Input.tsx`
-- `size?: "sm" | "md" | "lg"` — importado de `Input.tsx`
-- `label?`, `helperText?`, `required?`
+- Todo componente novo deve seguir o processo canônico antes de ser considerado pronto.
+- Componentes em `packages/ui` não usam Tailwind; use classes semânticas `ds-*`, `data-slot`, tokens e estilos compartilhados em `packages/css/ui.css`.
+- O app `docs` pode usar Tailwind para layout e composição da documentação.
+- Todo componente público precisa de export em `packages/ui/index.ts`, página em `apps/docs/app/componentes`, rota no `Navbar` do docs e smoke test.
+- Mudanças responsivas, navegação, overlays e risco de overflow mobile devem ter validação E2E.
+- Mudanças distribuíveis precisam de changeset.
 
 ## Tokens essenciais
 
@@ -156,14 +196,6 @@ Todos os form components usam:
 | Benefícios | `@carvalhorafael/eumilitar-patterns` + `app/padroes/beneficios` | grid, checklist e faixa de stats |
 | Depoimentos | `@carvalhorafael/eumilitar-patterns` + `app/padroes/depoimentos` | cards, destaque e prova social |
 | CTA Final | `@carvalhorafael/eumilitar-patterns` + `app/padroes/landing` | fechamento de conversão |
-
-## Adicionando novos componentes UI
-
-1. Criar `packages/ui/NomeComponente.tsx` com `"use client"` se necessário
-2. Se o demo precisar de estado, criar `components/docs/NomeComponenteDemo.tsx` com `"use client"`
-3. Criar `app/componentes/nome/page.tsx` para documentar o componente
-4. Exportar o componente em `packages/ui/index.ts`
-5. Adicionar rota no array `nav` em `components/layout/Sidebar.tsx`
 
 ## Adicionando novos padrões
 

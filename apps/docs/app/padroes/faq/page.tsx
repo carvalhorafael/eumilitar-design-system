@@ -76,7 +76,7 @@ export default function FaqPage() {
         description="Seções de perguntas frequentes com Accordion. Dois modelos: FAQ geral de plataforma e FAQ específico por força com conteúdo rico."
       />
 
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
         {faqDefinition ? <PatternContract definition={faqDefinition} /> : null}
 
         <SectionLabel
@@ -85,7 +85,7 @@ export default function FaqPage() {
           description="Perguntas sobre plataforma e planos. Item 2 aberto por padrão — abra com a pergunta mais estratégica para conversão."
         />
         <PatternShell label="FAQ — modo exclusivo, item 2 aberto">
-          <div style={{ background: "var(--surface-raised)", padding: "40px 40px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--surface-raised)" }}>
             <div style={{ maxWidth: "680px", margin: "0 auto" }}>
               <p style={{
                 fontFamily: "var(--font-mono)",
@@ -128,7 +128,7 @@ export default function FaqPage() {
           description="FAQ específico de concurso com conteúdo formatado: listas, negrito, notas. Accordion em allowMultiple para consulta simultânea."
         />
         <PatternShell label="FAQ específico — Exército, allowMultiple, conteúdo rico">
-          <div style={{ background: "var(--paper)", padding: "40px" }}>
+          <div className="docs-pattern-block" style={{ background: "var(--paper)" }}>
             <div style={{ maxWidth: "680px", margin: "0 auto" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
                 <Badge variant="ex">Exército Brasileiro</Badge>

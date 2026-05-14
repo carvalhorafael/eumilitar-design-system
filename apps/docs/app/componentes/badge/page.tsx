@@ -15,7 +15,7 @@ export default function BadgePage() {
         description="Rótulos compactos para status, categorias e forças militares. Monospace em caixa alta com tracking largo — linguagem de field manual."
       />
 
-      <div className="px-10 py-10 max-w-4xl">
+      <div className="docs-page max-w-4xl">
 
         <SectionLabel number="02.1" title="Variantes Base" />
         <div className="flex flex-col gap-4 mb-10">

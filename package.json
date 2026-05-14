@@ -11,6 +11,8 @@
     "build": "turbo build",
     "lint": "turbo lint",
     "test": "vitest run",
+    "build:e2e:packages": "npm run build --workspace=@carvalhorafael/eumilitar-ui --workspace=@carvalhorafael/eumilitar-patterns",
+    "test:e2e": "npm run build:e2e:packages && playwright test",
     "validate:propagation": "node scripts/validate-consumer-propagation.mjs",
     "changeset": "changeset",
     "release:status": "changeset status",
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "@eslint/eslintrc": "^3.3.5",
+    "@playwright/test": "^1.60.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "eslint": "^9.39.4",

@@ -148,7 +148,7 @@ const contextExamples = [
     label: "Grid de layout — gap --sp-8 (32px)",
     description: "Separação entre colunas de conteúdo",
     render: (
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "32px", maxWidth: "480px" }}>
+      <div className="docs-grid-3" style={{ gap: "32px", maxWidth: "480px" }}>
         {["EX", "MB", "FAB"].map((abbr, i) => {
           const colors = ["#1f4d2a", "#132645", "#1a3d5c"];
           return (
@@ -189,7 +189,7 @@ export default function EspacamentoPage() {
         title="Espaçamento"
         description="Grid de 4px. Use exclusivamente os tokens --sp-* nos componentes — jamais valores px avulsos."
       />
-      <div className="px-10 py-10 max-w-5xl">
+      <div className="docs-page max-w-5xl">
 
         {/* Escala visual */}
         <SectionLabel
