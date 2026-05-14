@@ -59,6 +59,12 @@ const nav: NavbarGroup[] = [
       { href: "/componentes/file-input", label: "20 — FileInput" },
       { href: "/componentes/progress",  label: "21 — Progress" },
       { href: "/componentes/steps",     label: "22 — Steps" },
+      { href: "/componentes/stat",      label: "23 — Stat" },
+      { href: "/componentes/avatar",    label: "24 — Avatar" },
+      { href: "/componentes/status",    label: "25 — Status" },
+      { href: "/componentes/list",      label: "26 — List" },
+      { href: "/componentes/divider",   label: "27 — Divider" },
+      { href: "/componentes/pagination", label: "28 — Pagination" },
     ],
   },
 ];

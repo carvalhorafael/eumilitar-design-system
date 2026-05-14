@@ -74,6 +74,12 @@ apps/docs/
       file-input/page.tsx
       progress/page.tsx
       steps/page.tsx
+      stat/page.tsx
+      avatar/page.tsx
+      status/page.tsx
+      list/page.tsx
+      divider/page.tsx
+      pagination/page.tsx
   components/
     layout/
       Sidebar.tsx
@@ -126,6 +132,12 @@ packages/
     FileInput.tsx
     Progress.tsx
     Steps.tsx
+    Stat.tsx
+    Avatar.tsx
+    Status.tsx
+    List.tsx
+    Divider.tsx
+    Pagination.tsx
     styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/

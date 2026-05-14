@@ -44,6 +44,12 @@ Ja existem no pacote UI:
 - `FileInput`
 - `Progress`
 - `Steps`
+- `Stat`
+- `Avatar`
+- `Status`
+- `List`
+- `Divider`
+- `Pagination`
 
 Tambem existem padroes de composicao em `@carvalhorafael/eumilitar-patterns`, como Hero, urgencia, captacao, FAQ, beneficios, depoimentos e landing.
 
@@ -302,6 +308,8 @@ Escopo sugerido:
 
 ### 05.6 Stat
 
+Status: implementado
+
 Valor:
 
 - Util para prova social, dashboards simples, metricas de landing e blocos de resultado.
@@ -316,12 +324,12 @@ Escopo sugerido:
 
 Estes componentes podem ser uteis, mas dependem mais do produto consumidor ou de decisoes de interacao:
 
-- `Avatar`
-- `List`
-- `Status`
+- `Avatar` - implementado no Lote 4
+- `List` - implementado no Lote 4
+- `Status` - implementado no Lote 4
 - `Kbd`
-- `Divider`
-- `Pagination`
+- `Divider` - implementado no Lote 4
+- `Pagination` - implementado no Lote 4
 - `Timeline`
 - `Range`
 - `Rating`
@@ -385,12 +393,12 @@ Justificativa:
 
 ### Lote 4 - Dados e suporte visual
 
-- [ ] `Stat`
-- [ ] `Avatar`
-- [ ] `Status`
-- [ ] `List`
-- [ ] `Divider`
-- [ ] `Pagination`
+- [x] `Stat`
+- [x] `Avatar`
+- [x] `Status`
+- [x] `List`
+- [x] `Divider`
+- [x] `Pagination`
 
 Justificativa:
 

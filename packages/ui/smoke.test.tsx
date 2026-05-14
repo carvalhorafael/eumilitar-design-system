@@ -3,20 +3,27 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import {
   Accordion,
   Alert,
+  Avatar,
   Button,
   Breadcrumbs,
   Checkbox,
   CheckboxGroup,
   Drawer,
+  Divider,
   Fieldset,
   FileInput,
   Input,
+  List,
   Loading,
   Navbar,
+  Pagination,
   Radio,
   RadioGroup,
   Skeleton,
   Progress,
+  Stat,
+  Stats,
+  Status,
   Steps,
   Tabs,
   Toast,
@@ -309,5 +316,64 @@ describe("@carvalhorafael/eumilitar-ui smoke", () => {
     );
 
     expect(screen.getByText("Documentos").closest("li")).toHaveAttribute("aria-current", "step");
+  });
+
+  it("renderiza Status com tom e pulso", () => {
+    render(<Status label="Online" tone="success" pulse />);
+
+    const status = screen.getByText("Online").closest(".ds-status");
+    expect(status).toHaveAttribute("data-tone", "success");
+    expect(status).toHaveAttribute("data-pulse", "true");
+  });
+
+  it("renderiza Avatar com fallback e status", () => {
+    render(<Avatar fallback="EM" status={<Status label="Ativo" tone="success" size="sm" />} />);
+
+    expect(screen.getByText("EM")).toBeInTheDocument();
+    expect(screen.getByText("Ativo")).toBeInTheDocument();
+  });
+
+  it("renderiza Divider semântico", () => {
+    render(<Divider>Próxima etapa</Divider>);
+
+    expect(screen.getByRole("separator")).toHaveAttribute("aria-orientation", "horizontal");
+    expect(screen.getByText("Próxima etapa")).toBeInTheDocument();
+  });
+
+  it("renderiza List com itens estruturados", () => {
+    render(
+      <List
+        label="Inscrições"
+        items={[
+          { title: "ESA 2026", description: "Turma intensiva", meta: "Aberta" },
+          { title: "EEAR 2026", description: "Lista de espera", meta: "Em breve" },
+        ]}
+      />,
+    );
+
+    expect(screen.getByRole("list", { name: "Inscrições" })).toBeInTheDocument();
+    expect(screen.getByText("ESA 2026")).toBeInTheDocument();
+    expect(screen.getByText("Aberta")).toBeInTheDocument();
+  });
+
+  it("renderiza Stats com valores", () => {
+    render(
+      <Stats>
+        <Stat title="Aprovados" value="12k" description="Alunos acompanhados." />
+      </Stats>,
+    );
+
+    expect(screen.getByText("Aprovados")).toBeInTheDocument();
+    expect(screen.getByText("12k")).toBeInTheDocument();
+  });
+
+  it("aciona Pagination por clique", () => {
+    const onPageChange = vi.fn();
+
+    render(<Pagination page={2} totalPages={4} onPageChange={onPageChange} />);
+
+    expect(screen.getByRole("button", { name: "Página 2" })).toHaveAttribute("aria-current", "page");
+    fireEvent.click(screen.getByRole("button", { name: "Próxima página" }));
+    expect(onPageChange).toHaveBeenCalledWith(3);
   });
 });

@@ -55,6 +55,8 @@ Arquitetura ativa de distribuição:
 - `@carvalhorafael/eumilitar-ui` para o adapter React
 - `@carvalhorafael/eumilitar-patterns` para contratos e blocos
 
+Componentes atuais incluem controles de formulário, navegação mobile-first, feedback, carregamento, progresso, dados e suporte visual.
+
 WordPress e Elementor ficam fora deste repositório.
 O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 
