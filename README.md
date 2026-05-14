@@ -113,7 +113,7 @@ As releases também ficam listadas em:
 - Input & Textarea — 3 estados, 3 tamanhos, foco com sombra offset
 - Select — dropdown estilizado com seta customizada
 - Checkbox & Radio — checkmark SVG animado, grupos
-- Alert, Accordion, Table, Navbar, Drawer, Tabs, Breadcrumbs, Toast, Tooltip, Skeleton e Loading — feedback, disclosure, dados, navegação, ajuda contextual e estados de carregamento
+- Alert, Accordion, Table, Navbar, Drawer, Tabs, Breadcrumbs, Toast, Tooltip, Skeleton, Loading, Fieldset, Toggle, FileInput, Progress e Steps — feedback, disclosure, dados, navegação, ajuda contextual, formulários e progresso
 
 **Padrões**
 - Hero, Urgência, Captação, FAQ, Benefícios, Depoimentos e CTA final

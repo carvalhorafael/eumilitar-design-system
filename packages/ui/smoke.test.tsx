@@ -8,15 +8,20 @@ import {
   Checkbox,
   CheckboxGroup,
   Drawer,
+  Fieldset,
+  FileInput,
   Input,
   Loading,
   Navbar,
   Radio,
   RadioGroup,
   Skeleton,
+  Progress,
+  Steps,
   Tabs,
   Toast,
   Tooltip,
+  Toggle,
 } from "./index";
 
 describe("@carvalhorafael/eumilitar-ui smoke", () => {
@@ -253,5 +258,56 @@ describe("@carvalhorafael/eumilitar-ui smoke", () => {
 
     expect(trigger).toHaveAttribute("aria-describedby", tooltip.id);
     expect(tooltip).toHaveTextContent("Publica a alteração");
+  });
+
+  it("renderiza Fieldset com legend, helper e aria-invalid", () => {
+    render(
+      <Fieldset legend="Dados" helperText="Preencha os campos." inputState="error">
+        <Input label="Nome" />
+      </Fieldset>,
+    );
+
+    const group = screen.getByRole("group", { name: "Dados" });
+    expect(group).toHaveAttribute("aria-invalid", "true");
+    expect(group).toHaveAttribute("aria-describedby");
+    expect(screen.getByText("Preencha os campos.")).toBeInTheDocument();
+  });
+
+  it("renderiza Toggle como switch acessível", () => {
+    render(<Toggle label="Receber alertas" defaultChecked />);
+
+    const toggle = screen.getByRole("switch", { name: "Receber alertas" });
+    expect(toggle).toBeChecked();
+  });
+
+  it("liga FileInput com label, helper e required", () => {
+    render(<FileInput label="Comprovante" helperText="Envie em PDF." required />);
+
+    const input = screen.getByLabelText(/Comprovante/);
+    expect(input).toHaveAttribute("type", "file");
+    expect(input).toHaveAttribute("aria-required", "true");
+    expect(input).toHaveAttribute("aria-describedby");
+  });
+
+  it("renderiza Progress determinado com aria-valuenow", () => {
+    render(<Progress label="Inscrição" value={45} showValue />);
+
+    const progress = screen.getByRole("progressbar", { name: "Inscrição" });
+    expect(progress).toHaveAttribute("aria-valuenow", "45");
+    expect(screen.getByText("45%")).toBeInTheDocument();
+  });
+
+  it("renderiza Steps com etapa atual", () => {
+    render(
+      <Steps
+        items={[
+          { label: "Cadastro", state: "complete" },
+          { label: "Documentos", state: "current" },
+          { label: "Pagamento", state: "pending" },
+        ]}
+      />,
+    );
+
+    expect(screen.getByText("Documentos").closest("li")).toHaveAttribute("aria-current", "step");
   });
 });

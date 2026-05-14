@@ -54,6 +54,11 @@ const nav: NavbarGroup[] = [
       { href: "/componentes/tooltip",   label: "15 — Tooltip" },
       { href: "/componentes/skeleton",  label: "16 — Skeleton" },
       { href: "/componentes/loading",   label: "17 — Loading" },
+      { href: "/componentes/fieldset",  label: "18 — Fieldset" },
+      { href: "/componentes/toggle",    label: "19 — Toggle" },
+      { href: "/componentes/file-input", label: "20 — FileInput" },
+      { href: "/componentes/progress",  label: "21 — Progress" },
+      { href: "/componentes/steps",     label: "22 — Steps" },
     ],
   },
 ];

@@ -39,6 +39,11 @@ Ja existem no pacote UI:
 - `Tooltip`
 - `Skeleton`
 - `Loading`
+- `Fieldset`
+- `Toggle`
+- `FileInput`
+- `Progress`
+- `Steps`
 
 Tambem existem padroes de composicao em `@carvalhorafael/eumilitar-patterns`, como Hero, urgencia, captacao, FAQ, beneficios, depoimentos e landing.
 
@@ -221,6 +226,8 @@ Validacao:
 
 ### 05.1 Progress
 
+Status: implementado
+
 Valor:
 
 - Mostra progresso de tarefas, onboarding, aulas, matricula e fluxos em etapas.
@@ -234,6 +241,8 @@ Escopo sugerido:
 
 ### 05.2 Steps
 
+Status: implementado
+
 Valor:
 
 - Alinhado com jornadas de inscricao, checkout, onboarding e trilhas de estudo.
@@ -245,6 +254,8 @@ Escopo sugerido:
 - orientacao mobile vertical e desktop horizontal
 
 ### 05.3 Fieldset
+
+Status: implementado
 
 Valor:
 
@@ -260,6 +271,8 @@ Escopo sugerido:
 
 ### 05.4 Toggle
 
+Status: implementado
+
 Valor:
 
 - Representa configuracao liga/desliga de forma melhor que `Checkbox`.
@@ -273,6 +286,8 @@ Escopo sugerido:
 - tamanhos alinhados a `InputSize`
 
 ### 05.5 FileInput
+
+Status: implementado
 
 Valor:
 
@@ -358,11 +373,11 @@ Justificativa:
 
 ### Lote 3 - Formularios e progresso
 
-- [ ] `Fieldset`
-- [ ] `Toggle`
-- [ ] `FileInput`
-- [ ] `Progress`
-- [ ] `Steps`
+- [x] `Fieldset`
+- [x] `Toggle`
+- [x] `FileInput`
+- [x] `Progress`
+- [x] `Steps`
 
 Justificativa:
 

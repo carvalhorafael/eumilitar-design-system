@@ -69,6 +69,11 @@ apps/docs/
       tooltip/page.tsx
       skeleton/page.tsx
       loading/page.tsx
+      fieldset/page.tsx
+      toggle/page.tsx
+      file-input/page.tsx
+      progress/page.tsx
+      steps/page.tsx
   components/
     layout/
       Sidebar.tsx
@@ -116,6 +121,11 @@ packages/
     Tooltip.tsx
     Skeleton.tsx
     Loading.tsx
+    Fieldset.tsx
+    Toggle.tsx
+    FileInput.tsx
+    Progress.tsx
+    Steps.tsx
     styles.css             ← shim de compatibilidade para a camada CSS compartilhada
     index.ts
   patterns/
