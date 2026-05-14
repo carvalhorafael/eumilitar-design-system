@@ -259,6 +259,9 @@ Para cada componente novo:
 - [ ] implementar `packages/ui/NomeComponente.tsx`
 - [ ] exportar em `packages/ui/index.ts`
 - [ ] adicionar estilos em `packages/css/ui.css`
+- [ ] adicionar ou atualizar renderizacao canonica em `packages/web` quando o componente for viavel fora de React
+- [ ] adicionar ou atualizar comportamento progressivo em `packages/web` quando houver interacao sem React
+- [ ] registrar explicitamente no PR quando o componente ficar React-only por enquanto
 - [ ] documentar em `apps/docs/app/componentes/nome/page.tsx`
 - [ ] adicionar rota em `apps/docs/components/layout/Sidebar.tsx`
 - [ ] adicionar smoke test em `packages/ui/smoke.test.tsx`
@@ -290,8 +293,12 @@ Antes de considerar pronto:
 3. Definir API publica minima.
 4. Implementar componente em `packages/ui`.
 5. Adicionar estilos em `packages/css`.
-6. Documentar no app `docs`.
-7. Adicionar testes.
-8. Rodar validacoes.
-9. Criar changeset.
-10. Preparar PR para `main`.
+6. Avaliar portabilidade web:
+   - se o componente puder existir em HTML/CSS/JS sem React, adicionar renderer e tipos em `packages/web`;
+   - se houver interacao, adicionar enhancement progressivo em `packages/web/behavior.ts`;
+   - se nao for viavel portar agora, registrar a decisao e o motivo no PR.
+7. Documentar no app `docs`.
+8. Adicionar testes.
+9. Rodar validacoes.
+10. Criar changeset listando todos os pacotes distribuiveis afetados.
+11. Preparar PR para `main`.
