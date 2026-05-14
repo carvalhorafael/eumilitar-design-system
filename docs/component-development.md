@@ -8,7 +8,7 @@ Ultima revisao: 2026-05-13
 
 Este documento define o processo que deve ser seguido para criar, alterar ou revisar componentes React do design system EuMilitar.
 
-Ele substitui a documentacao fragmentada que antes ficava em `packages/ui/ANATOMIA.md` e `packages/ui/QUALITY.md`. A regra pratica e: se a mudanca afeta a forma de implementar componentes UI, este documento deve ser atualizado.
+A regra pratica é: se a mudanca afeta a forma de implementar componentes UI, este documento deve ser atualizado.
 
 ## 02. Principios
 

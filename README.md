@@ -1,6 +1,9 @@
 # EuMilitar Design System
 
-Monorepo do design system da EuMilitar — plataforma de preparação para concursos militares. Fonte da verdade para times de produto, design e desenvolvimento.
+Monorepo do design system da EuMilitar. Fonte da verdade para times de produto, design e desenvolvimento.
+
+[Visite o site de documentação aqui.](https://eumilitar-design-system.vercel.app/)
+
 
 ## O que é
 
@@ -57,16 +60,14 @@ Arquitetura ativa de distribuição:
 
 Componentes atuais incluem controles de formulário, navegação mobile-first, feedback, carregamento, progresso, dados e suporte visual.
 
-WordPress e Elementor ficam fora deste repositório.
-O plano é que um projeto separado de tema WordPress consuma esta biblioteca.
 
-Os tokens agora também têm export em JSON para consumers que não querem depender de parsing de CSS.
+Os tokens também têm export em JSON para consumers que não querem depender de parsing de CSS.
 
 Documento de referência:
 - `docs/component-development.md`
-- `ARQUITETURA-BIBLIOTECA.md`
-- `CONSUMO-E-VERSOES.md`
-- `VALIDACAO-PROPAGACAO.md`
+- `docs/ARQUITETURA-BIBLIOTECA.md`
+- `docs/CONSUMO-E-VERSOES.md`
+- `docs/VALIDACAO-PROPAGACAO.md`
 - `packages/web/HTML_CONSUMPTION.md`
 - `packages/web/CONTRACT.md`
 - `packages/tokens/README.md`
@@ -98,34 +99,3 @@ Para instalar a partir do GitHub Packages, o consumer precisa configurar o scope
 
 As releases também ficam listadas em:
 - [GitHub Releases](https://github.com/carvalhorafael/eumilitar-design-system/releases)
-
-## Conteúdo atual
-
-**Fundamentos**
-- Cores — escalas primitivas, tokens semânticos, paletas das forças militares
-- Tipografia — famílias, escala de tamanhos, exemplos de uso
-- Espaçamento — escala base 4px, contextos de aplicação
-- Tokens — referência completa de todas as CSS custom properties
-- Sombras & Efeitos — sombras offset, raios, highlight, tape
-
-**Componentes**
-- Button — 6 variantes, 3 tamanhos, hover neo-brutalista
-- Badge — 11 variantes, dot prop, tamanhos sm/md
-- Card — 4 variantes, 5 níveis de sombra
-- Input & Textarea — 3 estados, 3 tamanhos, foco com sombra offset
-- Select — dropdown estilizado com seta customizada
-- Checkbox & Radio — checkmark SVG animado, grupos
-- Alert, Accordion, Table, Navbar, Drawer, Tabs, Breadcrumbs, Toast, Tooltip, Skeleton, Loading, Fieldset, Toggle, FileInput, Progress e Steps — feedback, disclosure, dados, navegação, ajuda contextual, formulários e progresso
-
-**Padrões**
-- Hero, Urgência, Captação, FAQ, Benefícios, Depoimentos e CTA final
-- Contratos de anatomia, variantes, tokens e campos CMS em `packages/patterns`
-
-## Cores principais
-
-| Token | Valor | Uso |
-|---|---|---|
-| `--accent` | `#1f4d2a` | Verde militar — ações primárias |
-| `--fire` | `#C4521A` | Laranja urgência — escassez, CTAs |
-| `--ink` | `#1a1612` | Texto principal |
-| `--paper` | `#ede4cf` | Superfície base |
