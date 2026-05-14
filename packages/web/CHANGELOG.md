@@ -1,5 +1,11 @@
 # @carvalhorafael/eumilitar-web
 
+## 0.3.0
+
+### Minor Changes
+
+- 1e4dfdc: Adiciona renderizacao HTML canonica e enhancements progressivos para os componentes base portaveis da versao 0.3.
+
 ## 0.2.0
 
 ### Minor Changes
